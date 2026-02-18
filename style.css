@@ -1,0 +1,1331 @@
+/* ============================================
+   LASER DEFENDER - Retro Minecraft Theme
+   ============================================
+   This stylesheet creates a retro Minecraft-inspired
+   pixel art aesthetic that matches the game in project.html
+   Uses Minecraft color palette with blocky beveled edges
+   ============================================ */
+
+/* Reset and Base - Clear default browser spacing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ============================================
+   Pixel Font Imports
+   ============================================
+   VT323 - Retro pixel-style text font
+   Press Start 2P - Classic 8-bit gaming font
+   ============================================ */
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+/* ============================================
+   CSS Variables - Minecraft Color Palette
+   ============================================
+   Colors inspired by Minecraft blocks:
+   - Dirt, Grass, Stone, Iron
+   - Gold, Lapis, Redstone, Emerald
+   - Cyan, Magenta, Yellow (Neon accents)
+   ============================================ */
+:root {
+    --mc-dirt: #4a3728;
+    --mc-dirt-dark: #3a2b1e;
+    --mc-dirt-light: #5d4a38;
+    --mc-grass: #5a8f29;
+    --mc-grass-dark: #487320;
+    --mc-grass-light: #6ba833;
+    --mc-stone: #7d7d7d;
+    --mc-stone-dark: #5a5a5a;
+    --mc-stone-light: #9e9e9e;
+    --mc-iron: #b8b8b8;
+    --mc-gold: #ffd700;
+    --mc-lapis: #2b5f9e;
+    --mc-redstone: #b30000;
+    --mc-emerald: #00b359;
+    --mc-emerald-dark: #008a42;
+    --mc-cyan: #00b8b3;
+    --mc-cyan-dark: #008f8b;
+    --mc-magenta: #b300b8;
+    --mc-magenta-dark: #8a008f;
+    --mc-yellow: #ffff00;
+    --mc-yellow-dark: #cccc00;
+
+    --bg-dark: #0a0a0a;
+    --bg-dirt: #2d2018;
+    --border-light: #8b8b8b;
+    --border-dark: #3a3a3a;
+}
+
+/* ============================================
+   Body Styles
+   ============================================
+   - Uses VT323 font for retro pixel text
+   - Dirt brown background with pixel pattern
+   - 16x16px grid creates Minecraft texture effect
+   ============================================ */
+body {
+    font-family: "VT323", monospace;
+    background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+    background-image:
+        /* Diagonal stripe pattern */
+        linear-gradient(
+            45deg,
+            rgba(0, 0, 0, 0.1) 25%,
+            transparent 25%,
+            transparent 75%,
+            rgba(0, 0, 0, 0.1) 75%,
+            rgba(0, 0, 0, 0.1)
+        ),
+        /* Offset diagonal for crosshatch */
+        linear-gradient(
+                45deg,
+                rgba(0, 0, 0, 0.1) 25%,
+                transparent 25%,
+                transparent 75%,
+                rgba(0, 0, 0, 0.1) 75%,
+                rgba(0, 0, 0, 0.1)
+            );
+    background-size: 16px 16px;
+    background-position:
+        0 0,
+        8px 8px;
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ============================================
+   CRT Scanline Effect
+   ============================================
+   Creates horizontal scanlines like old monitors
+   Adds retro arcade feel to the website
+   ============================================ */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        /* 2px dark, 2px transparent = 4px cycle */ 0deg,
+        rgba(0, 0, 0, 0.05) 0px,
+        rgba(0, 0, 0, 0.05) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+    pointer-events: none;
+    z-index: 9998;
+}
+
+/* Hidden Utility */
+.hidden {
+    display: none !important;
+}
+
+/* ============================================
+   Start Screen Overlay
+   ============================================
+   Full-screen menu that appears first
+   Blocks page interaction until button clicked
+   ============================================ */
+#startScreen {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(180deg, #1a0f08 0%, #0a0502 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+/* ============================================
+   Logo Styles
+   ============================================
+   Uses Press Start 2P for 8-bit gaming look
+   Emerald green with dirt shadow for 3D effect
+   Glow effect added via pixel-glow class
+   ============================================ */
+.logo {
+    font-family: "Press Start 2P", cursive;
+    font-size: 3rem;
+    color: var(--mc-emerald);
+    text-shadow:
+        /* Bevel shadow */
+        4px 4px 0 var(--mc-dirt-dark),
+        /* Glow shadow */ 8px 8px 0 var(--mc-redstone);
+    margin-bottom: 1rem;
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* ============================================
+   Menu Subtitle
+   ============================================
+   Gold text for "RETRO EDITION" subtitle
+   Dark shadow for contrast against background
+   ============================================ */
+.menu-subtitle {
+    font-size: 1.5rem;
+    color: var(--mc-gold);
+    text-shadow: 2px 2px 0 #000;
+    margin-bottom: 2rem;
+}
+
+/* ============================================
+   Menu Button (INSERT COIN)
+   ============================================
+   Blocky Minecraft-style button with:
+   - Beveled 4px border (top-left light, bottom-right dark)
+   - 6px shadow creates depth
+   - Hover lifts button 2px
+   - Active presses down with reduced shadow
+   ============================================ */
+.menu-btn {
+    font-family: "Press Start 2P", cursive;
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    background: var(--mc-grass);
+    color: #fff;
+    border: 4px solid;
+    /* Bevel effect: top-left light, bottom-right dark */
+    border-color: var(--mc-grass-dark) var(--mc-dirt) var(--mc-dirt)
+        var(--mc-grass-dark);
+    box-shadow: 0 6px 0 var(--mc-dirt-dark);
+    cursor: pointer;
+    margin-bottom: 2rem;
+    transition: all 0.1s;
+    text-transform: uppercase;
+}
+
+/* ============================================
+   Menu Button Hover State
+   ============================================
+   Button lifts 2px on hover
+   Color shifts to brighter emerald
+   Shadow remains consistent for depth
+   ============================================ */
+.menu-btn:hover {
+    background: var(--mc-emerald);
+    box-shadow: 0 6px 0 var(--mc-dirt-dark);
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   Menu Button Active State (Click)
+   ============================================
+   Button presses down 4px on click
+   Shadow shrinks to 2px for pressed effect
+   ============================================ */
+.menu-btn:active {
+    box-shadow: 0 2px 0 var(--mc-dirt-dark);
+    transform: translateY(4px);
+}
+
+/* ============================================
+   Menu Hint Text
+   ============================================
+   Light gray hint text for controls
+   Shows keyboard instructions below button
+   ============================================ */
+.menu-hint {
+    font-size: 1.2rem;
+    color: #ccc;
+    text-align: center;
+}
+
+/* ============================================
+   Pixel Header Components
+   ============================================
+   Header with decorative top/bottom borders
+   Creates blocky Minecraft structure look
+   ============================================ */
+.pixel-header {
+    position: relative;
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+/* ============================================
+   Pixel Border Lines
+   ============================================
+   Top and bottom decorative borders
+   Each line has 40px width with beveled gradient
+   Creates horizontal trim for headers
+   ============================================ */
+.pixel-border.top,
+.pixel-border.bottom {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin: 0 0 1rem 0;
+}
+
+.pixel-border.bottom {
+    margin: 1rem 0 0 0;
+}
+
+/* ============================================
+   Individual Pixel Border Line
+   ============================================
+   40px wide with beveled stone gradient
+   Light center, dark edges = 3D block effect
+   ============================================ */
+.pixel-line {
+    width: 40px;
+    height: 4px;
+    background: linear-gradient(
+        90deg,
+        var(--mc-stone-dark) 0%,
+        var(--mc-stone) 50%,
+        var(--mc-stone-dark) 100%
+    );
+    /* Add subtle border highlight */
+    border-top: 2px solid var(--mc-border-light);
+    border-bottom: 2px solid var(--mc-border-dark);
+}
+
+/* ============================================
+   Main Content Container
+   ============================================
+   Centered content wrapper with max width
+   Ensures text doesn't stretch too wide on large screens
+   ============================================ */
+#mainContent {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* ============================================
+   Hero Section
+   ============================================
+   Centered hero area with background box
+   Contains game title and action button
+   ============================================ */
+.hero {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+/* ============================================
+   Hero Content Box
+   ============================================
+   Semi-transparent dark box with stone border
+   Contains mission briefing text
+   Diagonal pattern overlay for texture
+   ============================================ */
+.hero-content {
+    background: rgba(0, 0, 0, 0.6);
+    border: 4px solid var(--mc-stone);
+    padding: 2rem;
+    position: relative;
+}
+
+.hero-content::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.1) 0px,
+        rgba(0, 0, 0, 0.1) 8px,
+        transparent 8px,
+        transparent 16px
+    );
+    z-index: -1;
+}
+
+/* ============================================
+   Hero Decorations
+   ============================================
+   Pixel art icons on sides of hero section
+   Contains spaceships, aliens, explosions, stars
+   ============================================ */
+.hero-decoration {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+    position: relative;
+}
+
+/* ============================================
+   Pixel Decoration Elements
+   ============================================
+   Container for CSS pixel art graphics
+   Uses linear gradients to create blocky patterns
+   ============================================ */
+.pixel-decoration {
+    width: 80px;
+    height: 80px;
+    position: relative;
+}
+
+/* ============================================
+   Decorations (Hidden - CSS handles visuals)
+   ============================================
+   The background property is overridden below
+   These classes exist for styling hooks
+   ============================================ */
+.deco-1 {
+    background: transparent;
+}
+.deco-2 {
+    background: transparent;
+}
+.deco-3 {
+    background: transparent;
+}
+.deco-4 {
+    background: transparent;
+}
+
+/* ============================================
+   Pixel Art Title
+   ============================================
+   Cyan color for section headers
+   Press Start 2P font for 8-bit look
+   Dirt shadow creates blocky depth
+   ============================================ */
+.pixel-title {
+    font-family: "Press Start 2P", cursive;
+    font-size: 1.5rem;
+    color: var(--mc-cyan);
+    text-shadow: 3px 3px 0 var(--mc-dirt-dark);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* ============================================
+   Pixel Text Content
+   ============================================
+   Light gray text with subtle shadow
+   Better readability over backgrounds
+   ============================================ */
+.pixel-text {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    color: #ddd;
+    text-shadow: 1px 1px 0 #000;
+}
+
+/* ============================================
+   Warning Text
+   ============================================
+   Yellow color for important notices
+   Used for game content warnings
+   ============================================ */
+.warning {
+    color: var(--mc-yellow);
+    display: block;
+    margin-top: 1rem;
+}
+
+/* ============================================
+   Action Button (Launch Mission)
+   ============================================
+   Larger button style for primary actions
+   Emerald green base with beveled border
+   Slightly smaller than menu button
+   ============================================ */
+.action-btn {
+    font-family: "Press Start 2P", cursive;
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--mc-emerald);
+    color: #fff;
+    border: 4px solid;
+    border-color: var(--mc-grass-dark) var(--mc-dirt) var(--mc-dirt)
+        var(--mc-grass-dark);
+    box-shadow: 0 4px 0 var(--mc-dirt-dark);
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: all 0.1s;
+    text-transform: uppercase;
+}
+
+/* ============================================
+   Action Button Hover
+   ============================================
+   Shifts to cyan on hover for feedback
+   Shadow consistency maintains depth
+   ============================================ */
+.action-btn:hover {
+    background: var(--mc-cyan);
+    box-shadow: 0 4px 0 var(--mc-dirt-dark);
+}
+
+/* ============================================
+   Action Button Active
+   ============================================
+   Presses down 2px on click
+   Reduced shadow for pressed effect
+   ============================================ */
+.action-btn:active {
+    box-shadow: 0 2px 0 var(--mc-dirt-dark);
+    transform: translateY(2px);
+}
+
+/* ============================================
+   Section Headers
+   ============================================
+   Centered headers for content sections
+   Consistent spacing below each section
+   ============================================ */
+.section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* ============================================
+   Features Grid Container
+   ============================================
+   Container for feature cards
+   Consistent spacing below sections
+   ============================================ */
+.features {
+    margin-bottom: 3rem;
+}
+
+/* ============================================
+   Features Grid Layout
+   ============================================
+   Auto-fit grid responsive layout
+   Minimum 220px per card
+   1.5rem gap between items
+   ============================================ */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+/* ============================================
+   Feature Card
+   ============================================
+   Dirt brown background block
+   Stone dark beveled border
+   Lifts on hover for interactivity
+   ============================================ */
+.feature-card {
+    background: var(--mc-dirt);
+    border: 4px solid var(--mc-stone-dark);
+    padding: 1rem;
+    transition: transform 0.2s;
+}
+
+/* ============================================
+   Feature Card Hover
+   ============================================
+   Lifts 2px diagonally on hover
+   Changes border to emerald green
+   Shows interactive feedback
+   ============================================ */
+.feature-card:hover {
+    transform: translate(-2px, -2px);
+    border-color: var(--mc-emerald);
+}
+
+/* ============================================
+   Card Header
+   ============================================
+   Flex container for icon/title layout
+   Gold title on left, icon on right
+   Separated by dirt border line
+   ============================================ */
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+    border-bottom: 2px solid var(--mc-dirt-dark);
+    padding-bottom: 0.5rem;
+}
+
+/* ============================================
+   Card Title
+   ============================================
+   Gold Press Start 2P text
+   Uppercase for blocky look
+   Smaller 0.7rem size
+   ============================================ */
+.card-title {
+    font-family: "Press Start 2P", cursive;
+    font-size: 0.7rem;
+    color: var(--mc-gold);
+    text-transform: uppercase;
+}
+
+/* ============================================
+   Card Icon
+   ============================================
+   Emoji or icon display
+   1.5rem size for visibility
+   ============================================ */
+.card-icon {
+    font-size: 1.5rem;
+}
+
+/* ============================================
+   Card Content Text
+   ============================================
+   Light gray paragraph text
+   Proper line height for readability
+   1rem size for consistency
+   ============================================ */
+.card-content p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #ddd;
+}
+
+/* ============================================
+   Stats Section Container
+   ============================================
+   Game statistics display area
+   Consistent bottom margin
+   ============================================ */
+.stats {
+    margin-bottom: 3rem;
+}
+
+/* ============================================
+   Stats Grid Layout
+   ============================================
+   180px minimum card width
+   1.5rem gap between stats
+   Auto-fit responsive behavior
+   ============================================ */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+}
+
+/* ============================================
+   Stat Card
+   ============================================
+   Dirt background block
+   Stone dark border
+   Centered content alignment
+   Lifts on hover
+   ============================================ */
+.stat-card {
+    background: var(--mc-dirt);
+    border: 4px solid var(--mc-stone-dark);
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+/* ============================================
+   Stat Card Hover
+   ============================================
+   Lifts 2px diagonally
+   Border shifts to gold color
+   Indicates interactive element
+   ============================================ */
+.stat-card:hover {
+    transform: translate(-2px, -2px);
+    border-color: var(--mc-gold);
+}
+
+/* ============================================
+   Stat Value Display
+   ============================================
+   Large emerald number (3, infinity, 10)
+   Press Start 2P font for consistency
+   Dirt shadow creates depth
+   ============================================ */
+.stat-value {
+    font-family: "Press Start 2P", cursive;
+    font-size: 2.5rem;
+    color: var(--mc-emerald);
+    text-shadow: 2px 2px 0 var(--mc-dirt-dark);
+    margin-bottom: 0.5rem;
+}
+
+/* ============================================
+   Stat Label
+   ============================================
+   Cyan text below value
+   Label text like "LIVES", "WAVES"
+   ============================================ */
+.stat-label {
+    font-size: 1rem;
+    color: var(--mc-cyan);
+    margin-bottom: 0.3rem;
+}
+
+/* ============================================
+   Stat Subtext
+   ============================================
+   Smaller hint text
+   Example: "YOULL NEED 'EM"
+   ============================================ */
+.stat-sub {
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+/* ============================================
+   Controls Section Container
+   ============================================
+   Keyboard control instructions
+   Consistent bottom margin
+   ============================================ */
+.controls {
+    margin-bottom: 3rem;
+}
+
+/* ============================================
+   Controls Grid Layout
+   ============================================
+   280px minimum width per control panel
+   1.5rem gap between panels
+   Auto-fit responsive behavior
+   ============================================ */
+.controls-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+/* ============================================
+   Control Panel
+   ============================================
+   Dirt background block
+   Stone dark beveled border
+   Centered content
+   Contains key instructions
+   ============================================ */
+.control-panel {
+    background: var(--mc-dirt);
+    border: 4px solid var(--mc-stone-dark);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+/* ============================================
+   Control Title
+   ============================================
+   Flex layout for icon + label
+   Gold color for visibility
+   1rem gap between icon and text
+   ============================================ */
+.control-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: var(--mc-gold);
+}
+
+/* ============================================
+   Control Label Text
+   ============================================
+   Uppercase gold label
+   "MOVEMENT" or "WEAPONS"
+   ============================================ */
+.control-label {
+    font-family: "Press Start 2P", cursive;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+/* ============================================
+   Key Display Container
+   ============================================
+   Flex layout for keyboard keys
+   Centers all keys together
+   Wraps on small screens
+   ============================================ */
+.key-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* ============================================
+   Keyboard Key Block
+   ============================================
+   Stone block representing each key
+   Beveled border (dark top-left)
+   Shows key name in black
+   Example: ←, →, SPACE
+   ============================================ */
+.key {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    background: var(--mc-stone);
+    color: #000;
+    border: 2px solid;
+    border-color: var(--mc-stone-dark) var(--mc-dirt) var(--mc-dirt)
+        var(--mc-stone-dark);
+    font-family: "Press Start 2P", cursive;
+    font-size: 0.8rem;
+    min-width: 50px;
+    text-align: center;
+}
+
+/* ============================================
+   Key Subtext
+   ============================================
+   Smaller alternative key hint
+   Shows "or A/D" or "or CLICK"
+   ============================================ */
+.key-sub {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   Quote/Audio Section Container
+   ============================================
+   Contains ship AI quotes
+   Consistent bottom spacing
+   ============================================ */
+.brainrot {
+    margin-bottom: 2rem;
+}
+
+/* ============================================
+   Quotes Grid Layout
+   ============================================
+   250px minimum per quote card
+   1.5rem gap between items
+   Auto-fit responsive grid
+   ============================================ */
+.quotes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+/* ============================================
+   Quote Card
+   ============================================
+   Dirt background block
+   Stone dark beveled border
+   Contains quotation icon and text
+   ============================================ */
+.quote-card {
+    background: var(--mc-dirt);
+    border: 4px solid var(--mc-stone-dark);
+    padding: 1.2rem;
+    position: relative;
+}
+
+/* ============================================
+   Quote Opening Quote
+   ============================================
+   Large semi-transparent quote mark
+   Positioned at top-left
+   Creates visual quotation effect
+   ============================================ */
+.quote-card::before {
+    content: '"';
+    position: absolute;
+    top: 0;
+    left: 10px;
+    font-size: 4rem;
+    color: rgba(0, 0, 0, 0.1);
+    line-height: 1;
+}
+
+/* ============================================
+   Quote Icon
+   ============================================
+   Small emoji above quote text
+   Example: 🤖, 🔧, 📉, ⚔️
+   ============================================ */
+.quote-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* ============================================
+   Quote Text Content
+   ============================================
+   Light gray italic text
+   Contains AI quote content
+   Proper line height
+   ============================================ */
+.quote-text {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #ccc;
+    font-style: italic;
+}
+
+/* ============================================
+   Pixel Footer
+   ============================================
+   Dark dirt background section
+   Top border separates from content
+   Contains copyright and credits
+   ============================================ */
+.pixel-footer {
+    border-top: 4px solid var(--mc-stone-dark);
+    background: var(--mc-dirt-dark);
+    padding: 2rem;
+    text-align: center;
+}
+
+/* ============================================
+   Footer Content Grid
+   ============================================
+   300px minimum per footer section
+   1rem gap between sections
+   Contains copyright and disclaimer
+   ============================================ */
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+/* ============================================
+   Footer Section
+   ============================================
+   Centered footer content block
+   Grouped together in grid
+   ============================================ */
+.footer-section {
+    text-align: center;
+}
+
+/* ============================================
+   Footer Text
+   ============================================
+   Light gray text for footer content
+   Copyright, credits, contact info
+   ============================================ */
+.footer-text {
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 0.5rem;
+}
+
+/* ============================================
+   Small Footer Text
+   ============================================
+   Smaller disclaimer text
+   Lighter gray color (#999)
+   ============================================ */
+.footer-text.small {
+    font-size: 0.9rem;
+    color: #999;
+}
+
+/* ============================================
+   Pixel Glow Animation
+   ============================================
+   Rotating glow effect on logo
+   Alternates between red and cyan shadows
+   Creates pulsing pixel art effect
+   ============================================ */
+@keyframes pixelGlow {
+    0%,
+    100% {
+        /* Red shadow - dimmer glow */
+        text-shadow:
+            3px 3px 0 var(--mc-dirt-dark),
+            6px 6px 0 var(--mc-redstone);
+    }
+    50% {
+        /* Cyan shadow - brighter glow */
+        text-shadow:
+            4px 4px 0 var(--mc-dirt-dark),
+            8px 8px 0 var(--mc-cyan);
+    }
+}
+
+/* ============================================
+   Apply Pixel Glow
+   ============================================
+   Applied to .logo class
+   2 second animation cycle
+   Infinite loop for continuous effect
+   ============================================ */
+.pixel-glow {
+    animation: pixelGlow 2s ease-in-out infinite;
+}
+
+/* ============================================
+   Responsive Design (Mobile)
+   ============================================
+   Adjustments for screens under 768px
+   Smaller logo, tighter spacing
+   Single column grid for all sections
+   ============================================ */
+@media (max-width: 768px) {
+    .logo {
+        font-size: 2rem;
+    }
+
+    .hero-content {
+        padding: 1rem;
+    }
+
+    .features-grid,
+    .stats-grid,
+    .controls-grid,
+    .quotes-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .controls-grid {
+        gap: 1rem;
+    }
+}
+
+/* ============================================
+   Custom Scrollbar
+   ============================================
+   Minecraft-inspired scrollbar
+   Dirt track with beveled stone thumb
+   Gold on hover for feedback
+   ============================================ */
+::-webkit-scrollbar {
+    width: 16px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--mc-dirt);
+    border-left: 4px solid var(--mc-stone-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--mc-stone);
+    border: 2px solid;
+    border-color: var(--mc-stone-dark) var(--mc-dirt) var(--mc-dirt)
+        var(--mc-stone-dark);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--mc-gold);
+}
+
+/* ============================================
+   Hero Decoration Layout
+   ============================================
+   Centered flex container
+   2rem gap between decorations
+   Wraps on smaller screens
+   ============================================ */
+.hero-decoration {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+/* ============================================
+   Pixel Decoration Size
+   ============================================
+   64x64px square containers
+   Pixelated rendering for crisp edges
+   ============================================ */
+.pixel-decoration {
+    width: 64px;
+    height: 64px;
+    position: relative;
+    image-rendering: pixelated;
+}
+
+/* ============================================
+   Pixel Art Spaceship Decoration
+   ============================================
+   Creates pixelated ship using CSS gradients
+   Emerald blocks with darker detail
+   16px and 8px grid pattern
+   ============================================ */
+.deco-1 {
+    background-image:
+        /* Horizontal lines */
+        linear-gradient(90deg, var(--mc-emerald) 4px, transparent 4px),
+        linear-gradient(90deg, var(--mc-emerald-dark) 2px, transparent 2px),
+        /* Vertical lines */
+        linear-gradient(0deg, var(--mc-emerald) 4px, transparent 4px),
+        linear-gradient(0deg, var(--mc-emerald-dark) 2px, transparent 2px);
+    background-size:
+        16px 16px,
+        8px 8px,
+        16px 16px,
+        8px 8px;
+    background-position:
+        4px 4px,
+        2px 2px,
+        4px 4px,
+        2px 2px;
+    background-color: var(--mc-dirt);
+    border: 2px solid var(--mc-stone-dark);
+}
+
+/* ============================================
+   Pixel Art Alien Decoration
+   ============================================
+   Cyan alien with magenta cross detail
+   Blocky extraterrestrial shape
+   Grid pattern creates pixel effect
+   ============================================ */
+.deco-2 {
+    background-image:
+        /* Horizontal cyan blocks */
+        linear-gradient(90deg, var(--mc-cyan) 4px, transparent 4px),
+        /* Vertical cyan blocks */
+        linear-gradient(0deg, var(--mc-cyan) 4px, transparent 4px),
+        /* Diagonal magenta cross */
+        linear-gradient(45deg, var(--mc-magenta) 2px, transparent 2px);
+    background-size:
+        16px 16px,
+        16px 16px,
+        8px 8px;
+    background-position:
+        4px 4px,
+        4px 4px,
+        2px 2px;
+    background-color: var(--mc-dirt);
+    border: 2px solid var(--mc-stone-dark);
+}
+
+/* ============================================
+   Pixel Art Explosion Decoration
+   ============================================
+   Gold explosion with redstone center
+   Crosshatch pattern creates burst effect
+   Pulsing animation for dynamic feel
+   ============================================ */
+.deco-3 {
+    background-image:
+        /* Horizontal gold sparks */
+        linear-gradient(90deg, var(--mc-gold) 2px, transparent 2px),
+        /* Vertical gold sparks */
+        linear-gradient(0deg, var(--mc-gold) 2px, transparent 2px),
+        /* Diagonal redstone lines */
+        linear-gradient(45deg, var(--mc-redstone) 2px, transparent 2px),
+        linear-gradient(135deg, var(--mc-redstone) 2px, transparent 2px);
+    background-size:
+        8px 8px,
+        8px 8px,
+        8px 8px,
+        8px 8px;
+    background-position:
+        2px 2px,
+        2px 2px,
+        2px 2px,
+        2px 2px;
+    background-color: var(--mc-dirt);
+    border: 2px solid var(--mc-stone-dark);
+    animation: pulse 1s ease-in-out infinite;
+}
+
+/* ============================================
+   Pixel Art Star Decoration
+   ============================================
+   Yellow star pattern
+   4-point cross with diagonal spikes
+   Smaller 1px grid for finer detail
+   ============================================ */
+.deco-4 {
+    background-image:
+        /* Horizontal yellow sparks */
+        linear-gradient(90deg, var(--mc-yellow) 2px, transparent 2px),
+        /* Vertical yellow sparks */
+        linear-gradient(0deg, var(--mc-yellow) 2px, transparent 2px),
+        /* Diagonal yellow lines */
+        linear-gradient(45deg, var(--mc-yellow) 1px, transparent 1px),
+        linear-gradient(135deg, var(--mc-yellow) 1px, transparent 1px);
+    background-size:
+        8px 8px,
+        8px 8px,
+        8px 8px,
+        8px 8px;
+    background-position:
+        2px 2px,
+        2px 2px,
+        2px 2px,
+        2px 2px;
+    background-color: var(--mc-dirt);
+    border: 2px solid var(--mc-stone-dark);
+}
+
+/* ============================================
+   Additional Pixel Art Borders
+   ============================================
+   Inset border overlay on cards
+   Beveled effect with low opacity
+   Adds depth to card elements
+   ============================================ */
+.feature-card::before,
+.quote-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border: 4px solid;
+    border-color: var(--mc-border-light) var(--mc-border-dark)
+        var(--mc-border-dark) var(--mc-border-light);
+    z-index: 0;
+    opacity: 0.3;
+}
+
+/* ============================================
+   Border Hover Effect
+   ============================================
+   Border opacity increases on hover
+   Shows interactive feedback
+   ============================================ */
+.feature-card:hover::before,
+.stat-card:hover::before {
+    opacity: 0.5;
+}
+
+/* ============================================
+   Pulse Animation
+   ============================================
+   Expands to 105% then returns
+   Creates breathing/expansion effect
+   Used on explosion decoration
+   ============================================ */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(255, 165, 0, 0.3);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(255, 165, 0, 0.3);
+    }
+}
+
+/* ============================================
+   Floating Text Animation
+   ============================================
+   Text moves up 100px while scaling
+   Used for floating text effects
+   ============================================ */
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   Pixel Header Pattern
+   ============================================
+   Header with diagonal pattern overlay
+   Adds texture behind header elements
+   ============================================ */
+.pixel-header {
+    position: relative;
+}
+
+/* ============================================
+   Header Background Pattern
+   ============================================
+   Diagonal stripe overlay behind header
+   8px repeating pattern
+   Semi-transparent for subtle effect
+   ============================================ */
+.pixel-header::before {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    background: repeating-linear-gradient(
+        45deg,
+        var(--mc-dirt-dark) 0px,
+        var(--mc-dirt-dark) 4px,
+        transparent 4px,
+        transparent 8px
+    );
+    z-index: -1;
+    opacity: 0.5;
+}
+
+/* ============================================
+   Menu Screen Overlay
+   ============================================
+   Full-screen centered menu
+   Used as start screen overlay
+   Z-index ensures it stays on top
+   ============================================ */
+.menu-screen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+/* ============================================
+   Menu Button (Duplicate for clarity)
+   ============================================
+   Repeated definition for menu context
+   Same blocky beveled style
+   ============================================ */
+.menu-btn {
+    font-family: "Press Start 2P", cursive;
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    background: var(--mc-grass);
+    color: #fff;
+    border: 4px solid;
+    border-color: var(--mc-grass-dark) var(--mc-dirt) var(--mc-dirt)
+        var(--mc-grass-dark);
+    box-shadow: 0 6px 0 var(--mc-dirt-dark);
+    cursor: pointer;
+    margin-bottom: 2rem;
+    transition: all 0.1s;
+    text-transform: uppercase;
+}
+
+.menu-btn:hover {
+    background: var(--mc-emerald);
+    box-shadow: 0 6px 0 var(--mc-dirt-dark);
+    transform: translateY(-2px);
+}
+
+.menu-btn:active {
+    box-shadow: 0 2px 0 var(--mc-dirt-dark);
+    transform: translateY(4px);
+}
+
+/* ============================================
+   Menu Hint (Duplicate)
+   ============================================
+   Repeated for consistency
+   Key spacing adjustment
+   ============================================ */
+.menu-hint {
+    font-size: 1.2rem;
+    color: #ccc;
+    text-align: center;
+}
+
+.menu-hint .key {
+    margin: 0 4px;
+}

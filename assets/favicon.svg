@@ -1,0 +1,28 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background (optional, makes it more visible) -->
+  <rect x="0" y="0" width="32" height="32" fill="#1a1a1a" />
+
+  <!-- Pixel Art Spaceship -->
+  <!-- Main body -->
+  <rect x="12" y="14" width="8" height="8" fill="#4caf50" />
+  <rect x="14" y="12" width="4" height="2" fill="#4caf50" />
+
+  <!-- Wings -->
+  <rect x="8" y="16" width="4" height="4" fill="#388e3c" />
+  <rect x="20" y="16" width="4" height="4" fill="#388e3c" />
+
+  <!-- Cockpit -->
+  <rect x="14" y="16" width="4" height="4" fill="#81c784" />
+  <rect x="15" y="17" width="2" height="2" fill="#2e7d32" />
+
+  <!-- Engine glow -->
+  <rect x="13" y="22" width="6" height="2" fill="#ff9800" />
+  <rect x="14" y="23" width="4" height="1" fill="#ffc107" />
+
+  <!-- Stars -->
+  <rect x="4" y="4" width="2" height="2" fill="#ffffff" />
+  <rect x="26" y="6" width="2" height="2" fill="#ffffff" />
+  <rect x="6" y="26" width="2" height="2" fill="#ffffff" />
+  <rect x="28" y="24" width="2" height="2" fill="#ffffff" />
+  <rect x="22" y="28" width="2" height="2" fill="#ffffff" />
+</svg>
