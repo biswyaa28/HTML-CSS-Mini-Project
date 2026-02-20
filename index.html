@@ -3,25 +3,570 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>LASER DEFENDER - Retro Edition</title>
+        <title>LASER DEFENDER — by Biswyaa</title>
         <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+        />
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <!-- Start Screen -->
-        <div id="startScreen" class="menu-screen">
-            <h1 class="logo pixel-glow">LASER DEFENDER</h1>
-            <p class="menu-subtitle">RETRO EDITION</p>
-            <button id="startBtn" class="menu-btn">▶ INSERT COIN</button>
-            <div class="menu-hint">
-                <span class="key">←</span> <span class="key">→</span> to Move •
-                <span class="key">SPACE</span> to Shoot
+        <!-- NAV -->
+        <nav class="retro-nav">
+            <div class="nav-inner">
+                <a href="#" class="nav-logo" data-section="home"
+                    >✦ LASER DEFENDER</a
+                >
+                <button
+                    class="nav-hamburger"
+                    id="navHamburger"
+                    aria-label="Toggle menu"
+                >
+                    ☰
+                </button>
+                <div class="nav-links" id="navLinks">
+                    <a href="#" data-section="home" class="active">Home</a>
+                    <a href="#" data-section="about">About</a>
+                    <a href="#" data-section="leaderboard">Scores</a>
+                    <a href="#" data-section="game">🪙 Play</a>
+                </div>
             </div>
-        </div>
-        <script src="script.js"></script>
+        </nav>
+
+        <!-- HOME -->
+        <section id="sec-home" class="page-section active">
+            <div class="page-container">
+                <section class="hero">
+                    <div class="terminal-window">
+                        <div class="terminal-header">
+                            <span class="terminal-dot dot-red"></span>
+                            <span class="terminal-dot dot-yellow"></span>
+                            <span class="terminal-dot dot-green"></span>
+                            <span class="terminal-title"
+                                >laser_defender.exe</span
+                            >
+                        </div>
+                        <div class="terminal-body">
+                            <h1 class="landing-title pixel-glow">
+                                LASER<br />DEFENDER
+                            </h1>
+                            <p class="landing-subtitle">
+                                ✦ A GAME BY BISWYAA ✦
+                            </p>
+                            <div class="terminal-line">
+                                <span class="terminal-prompt">$</span>
+                                <span
+                                    id="heroTypewriter"
+                                    class="terminal-text"
+                                    data-text="Defend the galaxy from waves of pixel invaders! Command your ship through an 8-bit warzone. How long can you survive, pilot?"
+                                ></span>
+                            </div>
+                            <div
+                                id="personalBestBanner"
+                                class="personal-best-banner no-score"
+                            >
+                                <span class="pb-label">NO SCORE YET</span>
+                            </div>
+                            <div class="landing-cta-row">
+                                <a
+                                    href="#"
+                                    data-section="game"
+                                    class="action-btn landing-play-btn"
+                                    >🪙 INSERT COIN</a
+                                >
+                                <a
+                                    href="#"
+                                    data-section="about"
+                                    class="action-btn landing-secondary-btn"
+                                    >📖 LEARN MORE</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-decoration">
+                        <div class="pixel-decoration deco-1"></div>
+                        <div class="pixel-decoration deco-4"></div>
+                        <div class="pixel-decoration deco-3"></div>
+                        <div class="pixel-decoration deco-2"></div>
+                        <div class="pixel-decoration deco-5"></div>
+                    </div>
+                </section>
+
+                <section class="stats">
+                    <div class="section-header">
+                        <span class="section-tag">// STATS</span>
+                        <h2 class="section-title">📊 BATTLE STATS</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card fade-in-up">
+                            <div class="stat-value" data-target="1247">0</div>
+                            <div class="stat-label">PILOTS ENLISTED</div>
+                        </div>
+                        <div class="stat-card fade-in-up">
+                            <div class="stat-value" data-target="58432">0</div>
+                            <div class="stat-label">ENEMIES DESTROYED</div>
+                        </div>
+                        <div class="stat-card fade-in-up">
+                            <div class="stat-value" data-target="3">0</div>
+                            <div class="stat-label">DIFFICULTY MODES</div>
+                        </div>
+                        <div class="stat-card fade-in-up">
+                            <div
+                                class="stat-value"
+                                data-target="99"
+                                data-suffix="%"
+                            >
+                                0
+                            </div>
+                            <div class="stat-label">FUN FACTOR</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="features">
+                    <div class="section-header">
+                        <span class="section-tag">// FEATURES</span>
+                        <h2 class="section-title">⚡ SELECT YOUR QUEST</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    <div class="quest-grid">
+                        <div class="quest-card fade-in-up">
+                            <div class="quest-number">01</div>
+                            <div class="quest-title">🎨 Pixel Graphics</div>
+                            <p class="quest-desc">
+                                Hand-crafted pixel art sprites with retro CRT
+                                scanline effects.
+                            </p>
+                        </div>
+                        <div class="quest-card fade-in-up">
+                            <div class="quest-number">02</div>
+                            <div class="quest-title">👾 Enemy Waves</div>
+                            <p class="quest-desc">
+                                Face endless waves of creeper-inspired aliens.
+                                Normal and fast enemies!
+                            </p>
+                        </div>
+                        <div class="quest-card fade-in-up">
+                            <div class="quest-number">03</div>
+                            <div class="quest-title">⚡ Power System</div>
+                            <p class="quest-desc">
+                                Manage laser cooldowns and lives. Three hits and
+                                it's game over!
+                            </p>
+                        </div>
+                        <div class="quest-card fade-in-up">
+                            <div class="quest-number">04</div>
+                            <div class="quest-title">🏆 Leaderboard</div>
+                            <p class="quest-desc">
+                                Scores saved locally. Compete with yourself and
+                                climb the ranks!
+                            </p>
+                        </div>
+                        <div class="quest-card fade-in-up">
+                            <div class="quest-number">05</div>
+                            <div class="quest-title">🎯 3 Difficulties</div>
+                            <p class="quest-desc">
+                                Easy for chill vibes, Normal for a fair fight,
+                                or Hard if you dare!
+                            </p>
+                        </div>
+                        <div class="quest-card fade-in-up">
+                            <div class="quest-number">06</div>
+                            <div class="quest-title">🔊 8-bit Sounds</div>
+                            <p class="quest-desc">
+                                Retro beeps powered by Web Audio API. No files
+                                needed!
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="controls">
+                    <div class="section-header">
+                        <span class="section-tag">// CONTROLS</span>
+                        <h2 class="section-title">🎮 QUICK CONTROLS</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    <div class="controls-grid">
+                        <div class="control-panel">
+                            <div class="control-title">
+                                🕹️ <span class="control-label">Movement</span>
+                            </div>
+                            <div class="key-display">
+                                <span class="key">←</span
+                                ><span class="key">→</span>
+                                <span class="key-sub">or</span>
+                                <span class="key">A</span
+                                ><span class="key">D</span>
+                            </div>
+                        </div>
+                        <div class="control-panel">
+                            <div class="control-title">
+                                💥 <span class="control-label">Fire Laser</span>
+                            </div>
+                            <div class="key-display">
+                                <span class="key key-large">SPACE</span>
+                                <span class="key-sub">or</span>
+                                <span class="key">CLICK</span>
+                            </div>
+                        </div>
+                        <div class="control-panel">
+                            <div class="control-title">
+                                ⏸️ <span class="control-label">Pause</span>
+                            </div>
+                            <div class="key-display">
+                                <span class="key">ESC</span>
+                                <span class="key-sub">or</span>
+                                <span class="key">P</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="sec-about" class="page-section">
+            <div class="page-container">
+                <div class="pixel-header">
+                    <h1 class="pixel-title pixel-title--lg">
+                        📖 ABOUT THE GAME
+                    </h1>
+                    <p class="pixel-text text-muted">
+                        The story and the tech behind Laser Defender
+                    </p>
+                </div>
+
+                <section class="about-section">
+                    <div class="section-header">
+                        <h2 class="section-title">🌌 THE STORY</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    <div class="story-box">
+                        <p class="pixel-text mb-1">
+                            <strong class="text-gold">Year 2187.</strong> The
+                            galaxy is under siege. An alien armada of pixelated
+                            creeper-like invaders has emerged from the void.
+                        </p>
+                        <p class="pixel-text mb-1">
+                            You are the last line of defense. Piloting the
+                            <strong class="text-emerald"
+                                >LD-01 Emerald Striker</strong
+                            >, push back wave after wave of the invading force.
+                        </p>
+                        <p class="pixel-text">
+                            <span class="warning"
+                                >⚠ The fate of the universe rests in your hands,
+                                pilot. ⚠</span
+                            >
+                        </p>
+                    </div>
+                </section>
+
+                <section class="about-section">
+                    <div class="section-header">
+                        <h2 class="section-title">🔧 TECH STACK</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    <div class="tech-grid">
+                        <div class="tech-card fade-in-up">
+                            <div class="tech-icon">🏗️</div>
+                            <div class="tech-name">HTML5</div>
+                            <p class="tech-desc">
+                                Semantic structure & Canvas for game rendering.
+                            </p>
+                        </div>
+                        <div class="tech-card fade-in-up">
+                            <div class="tech-icon">🎨</div>
+                            <div class="tech-name">CSS3</div>
+                            <p class="tech-desc">
+                                Variables, grid layouts, keyframe animations &
+                                CRT effects.
+                            </p>
+                        </div>
+                        <div class="tech-card fade-in-up">
+                            <div class="tech-icon">⚡</div>
+                            <div class="tech-name">Vanilla JS</div>
+                            <p class="tech-desc">
+                                No frameworks! Pure JS for game logic & DOM.
+                            </p>
+                        </div>
+                        <div class="tech-card fade-in-up">
+                            <div class="tech-icon">🎵</div>
+                            <div class="tech-name">Web Audio API</div>
+                            <p class="tech-desc">
+                                Procedural 8-bit sound effects generated in
+                                real-time.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="about-section text-center">
+                    <div class="section-header">
+                        <h2 class="section-title">👾 CREDITS</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    <div class="story-box credits-box">
+                        <p class="pixel-text mb-1"></p>
+                        <p class="pixel-text mb-1">
+                            <strong class="text-gold">Lead Developers</strong
+                            ><br />
+                            Biswajeet &nbsp;·&nbsp; Neel &nbsp;·&nbsp; Saish
+                            &nbsp;·&nbsp; Manthan
+                        </p>
+                        <p class="pixel-text mb-1">
+                            <strong class="text-lavender">Fonts</strong
+                            ><br />VT323 & Press Start 2P — Google Fonts
+                        </p>
+                        <p class="pixel-text">
+                            <strong class="text-emerald">Inspiration</strong
+                            ><br />Classic arcade games, Minecraft & the retro
+                            community
+                        </p>
+                    </div>
+                </section>
+
+                <div class="text-center">
+                    <a href="#" data-section="game" class="action-btn"
+                        >🪙 PLAY THE GAME</a
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- LEADERBOARD -->
+        <section id="sec-leaderboard" class="page-section">
+            <div class="page-container">
+                <div class="pixel-header">
+                    <h1 class="pixel-title pixel-title--lg">🏆 LEADERBOARD</h1>
+                    <p class="pixel-text text-muted">
+                        Top pilots of the galaxy — Can you claim the #1 spot?
+                    </p>
+                </div>
+
+                <section class="leaderboard-container">
+                    <div id="leaderboardContent"></div>
+                    <div class="leaderboard-actions">
+                        <a href="#" data-section="game" class="action-btn"
+                            >🚀 PLAY NOW</a
+                        >
+                        <button id="clearBtn" class="action-btn red">
+                            🗑️ CLEAR SCORES
+                        </button>
+                    </div>
+                </section>
+
+                <section class="achievement-section">
+                    <div class="section-header">
+                        <h2 class="section-title">🏅 ACHIEVEMENTS</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    <div class="achievement-grid" id="achievementGrid"></div>
+                </section>
+
+                <section class="stats mt-3">
+                    <div class="section-header">
+                        <h2 class="section-title">📊 YOUR STATS</h2>
+                        <div class="section-divider"></div>
+                    </div>
+                    <div class="stats-grid" id="statsGrid"></div>
+                </section>
+            </div>
+        </section>
+
+        <!-- GAME -->
+        <section id="sec-game" class="page-section">
+            <div class="game-wrapper">
+                <div id="gameContainer">
+                    <div id="ui">
+                        <div class="ui-panel">
+                            <div class="ui-label">SCORE</div>
+                            <div class="ui-value score" id="score">0</div>
+                        </div>
+                        <div class="ui-panel">
+                            <div class="ui-label">LIVES</div>
+                            <div class="ui-value lives" id="lives">3</div>
+                        </div>
+                        <div class="ui-panel">
+                            <div class="ui-label">WAVE</div>
+                            <div
+                                class="ui-value ui-value--wave"
+                                id="waveDisplay"
+                            >
+                                1
+                            </div>
+                        </div>
+                    </div>
+                    <div id="difficultyInfo" class="ui-difficulty">
+                        <div class="ui-panel">
+                            <div class="ui-label">MODE</div>
+                            <div
+                                class="ui-value ui-value--mode"
+                                id="modeDisplay"
+                            >
+                                NORMAL
+                            </div>
+                        </div>
+                        <div class="ui-panel">
+                            <div class="ui-label">TIME</div>
+                            <div
+                                class="ui-value ui-value--time"
+                                id="timeDisplay"
+                            >
+                                0:00
+                            </div>
+                        </div>
+                    </div>
+                    <canvas id="game" width="600" height="800"></canvas>
+                    <div id="difficultyScreen">
+                        <h2>SELECT DIFFICULTY</h2>
+                        <p>Choose your challenge, pilot</p>
+                        <button
+                            class="diff-btn easy"
+                            onclick="startGame('easy')"
+                        >
+                            ☮ EASY
+                            <div class="diff-desc">5 Lives • Slow enemies</div>
+                        </button>
+                        <button
+                            class="diff-btn normal"
+                            onclick="startGame('normal')"
+                        >
+                            ⚔ NORMAL
+                            <div class="diff-desc">
+                                3 Lives • Standard speed
+                            </div>
+                        </button>
+                        <button
+                            class="diff-btn hard"
+                            onclick="startGame('hard')"
+                        >
+                            💀 HARD
+                            <div class="diff-desc">1 Life • Fast & furious</div>
+                        </button>
+                    </div>
+                    <div id="pauseOverlay">
+                        <h2>⏸ PAUSED</h2>
+                        <p>Press ESC or P to resume</p>
+                    </div>
+                    <div id="gameOver">
+                        <h2>MISSION FAILED</h2>
+                        <div class="final-stats">
+                            <div class="stat-row">
+                                <span class="label">FINAL SCORE</span
+                                ><span class="value" id="finalScore">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="label">ENEMIES KILLED</span
+                                ><span class="value green" id="finalKills"
+                                    >0</span
+                                >
+                            </div>
+                            <div class="stat-row">
+                                <span class="label">ACCURACY</span
+                                ><span class="value green" id="finalAccuracy"
+                                    >0%</span
+                                >
+                            </div>
+                            <div class="stat-row">
+                                <span class="label">TIME SURVIVED</span
+                                ><span class="value" id="finalTime">0:00</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="label">DIFFICULTY</span
+                                ><span class="value" id="finalDifficulty"
+                                    >NORMAL</span
+                                >
+                            </div>
+                            <div class="stat-row">
+                                <span class="label">WAVE REACHED</span
+                                ><span
+                                    class="value ui-value--wave"
+                                    id="finalWave"
+                                    >1</span
+                                >
+                            </div>
+                        </div>
+                        <div class="name-input-row">
+                            <label>NAME:</label
+                            ><input
+                                type="text"
+                                id="playerName"
+                                maxlength="10"
+                                placeholder="PILOT"
+                                value="PILOT"
+                            />
+                        </div>
+                        <div class="btn-row">
+                            <button class="go-btn" onclick="saveAndRestart()">
+                                💾 SAVE & RETRY
+                            </button>
+                            <button
+                                class="go-btn secondary"
+                                onclick="restartOnly()"
+                            >
+                                ↻ RETRY
+                            </button>
+                        </div>
+                        <div class="btn-row">
+                            <button
+                                class="go-btn secondary"
+                                onclick="navigateTo('leaderboard')"
+                            >
+                                🏆 SCORES
+                            </button>
+                            <button
+                                class="go-btn secondary"
+                                onclick="navigateTo('home')"
+                            >
+                                🏠 MENU
+                            </button>
+                        </div>
+                        <div id="savedMsg"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="pixel-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Navigate</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" data-section="home">🏠 Home</a></li>
+                        <li><a href="#" data-section="about">📖 About</a></li>
+                        <li>
+                            <a href="#" data-section="leaderboard">🏆 Scores</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Play</h4>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="#" data-section="game">🪙 Launch Game</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Made by</h4>
+                    <p class="footer-text small">
+                        Biswyaa — with ❤️ and pixels
+                    </p>
+                    <p class="footer-text small">B.Tech CSE</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>LASER DEFENDER © 2026 Biswyaa — Retro Edition</p>
+            </div>
+        </footer>
+
+        <script src="app.js"></script>
     </body>
 </html>
