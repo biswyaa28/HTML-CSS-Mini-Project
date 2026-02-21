@@ -32,7 +32,7 @@
 /* Base */
 body {
     font-family: "VT323", monospace;
-    background: linear-gradient(180deg, #1e1830, #12101c);
+    background-color: #12101c;
     background-image:
         linear-gradient(
             45deg,
@@ -54,7 +54,7 @@ body {
         8px 8px;
     color: #e8e0f0;
     min-height: 100vh;
-    overflow-x: hidden;
+    overflow: hidden;
     padding-top: 52px;
 }
 body::before {
@@ -140,6 +140,7 @@ body::after {
     pointer-events: none;
     z-index: -1;
     animation: starScroll 60s linear infinite;
+    will-change: transform;
 }
 
 /* Utilities */
@@ -168,13 +169,20 @@ body::after {
     margin-bottom: 1rem;
 }
 
-/* SPA */
+/* SPA — morph transitions instead of hard cut */
 .page-section {
     display: none;
-    animation: fadeInUp 0.4s ease-out;
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
 }
 .page-section.active {
     display: block;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    animation: morphIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 /* Nav */
@@ -187,6 +195,10 @@ body::after {
     background: rgba(26, 22, 40, 0.95);
     border-bottom: 4px solid var(--stone-dark);
     backdrop-filter: blur(6px);
+    transition: box-shadow 0.3s ease;
+}
+.retro-nav:hover {
+    box-shadow: 0 4px 20px rgba(196, 183, 235, 0.15);
 }
 .nav-inner {
     max-width: 1100px;
@@ -204,9 +216,18 @@ body::after {
     padding: 0.8rem 0;
     text-shadow: 2px 2px 0 var(--dirt-dark);
     white-space: nowrap;
+    transition:
+        color 0.4s ease,
+        text-shadow 0.4s ease,
+        transform 0.2s;
+    animation: colorMorph 8s ease-in-out infinite;
 }
 .nav-logo:hover {
     color: var(--cyan);
+    transform: scale(1.05);
+    text-shadow:
+        2px 2px 0 var(--dirt-dark),
+        0 0 12px rgba(137, 212, 207, 0.5);
 }
 .nav-links {
     display: flex;
@@ -222,19 +243,30 @@ body::after {
     padding: 0.8rem 1rem;
     display: block;
     border-left: 2px solid var(--stone-dark);
-    transition: all 0.15s;
+    transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
     text-transform: uppercase;
     letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
 }
-.nav-links a:hover,
-.nav-links a.active {
-    color: var(--gold);
-    background: rgba(240, 200, 90, 0.08);
-    text-shadow: 0 0 8px rgba(240, 200, 90, 0.4);
+.nav-links a::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    transition:
+        width 0.3s ease,
+        left 0.3s ease;
 }
-.nav-links a:last-child {
-    border-right: 2px solid var(--stone-dark);
+.nav-links a:hover::before,
+.nav-links a.active::before {
+    width: 100%;
+    left: 0;
 }
+
 .nav-hamburger {
     display: none;
     background: none;
@@ -1251,9 +1283,11 @@ body::after {
     align-items: center;
     min-height: calc(100vh - 52px);
     padding: 2rem 1rem;
+    overflow: hidden;
 }
 #gameContainer {
     position: relative;
+    contain: layout style paint;
     border: 4px solid;
     border-color: #9e95a8 #6e6580 #6e6580 #9e95a8;
     box-shadow:
@@ -1278,6 +1312,7 @@ canvas#game {
     display: block;
     image-rendering: pixelated;
     background: linear-gradient(180deg, #0f1a0f, #081008);
+    will-change: contents;
 }
 #ui {
     position: absolute;

@@ -54,18 +54,18 @@ const sfx = {
 };
 
 // ─── SPA Navigation ─────────────────────────────────
+// Cache page sections & nav links once
+const _pageSections = document.querySelectorAll(".page-section");
+const _navLinks = document.querySelectorAll("[data-section]");
+
 function navigateTo(section) {
-  document
-    .querySelectorAll(".page-section")
-    .forEach((s) => s.classList.remove("active"));
+  _pageSections.forEach((s) => s.classList.remove("active"));
   const el = document.getElementById("sec-" + section);
   if (el) {
     el.classList.add("active");
     window.scrollTo({ top: 0, behavior: "instant" });
   }
-  document
-    .querySelectorAll("[data-section]")
-    .forEach((a) => a.classList.remove("active"));
+  _navLinks.forEach((a) => a.classList.remove("active"));
   document
     .querySelectorAll(`[data-section="${section}"]`)
     .forEach((a) => a.classList.add("active"));
@@ -391,6 +391,32 @@ function initScrollTop() {
 const canvas = document.getElementById("game"),
   ctx = canvas.getContext("2d");
 
+// ─── Cached DOM elements for the hot game loop ──────
+const DOM = {
+  score: document.getElementById("score"),
+  lives: document.getElementById("lives"),
+  waveDisplay: document.getElementById("waveDisplay"),
+  timeDisplay: document.getElementById("timeDisplay"),
+  modeDisplay: document.getElementById("modeDisplay"),
+  difficultyScreen: document.getElementById("difficultyScreen"),
+  pauseOverlay: document.getElementById("pauseOverlay"),
+  gameOverEl: document.getElementById("gameOver"),
+  finalScore: document.getElementById("finalScore"),
+  finalKills: document.getElementById("finalKills"),
+  finalAccuracy: document.getElementById("finalAccuracy"),
+  finalTime: document.getElementById("finalTime"),
+  finalDifficulty: document.getElementById("finalDifficulty"),
+  finalWave: document.getElementById("finalWave"),
+  savedMsg: document.getElementById("savedMsg"),
+  playerName: document.getElementById("playerName"),
+  gameContainer: document.getElementById("gameContainer"),
+};
+
+// ─── Pre-create & cache the background gradient ─────
+const bgGradient = ctx.createLinearGradient(0, 0, 0, 800);
+bgGradient.addColorStop(0, "#0f1a0f");
+bgGradient.addColorStop(1, "#081008");
+
 const C = {
   pBody: "#7ec8a0",
   pDark: "#5fa880",
@@ -478,19 +504,19 @@ function startGame(diff) {
     normal: [3, 60, 1, 6],
     hard: [1, 40, 1.5, 5],
   }[diff];
-  document.getElementById("lives").textContent = lives;
-  document.getElementById("modeDisplay").textContent = diff.toUpperCase();
-  document.getElementById("difficultyScreen").style.display = "none";
+  DOM.lives.textContent = lives;
+  DOM.modeDisplay.textContent = diff.toUpperCase();
+  DOM.difficultyScreen.style.display = "none";
   gameStarted = true;
   gameRunning = true;
   startTime = Date.now();
   waveNumber = 1;
   killsThisWave = 0;
-  document.getElementById("waveDisplay").textContent = "1";
+  DOM.waveDisplay.textContent = "1";
   konamiBonus = +(localStorage.getItem("laserDefenderBonus") || 0);
   if (konamiBonus > 0) {
     score = konamiBonus;
-    document.getElementById("score").textContent = score;
+    DOM.score.textContent = score;
     localStorage.removeItem("laserDefenderBonus");
     konamiBonus = 0;
   }
@@ -500,9 +526,7 @@ function startGame(diff) {
 
 function togglePause() {
   gamePaused = !gamePaused;
-  document.getElementById("pauseOverlay").style.display = gamePaused
-    ? "flex"
-    : "none";
+  DOM.pauseOverlay.style.display = gamePaused ? "flex" : "none";
   gamePaused
     ? ((elapsedTime = Date.now() - startTime), beep(400, 0.1))
     : ((startTime = Date.now() - elapsedTime), beep(600, 0.05));
@@ -548,7 +572,7 @@ function collides(a, b) {
   );
 }
 function flash(id) {
-  const el = document.getElementById(id);
+  const el = DOM[id] || document.getElementById(id);
   el.classList.add("flash");
   setTimeout(() => el.classList.remove("flash"), 200);
 }
@@ -606,8 +630,8 @@ function drawEnemy(e) {
 function update() {
   if (!gameRunning || gamePaused) return;
   frame++;
-  if (gameRunning && !gamePaused) elapsedTime = Date.now() - startTime;
-  document.getElementById("timeDisplay").textContent = fmtTime(elapsedTime);
+  elapsedTime = Date.now() - startTime;
+  DOM.timeDisplay.textContent = fmtTime(elapsedTime);
 
   if (keys["ArrowLeft"] || keys["a"])
     player.x = Math.max(0, player.x - player.speed);
@@ -615,24 +639,36 @@ function update() {
     player.x = Math.min(552, player.x + player.speed);
   if (keys[" "]) shoot();
 
-  bullets = bullets.filter((b) => {
-    b.y -= b.speed;
-    return b.y > -20;
-  });
-  if (frame % enemySpawnRate === 0) spawnEnemy();
-  stars.forEach((s) => {
-    s.y += s.speed;
-    if (s.y > 800) {
-      s.y = 0;
-      s.x = Math.random() * 600;
+  // Filter bullets in-place (avoid creating new array every frame)
+  let bWrite = 0;
+  for (let i = 0; i < bullets.length; i++) {
+    bullets[i].y -= bullets[i].speed;
+    if (bullets[i].y > -20) {
+      bullets[bWrite++] = bullets[i];
     }
-  });
+  }
+  bullets.length = bWrite;
 
-  enemies.forEach((e) => {
+  if (frame % enemySpawnRate === 0) spawnEnemy();
+
+  // Stars — use for loop
+  for (let i = 0; i < stars.length; i++) {
+    stars[i].y += stars[i].speed;
+    if (stars[i].y > 800) {
+      stars[i].y = 0;
+      stars[i].x = Math.random() * 600;
+    }
+  }
+
+  // Enemy update — mark bullets to remove instead of splice inside forEach
+  for (let ei = 0; ei < enemies.length; ei++) {
+    const e = enemies[ei];
     e.y += e.speed;
-    bullets.forEach((b, bi) => {
+    for (let bi = bullets.length - 1; bi >= 0; bi--) {
+      const b = bullets[bi];
+      if (b.dead) continue;
       if (collides(b, e)) {
-        bullets.splice(bi, 1);
+        b.dead = true;
         shotsHit++;
         e.health--;
         sfx.hit();
@@ -641,14 +677,14 @@ function update() {
           score += e.type === "fast" ? 20 : 10;
           enemiesKilled++;
           killsThisWave++;
-          document.getElementById("score").textContent = score;
+          DOM.score.textContent = score;
           flash("score");
           sfx.kill();
           e.dead = true;
           if (killsThisWave >= KILLS_PER_WAVE) {
             killsThisWave = 0;
             waveNumber++;
-            document.getElementById("waveDisplay").textContent = waveNumber;
+            DOM.waveDisplay.textContent = waveNumber;
             flash("waveDisplay");
             const wb = Math.min(waveNumber - 1, 9);
             enemySpawnRate = Math.max(
@@ -660,55 +696,77 @@ function update() {
             const n = document.createElement("div");
             n.className = "wave-clear-notify";
             n.innerHTML = `WAVE ${waveNumber}<br><span style="font-size:9px;color:#98d8c8">ENEMIES FASTER!</span>`;
-            document.getElementById("gameContainer").appendChild(n);
+            DOM.gameContainer.appendChild(n);
             setTimeout(() => n.remove(), 2100);
             sfx.wave();
           }
+          break; // bullet is consumed, stop checking other bullets
         }
       }
-    });
-    if (collides(e, player)) {
+    }
+    if (!e.dead && collides(e, player)) {
       boom(player.x + 24, player.y + 16, "#f5e6a3");
       lives--;
-      document.getElementById("lives").textContent = lives;
+      DOM.lives.textContent = lives;
       flash("lives");
       sfx.death();
       e.dead = true;
       if (lives <= 0) endGame();
     }
-  });
-  enemies = enemies.filter((e) => !e.dead && e.y < 850);
-  particles = particles.filter((p) => {
+  }
+
+  // Clean up dead bullets and enemies in one pass
+  bWrite = 0;
+  for (let i = 0; i < bullets.length; i++) {
+    if (!bullets[i].dead) bullets[bWrite++] = bullets[i];
+  }
+  bullets.length = bWrite;
+
+  let eWrite = 0;
+  for (let i = 0; i < enemies.length; i++) {
+    if (!enemies[i].dead && enemies[i].y < 850) enemies[eWrite++] = enemies[i];
+  }
+  enemies.length = eWrite;
+
+  // Particles — update in-place
+  let pWrite = 0;
+  for (let i = 0; i < particles.length; i++) {
+    const p = particles[i];
     p.x += p.vx;
     p.y += p.vy;
     p.vy += 0.2;
     p.life--;
-    return p.life > 0;
-  });
+    if (p.life > 0) particles[pWrite++] = p;
+  }
+  particles.length = pWrite;
 }
 
 function draw() {
-  const g = ctx.createLinearGradient(0, 0, 0, 800);
-  g.addColorStop(0, C.bgTop);
-  g.addColorStop(1, C.bgBot);
-  ctx.fillStyle = g;
+  ctx.fillStyle = bgGradient;
   ctx.fillRect(0, 0, 600, 800);
   ctx.fillStyle = C.star;
-  stars.forEach((s) => ctx.fillRect(s.x, s.y, s.size, s.size));
+  for (let i = 0; i < stars.length; i++) {
+    const s = stars[i];
+    ctx.fillRect(s.x, s.y, s.size, s.size);
+  }
   if (gameStarted) drawPlayer();
-  bullets.forEach((b) => {
+  for (let i = 0; i < bullets.length; i++) {
+    const b = bullets[i];
     ctx.fillStyle = C.bullet;
     ctx.fillRect(b.x, b.y, b.w, b.h);
     ctx.fillStyle = C.bulletSh;
     ctx.fillRect(b.x + 2, b.y + 2, b.w - 4, b.h - 4);
-  });
-  enemies.forEach(drawEnemy);
-  particles.forEach((p) => {
-    ctx.fillStyle = p.color;
-    ctx.globalAlpha = p.life / 25;
-    ctx.fillRect(p.x, p.y, p.size, p.size);
+  }
+  for (let i = 0; i < enemies.length; i++) drawEnemy(enemies[i]);
+  if (particles.length > 0) {
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.life / 25;
+      ctx.fillRect(p.x, p.y, p.size, p.size);
+    }
     ctx.globalAlpha = 1;
-  });
+  }
   if (gamePaused) {
     ctx.fillStyle = "rgba(0,0,0,.3)";
     ctx.fillRect(0, 0, 600, 800);
@@ -723,20 +781,18 @@ function gameLoop() {
 
 function drawIdleBackground() {
   if (!idleRunning) return;
-  const g = ctx.createLinearGradient(0, 0, 0, 800);
-  g.addColorStop(0, C.bgTop);
-  g.addColorStop(1, C.bgBot);
-  ctx.fillStyle = g;
+  ctx.fillStyle = bgGradient;
   ctx.fillRect(0, 0, 600, 800);
   ctx.fillStyle = C.star;
-  stars.forEach((s) => {
+  for (let i = 0; i < stars.length; i++) {
+    const s = stars[i];
     s.y += s.speed * 0.3;
     if (s.y > 800) {
       s.y = 0;
       s.x = Math.random() * 600;
     }
     ctx.fillRect(s.x, s.y, s.size, s.size);
-  });
+  }
   requestAnimationFrame(drawIdleBackground);
 }
 
@@ -745,19 +801,18 @@ function endGame() {
   elapsedTime = Date.now() - startTime;
   sfx.gameOver();
   const acc = shotsFired > 0 ? Math.round((shotsHit / shotsFired) * 100) : 0;
-  document.getElementById("finalScore").textContent = score;
-  document.getElementById("finalKills").textContent = enemiesKilled;
-  document.getElementById("finalAccuracy").textContent = acc + "%";
-  document.getElementById("finalTime").textContent = fmtTime(elapsedTime);
-  document.getElementById("finalDifficulty").textContent =
-    difficulty.toUpperCase();
-  document.getElementById("finalWave").textContent = waveNumber;
-  document.getElementById("gameOver").style.display = "block";
-  document.getElementById("savedMsg").textContent = "";
+  DOM.finalScore.textContent = score;
+  DOM.finalKills.textContent = enemiesKilled;
+  DOM.finalAccuracy.textContent = acc + "%";
+  DOM.finalTime.textContent = fmtTime(elapsedTime);
+  DOM.finalDifficulty.textContent = difficulty.toUpperCase();
+  DOM.finalWave.textContent = waveNumber;
+  DOM.gameOverEl.style.display = "block";
+  DOM.savedMsg.textContent = "";
 }
 
 function saveAndRestart() {
-  const name = document.getElementById("playerName").value.trim() || "PILOT";
+  const name = DOM.playerName.value.trim() || "PILOT";
   const acc = shotsFired > 0 ? Math.round((shotsHit / shotsFired) * 100) : 0;
   saveScore(name, score, {
     accuracy: acc,
@@ -765,7 +820,7 @@ function saveAndRestart() {
     timeSurvived: fmtTime(elapsedTime),
     difficulty: difficulty.toUpperCase(),
   });
-  document.getElementById("savedMsg").textContent = "✓ Score saved!";
+  DOM.savedMsg.textContent = "✓ Score saved!";
   beep(800, 0.1);
   setTimeout(() => beep(1000, 0.1), 80);
   setTimeout(resetGame, 600);
@@ -795,14 +850,13 @@ function resetGame() {
   waveNumber = 1;
   killsThisWave = 0;
   konamiBonus = 0;
-  ["score", "lives", "waveDisplay"].forEach(
-    (id, i) => (document.getElementById(id).textContent = ["0", "3", "1"][i]),
-  );
-  ["gameOver", "pauseOverlay"].forEach(
-    (id) => (document.getElementById(id).style.display = "none"),
-  );
-  document.getElementById("difficultyScreen").style.display = "flex";
-  document.getElementById("savedMsg").textContent = "";
+  DOM.score.textContent = "0";
+  DOM.lives.textContent = "3";
+  DOM.waveDisplay.textContent = "1";
+  DOM.gameOverEl.style.display = "none";
+  DOM.pauseOverlay.style.display = "none";
+  DOM.difficultyScreen.style.display = "flex";
+  DOM.savedMsg.textContent = "";
   idleRunning = true;
   drawIdleBackground();
 }
