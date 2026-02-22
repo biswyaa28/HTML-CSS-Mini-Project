@@ -16,7 +16,7 @@ Open `index.html` directly in any modern browser. No server required.
 
 | # | Feature | Description |
 |---|---------|-------------|
-| 01 | 🎨 **Pixel Graphics** | Hand-crafted pixel art sprites drawn entirely on HTML5 Canvas with retro CRT scanline overlay |
+| 01 | 🎨 **Pixel Graphics** | Hand-crafted pixel art sprites drawn entirely on HTML5 Canvas with retro scanline overlay |
 | 02 | 👾 **Enemy Waves** | Endless waves of creeper-inspired aliens — normal and fast variants, each with their own health |
 | 03 | ⚡ **Power System** | Laser cooldown mechanic + limited lives. Take too many hits and it's game over |
 | 04 | 🏆 **Leaderboard** | Top 20 scores persisted in `localStorage` with name, accuracy, kills, difficulty & date |
@@ -24,8 +24,13 @@ Open `index.html` directly in any modern browser. No server required.
 | 06 | 🎯 **3 Difficulties** | Easy (5 lives, slow enemies) · Normal (3 lives, balanced) · Hard (1 life, fast & furious) |
 | 07 | 📈 **Wave Scaling** | Every 8 kills advances a wave — enemies spawn faster and move quicker each round |
 | 08 | 🔊 **8-bit Sounds** | Procedural sound effects generated in real-time via the **Web Audio API** — zero audio files |
-| 09 | 🕹️ **SPA Navigation** | Single-page app with animated section transitions, no page reloads |
-| 10 | 🐣 **Easter Eggs** | Konami code, terminal hack sequence, idle UFO flyby, and a secret footer message |
+| 09 | 🕹️ **SPA Navigation** | Single-page app with VHS glitch transitions between sections, no page reloads |
+| 10 | 💥 **Screen Shake** | Camera shake effect when the player takes damage for impactful hit feedback |
+| 11 | ☄️ **Meteor Showers** | Random meteor shower events during gameplay — survive for bonus points |
+| 12 | 🖥️ **Boot Sequence** | Fake BIOS boot screen with green-on-black DOS terminal text on every page load |
+| 13 | 🎯 **Retro Cursor** | Custom pixel-art crosshair cursor with click ripple effect and hover/active states |
+| 14 | 📊 **Live Stats** | Home page battle stats pull real data from localStorage — games played, best score, kills, accuracy |
+| 15 | 🐣 **Easter Eggs** | Konami code, terminal hack sequence, idle UFO flyby, and a secret footer message |
 
 ---
 
@@ -43,7 +48,7 @@ Open `index.html` directly in any modern browser. No server required.
 ## 🗂️ Project Structure
 
 ```
-miniproject/
+laser-defender/
 ├── index.html      # Full SPA — all pages (Home, About, Scores, Game)
 ├── style.css       # All styles — layout, animations, game UI, responsive
 ├── app.js          # All logic — SPA nav, game engine, leaderboard, easter eggs
@@ -62,7 +67,7 @@ miniproject/
 git clone https://github.com/your-username/laser-defender.git
 
 # Open in browser — no install step needed
-open miniproject/index.html
+open index.html
 ```
 
 Or just double-click `index.html`. Works offline too.
@@ -74,10 +79,10 @@ Or just double-click `index.html`. Works offline too.
 | Technology | Usage |
 |------------|-------|
 | **HTML5** | Semantic structure, Canvas API for game rendering |
-| **CSS3** | Custom properties, CSS Grid, keyframe animations, CRT scanline effect |
+| **CSS3** | Custom properties, CSS Grid, keyframe animations, scanline effects, custom cursors |
 | **Vanilla JS** | Game loop (`requestAnimationFrame`), SPA routing, DOM manipulation |
 | **Web Audio API** | Procedural 8-bit sound effects — oscillators + gain nodes |
-| **localStorage** | Persistent leaderboard scores and achievement tracking |
+| **localStorage** | Persistent leaderboard scores, achievements, and home page stats |
 | **Google Fonts** | VT323 · Press Start 2P |
 
 ---
@@ -88,11 +93,14 @@ Or just double-click `index.html`. Works offline too.
 2. Pick your difficulty — **Easy**, **Normal**, or **Hard**
 3. Move your ship left/right and shoot down the incoming aliens
 4. Each wave gets progressively harder — enemies spawn faster and move quicker
-5. Survive as long as possible, then save your score to the leaderboard
+5. Watch out for random **meteor showers** mid-game — survive them for +50 bonus points
+6. Survive as long as possible, then save your score to the leaderboard
 
 **Scoring:**
 - Normal enemy destroyed → **+10 pts**
 - Fast enemy destroyed → **+20 pts**
+- Meteor destroyed → **+5 pts**
+- Meteor shower survived → **+50 pts bonus**
 
 ---
 
@@ -115,7 +123,7 @@ Or just double-click `index.html`. Works offline too.
 
 ## 🐣 Easter Eggs
 
-There are **3 hidden secrets** in the game. Can you find them all?
+There are **4 hidden secrets** in the game. Can you find them all?
 
 <details>
 <summary>Spoilers (click to reveal)</summary>
