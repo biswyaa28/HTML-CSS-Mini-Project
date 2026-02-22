@@ -118,7 +118,7 @@ function navigateTo(section) {
     }
     if (section === "home") {
       renderPersonalBest();
-      animateCounters();
+      renderHomeStats();
     }
     if (section === "game") {
       resetGame();
@@ -315,6 +315,33 @@ function renderPersonalBest() {
     banner.innerHTML = `<span class="pb-label">NO SCORE YET —</span><a href="#" data-section="game" style="color:var(--emerald);font-family:'Press Start 2P',cursive;font-size:.55rem">PLAY NOW ▶</a>`;
     banner.classList.add("no-score");
   }
+}
+
+// ─── Home Page Stats ─────────────────────────────────────
+// Populates the home "BATTLE STATS" grid with real data from localStorage.
+function renderHomeStats() {
+  const grid = document.getElementById("homeStatsGrid");
+  if (!grid) return;
+  const board = getBoard();
+  const games = board.length;
+  const best = board[0]?.score || 0;
+  const kills = board.reduce((s, e) => s + (e.enemiesKilled || 0), 0);
+  const acc = games > 0
+    ? Math.round(board.reduce((s, e) => s + (e.accuracy || 0), 0) / games)
+    : 0;
+
+  grid.innerHTML = [
+    [games, "GAMES PLAYED"],
+    [best, "BEST SCORE"],
+    [kills, "ENEMIES DESTROYED"],
+    [acc, "AVG ACCURACY", "%"],
+  ]
+    .map(
+      ([v, l, s]) =>
+        `<div class="stat-card fade-in-up"><div class="stat-value" data-target="${v}"${s ? ` data-suffix="${s}"` : ""}>0</div><div class="stat-label">${l}</div></div>`,
+    )
+    .join("");
+  animateCounters();
 }
 
 // ─── Typewriter Effect ──────────────────────────────────
@@ -1288,8 +1315,8 @@ document.addEventListener("DOMContentLoaded", () => {
     sfx.click();
   });
 
-  // Initialise homepage counters and scroll-to-top button
-  animateCounters();
+  // Initialise homepage stats and scroll-to-top button
+  renderHomeStats();
   initScrollTop();
   renderPersonalBest();
   renderAchievements();

@@ -133,30 +133,8 @@
                             <h2 class="section-title">📊 BATTLE STATS</h2>
                             <div class="section-divider"></div>
                         </div>
-                        <div class="stats-grid">
-                            <div class="stat-card fade-in-up">
-                                <div class="stat-value" data-target="1247">0</div>
-                                <div class="stat-label">PILOTS ENLISTED</div>
-                            </div>
-                            <div class="stat-card fade-in-up">
-                                <div class="stat-value" data-target="58432">0</div>
-                                <div class="stat-label">ENEMIES DESTROYED</div>
-                            </div>
-                            <div class="stat-card fade-in-up">
-                                <div class="stat-value" data-target="3">0</div>
-                                <div class="stat-label">DIFFICULTY MODES</div>
-                            </div>
-                            <div class="stat-card fade-in-up">
-                                <div
-                                    class="stat-value"
-                                    data-target="99"
-                                    data-suffix="%"
-                                >
-                                    0
-                                </div>
-                                <div class="stat-label">FUN FACTOR</div>
-                            </div>
-                        </div>
+                        <!-- Populated dynamically from localStorage by renderHomeStats() -->
+                        <div class="stats-grid" id="homeStatsGrid"></div>
                     </section>
 
                     <!-- Feature quest cards grid -->
