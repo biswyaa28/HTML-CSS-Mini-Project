@@ -1,4 +1,4 @@
-/* LASER DEFENDER — by Biswyaa */
+/* LASER DEFENDER */
 
 // ─── Audio ──────────────────────────────────────────
 const AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -310,7 +310,7 @@ document.addEventListener("click", (e) => {
   }
   if (e.target.closest(".footer-bottom p")) {
     beep(400, 0.06);
-    toast("🫡 Built at 2am with chai & determination — Biswyaa, B.Tech CSE");
+    toast("🫡 Built at 2am with chai & determination");
   }
 });
 
