@@ -1,4 +1,5 @@
-/* LASER DEFENDER — by Biswyaa */
+/* LASER DEFENDER — by Biswyaa | B.Tech CSE */
+
 * {
     margin: 0;
     padding: 0;
@@ -6,141 +7,40 @@
 }
 
 :root {
-    --dirt: #2d2438;
-    --dirt-dark: #1e1830;
-    --dirt-light: #3f3550;
-    --stone: #9e95a8;
-    --stone-dark: #6e6580;
-    --stone-light: #c4b8d0;
-    --iron: #d4cce0;
+    --bg-dark: #12101c;
+    --bg-card: #2d2438;
+    --bg-darker: #1e1830;
+    --border: #6e6580;
+    --border-light: #9e95a8;
+    --text: #e8e0f0;
+    --text-muted: #c4b8d0;
     --gold: #f0c85a;
-    --emerald: #7ec8a0;
-    --emerald-dark: #5fa880;
-    --emerald-light: #a2dbb8;
-    --redstone: #e88d8d;
+    --green: #7ec8a0;
+    --green-dark: #5fa880;
     --cyan: #89d4cf;
-    --magenta: #d4a0d8;
-    --yellow: #f5e6a3;
-    --yellow-dark: #e0cc80;
     --lavender: #c4b7eb;
-    --mint: #98d8c8;
+    --red: #e88d8d;
     --peach: #f7c5a8;
-    --pink: #f0b6c5;
-    --blue: #a8d4f0;
+    --mint: #98d8c8;
+    --yellow: #f5e6a3;
 }
 
 /* Base */
 body {
     font-family: "VT323", monospace;
-    background-color: #12101c;
-    background-image:
-        linear-gradient(
-            45deg,
-            rgba(100, 80, 140, 0.04) 25%,
-            transparent 25%,
-            transparent 75%,
-            rgba(100, 80, 140, 0.04) 75%
-        ),
-        linear-gradient(
-            45deg,
-            rgba(100, 80, 140, 0.04) 25%,
-            transparent 25%,
-            transparent 75%,
-            rgba(100, 80, 140, 0.04) 75%
-        );
+    background-color: var(--bg-dark);
+    background-image: linear-gradient(
+        45deg,
+        rgba(100, 80, 140, 0.05) 25%,
+        transparent 25%,
+        transparent 75%,
+        rgba(100, 80, 140, 0.05) 75%
+    );
     background-size: 16px 16px;
-    background-position:
-        0 0,
-        8px 8px;
-    color: #e8e0f0;
+    color: var(--text);
     min-height: 100vh;
     overflow: hidden;
     padding-top: 52px;
-}
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: repeating-linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0.03) 0 2px,
-        transparent 2px 4px
-    );
-    pointer-events: none;
-    z-index: 9998;
-}
-body::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 200%;
-    background-image:
-        radial-gradient(
-            1px 1px at 10% 15%,
-            rgba(196, 183, 235, 0.8) 50%,
-            transparent 100%
-        ),
-        radial-gradient(
-            1px 1px at 20% 35%,
-            rgba(152, 216, 200, 0.6) 50%,
-            transparent 100%
-        ),
-        radial-gradient(
-            2px 2px at 30% 55%,
-            rgba(240, 182, 197, 0.7) 50%,
-            transparent 100%
-        ),
-        radial-gradient(
-            1px 1px at 40% 75%,
-            rgba(168, 212, 240, 0.5) 50%,
-            transparent 100%
-        ),
-        radial-gradient(
-            1px 1px at 50% 10%,
-            rgba(245, 230, 163, 0.6) 50%,
-            transparent 100%
-        ),
-        radial-gradient(
-            2px 2px at 60% 45%,
-            rgba(196, 183, 235, 0.5) 50%,
-            transparent 100%
-        ),
-        radial-gradient(
-            1px 1px at 70% 65%,
-            rgba(247, 197, 168, 0.6) 50%,
-            transparent 100%
-        ),
-        radial-gradient(
-            1px 1px at 80% 85%,
-            rgba(152, 216, 200, 0.4) 50%,
-            transparent 100%
-        ),
-        radial-gradient(
-            1px 1px at 90% 25%,
-            rgba(240, 182, 197, 0.5) 50%,
-            transparent 100%
-        ),
-        radial-gradient(
-            1px 1px at 15% 50%,
-            rgba(168, 212, 240, 0.5) 50%,
-            transparent 100%
-        ),
-        radial-gradient(
-            2px 2px at 25% 80%,
-            rgba(196, 183, 235, 0.6) 50%,
-            transparent 100%
-        ),
-        radial-gradient(
-            1px 1px at 45% 40%,
-            rgba(245, 230, 163, 0.5) 50%,
-            transparent 100%
-        );
-    pointer-events: none;
-    z-index: -1;
-    animation: starScroll 60s linear infinite;
-    will-change: transform;
 }
 
 /* Utilities */
@@ -148,7 +48,7 @@ body::after {
     text-align: center;
 }
 .text-muted {
-    color: var(--stone-light);
+    color: var(--text-muted);
 }
 .text-gold {
     color: var(--gold);
@@ -157,7 +57,7 @@ body::after {
     color: var(--cyan);
 }
 .text-emerald {
-    color: var(--emerald);
+    color: var(--green);
 }
 .text-lavender {
     color: var(--lavender);
@@ -169,36 +69,24 @@ body::after {
     margin-bottom: 1rem;
 }
 
-/* SPA — morph transitions instead of hard cut */
+/* SPA Sections */
 .page-section {
     display: none;
-    opacity: 0;
-    transform: translateY(20px) scale(0.98);
-    transition:
-        opacity 0.5s ease,
-        transform 0.5s ease;
 }
 .page-section.active {
     display: block;
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    animation: morphIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: fadeInUp 0.4s ease-out;
 }
 
-/* Nav */
+/* ── NAV ── */
 .retro-nav {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 9999;
-    background: rgba(26, 22, 40, 0.95);
-    border-bottom: 4px solid var(--stone-dark);
-    backdrop-filter: blur(6px);
-    transition: box-shadow 0.3s ease;
-}
-.retro-nav:hover {
-    box-shadow: 0 4px 20px rgba(196, 183, 235, 0.15);
+    background: rgba(26, 22, 40, 0.97);
+    border-bottom: 4px solid var(--border);
 }
 .nav-inner {
     max-width: 1100px;
@@ -211,66 +99,39 @@ body::after {
 .nav-logo {
     font-family: "Press Start 2P", cursive;
     font-size: 0.7rem;
-    color: var(--emerald);
+    color: var(--green);
     text-decoration: none;
     padding: 0.8rem 0;
-    text-shadow: 2px 2px 0 var(--dirt-dark);
-    white-space: nowrap;
-    transition:
-        color 0.4s ease,
-        text-shadow 0.4s ease,
-        transform 0.2s;
-    animation: colorMorph 8s ease-in-out infinite;
 }
 .nav-logo:hover {
     color: var(--cyan);
-    transform: scale(1.05);
-    text-shadow:
-        2px 2px 0 var(--dirt-dark),
-        0 0 12px rgba(137, 212, 207, 0.5);
 }
 .nav-links {
     display: flex;
-    gap: 0;
     list-style: none;
-    flex-wrap: wrap;
 }
 .nav-links a {
     font-family: "VT323", monospace;
     font-size: 1.1rem;
-    color: var(--stone-light);
+    color: var(--text-muted);
     text-decoration: none;
     padding: 0.8rem 1rem;
     display: block;
-    border-left: 2px solid var(--stone-dark);
-    transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    border-left: 2px solid var(--border);
     text-transform: uppercase;
-    letter-spacing: 1px;
-    position: relative;
-    overflow: hidden;
-}
-.nav-links a::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: var(--gold);
     transition:
-        width 0.3s ease,
-        left 0.3s ease;
+        color 0.2s,
+        background 0.2s;
 }
-.nav-links a:hover::before,
-.nav-links a.active::before {
-    width: 100%;
-    left: 0;
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--gold);
+    background: rgba(240, 200, 90, 0.08);
 }
-
 .nav-hamburger {
     display: none;
     background: none;
-    border: 2px solid var(--stone-dark);
+    border: 2px solid var(--border);
     color: var(--gold);
     font-family: "VT323", monospace;
     font-size: 2rem;
@@ -278,44 +139,25 @@ body::after {
     padding: 0.1rem 0.6rem;
     line-height: 1.2;
 }
-.nav-hamburger:hover {
-    color: var(--emerald);
-    border-color: var(--emerald);
-}
 
-/* Layout */
+/* ── LAYOUT ── */
 .page-container {
     max-width: 1000px;
     margin: 0 auto;
     padding: 2rem 1rem;
 }
 
-/* Pixel Components */
+/* ── PIXEL HEADER ── */
 .pixel-header {
-    position: relative;
     text-align: center;
     padding: 2rem 1rem;
-}
-.pixel-header::before {
-    content: "";
-    position: absolute;
-    inset: -8px;
-    background: repeating-linear-gradient(
-        45deg,
-        var(--dirt-dark) 0 4px,
-        transparent 4px 8px
-    );
-    z-index: -1;
-    opacity: 0.5;
 }
 .pixel-title {
     font-family: "Press Start 2P", cursive;
     font-size: 1.5rem;
     color: var(--cyan);
-    text-shadow: 3px 3px 0 var(--dirt-dark);
+    text-shadow: 3px 3px 0 var(--bg-darker);
     margin-bottom: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
 }
 .pixel-title--lg {
     font-size: 2rem;
@@ -332,33 +174,19 @@ body::after {
     margin-top: 1rem;
 }
 
-/* Terminal / Hero */
+/* ── HERO / TERMINAL ── */
 .hero {
     text-align: center;
     margin-bottom: 3rem;
 }
-.hero-decoration {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-    margin: 2rem 0;
-}
-.pixel-decoration {
-    width: 64px;
-    height: 64px;
-    image-rendering: pixelated;
-}
 .terminal-window {
-    background: rgba(20, 16, 30, 0.85);
-    border: 3px solid var(--stone-dark);
+    background: rgba(20, 16, 30, 0.9);
+    border: 3px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
     max-width: 700px;
     margin: 0 auto 2rem;
-    box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.5),
-        0 0 0 1px rgba(196, 183, 235, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 .terminal-header {
     background: linear-gradient(90deg, #2a2240, #322a4a);
@@ -366,24 +194,16 @@ body::after {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    border-bottom: 2px solid var(--stone-dark);
+    border-bottom: 2px solid var(--border);
 }
 .terminal-dot {
     width: 12px;
     height: 12px;
     border-radius: 50%;
     display: inline-block;
-    cursor: pointer;
-    transition:
-        transform 0.15s,
-        box-shadow 0.15s;
-}
-.terminal-dot:hover {
-    transform: scale(1.4);
-    box-shadow: 0 0 6px currentColor;
 }
 .terminal-dot.dot-red {
-    background: var(--redstone);
+    background: var(--red);
 }
 .terminal-dot.dot-yellow {
     background: var(--yellow);
@@ -393,7 +213,7 @@ body::after {
 }
 .terminal-title {
     font-size: 0.95rem;
-    color: var(--stone-light);
+    color: var(--text-muted);
     margin-left: 0.5rem;
 }
 .terminal-body {
@@ -420,7 +240,7 @@ body::after {
 }
 .terminal-text {
     font-size: 1.2rem;
-    color: var(--iron);
+    color: var(--text);
     line-height: 1.6;
 }
 .landing-title {
@@ -428,10 +248,11 @@ body::after {
     font-size: 2.5rem;
     color: var(--lavender);
     text-shadow:
-        3px 3px 0 var(--dirt-dark),
+        3px 3px 0 var(--bg-darker),
         6px 6px 0 rgba(232, 141, 141, 0.5);
     line-height: 1.6;
     margin-bottom: 0.5rem;
+    animation: pixelGlow 2s ease-in-out infinite;
 }
 .landing-subtitle {
     font-family: "Press Start 2P", cursive;
@@ -448,35 +269,65 @@ body::after {
     margin-top: 1.5rem;
 }
 
-/* Buttons */
+/* Personal Best Banner */
+.personal-best-banner {
+    background: rgba(126, 200, 160, 0.1);
+    border: 3px solid var(--green);
+    padding: 0.7rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin: 1rem 0 1.5rem;
+}
+.personal-best-banner .pb-label {
+    font-family: "Press Start 2P", cursive;
+    font-size: 0.5rem;
+    color: var(--green);
+}
+.personal-best-banner .pb-value {
+    font-family: "Press Start 2P", cursive;
+    font-size: 0.95rem;
+    color: var(--gold);
+}
+.personal-best-banner.no-score {
+    border-color: var(--border);
+    background: rgba(0, 0, 0, 0.3);
+}
+.personal-best-banner.no-score .pb-label {
+    color: var(--text-muted);
+}
+
+/* ── BUTTONS ── */
 .action-btn {
     font-family: "Press Start 2P", cursive;
     font-size: 1rem;
     padding: 0.8rem 1.5rem;
-    background: var(--emerald);
+    background: var(--green);
     color: #1e1830;
     border: 4px solid;
-    border-color: var(--emerald-dark) var(--dirt) var(--dirt)
-        var(--emerald-dark);
-    box-shadow: 0 4px 0 var(--dirt-dark);
+    border-color: var(--green-dark) var(--bg-darker) var(--bg-darker)
+        var(--green-dark);
+    box-shadow: 0 4px 0 var(--bg-darker);
     cursor: pointer;
     margin-top: 1.5rem;
-    transition: all 0.1s;
     text-transform: uppercase;
     text-decoration: none;
     display: inline-block;
+    transition: all 0.1s;
 }
 .action-btn:hover {
     background: var(--cyan);
     transform: translateY(-2px);
 }
 .action-btn:active {
-    box-shadow: 0 2px 0 var(--dirt-dark);
+    box-shadow: 0 2px 0 var(--bg-darker);
     transform: translateY(2px);
 }
 .action-btn.red {
-    background: var(--redstone);
-    border-color: #cc6666 var(--dirt) var(--dirt) #cc6666;
+    background: var(--red);
+    border-color: #cc6666 var(--bg-darker) var(--bg-darker) #cc6666;
 }
 .action-btn.red:hover {
     background: #f0a0a0;
@@ -484,15 +335,8 @@ body::after {
 .landing-play-btn {
     background: var(--mint) !important;
     color: #1a1625 !important;
-    border-color: var(--emerald-dark) var(--dirt) var(--dirt)
-        var(--emerald-dark) !important;
-}
-.landing-play-btn:hover {
-    background: var(--lavender) !important;
-    transform: translateY(-3px);
-    box-shadow:
-        0 6px 0 var(--dirt-dark),
-        0 0 20px rgba(196, 183, 235, 0.3) !important;
+    border-color: var(--green-dark) var(--bg-darker) var(--bg-darker)
+        var(--green-dark) !important;
 }
 .landing-secondary-btn {
     background: transparent !important;
@@ -501,11 +345,10 @@ body::after {
     box-shadow: 0 4px 0 rgba(196, 183, 235, 0.3) !important;
 }
 .landing-secondary-btn:hover {
-    background: rgba(196, 183, 235, 0.12) !important;
-    transform: translateY(-2px);
+    background: rgba(196, 183, 235, 0.1) !important;
 }
 
-/* Section Headers */
+/* ── SECTION HEADERS ── */
 .section-header {
     text-align: center;
     margin-bottom: 2rem;
@@ -514,16 +357,20 @@ body::after {
     font-family: "Press Start 2P", cursive;
     font-size: 1.2rem;
     color: var(--gold);
-    text-shadow: 2px 2px 0 var(--dirt-dark);
+    text-shadow: 2px 2px 0 var(--bg-darker);
     margin-bottom: 0.5rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
 }
 .section-divider {
     width: 200px;
     height: 4px;
     margin: 0.5rem auto 0;
-    background: linear-gradient(90deg, transparent, var(--stone), transparent);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--border-light),
+        transparent
+    );
 }
 .section-tag {
     display: inline-block;
@@ -532,12 +379,10 @@ body::after {
     background: rgba(247, 197, 168, 0.1);
     border: 1px solid rgba(247, 197, 168, 0.25);
     padding: 0.2rem 0.8rem;
-    border-radius: 4px;
-    letter-spacing: 2px;
     margin-bottom: 0.5rem;
 }
 
-/* Stats */
+/* ── STATS ── */
 .stats {
     margin-bottom: 3rem;
 }
@@ -547,8 +392,8 @@ body::after {
     gap: 1.5rem;
 }
 .stat-card {
-    background: var(--dirt);
-    border: 4px solid var(--stone-dark);
+    background: var(--bg-card);
+    border: 4px solid var(--border);
     padding: 1.5rem;
     text-align: center;
     transition:
@@ -562,8 +407,8 @@ body::after {
 .stat-value {
     font-family: "Press Start 2P", cursive;
     font-size: 2.5rem;
-    color: var(--emerald);
-    text-shadow: 2px 2px 0 var(--dirt-dark);
+    color: var(--green);
+    text-shadow: 2px 2px 0 var(--bg-darker);
     margin-bottom: 0.5rem;
 }
 .stat-label {
@@ -571,7 +416,7 @@ body::after {
     color: var(--cyan);
 }
 
-/* Quest Cards */
+/* ── FEATURE CARDS ── */
 .features {
     margin-bottom: 3rem;
 }
@@ -582,61 +427,22 @@ body::after {
 }
 .quest-card {
     background: rgba(30, 24, 48, 0.8);
-    border: 3px solid var(--stone-dark);
+    border: 3px solid var(--border);
     border-left: 5px solid var(--lavender);
     border-radius: 8px;
     padding: 1.4rem;
     transition:
         transform 0.2s,
-        border-color 0.2s,
         box-shadow 0.2s;
-    overflow: hidden;
 }
 .quest-card:hover {
     transform: translate(-2px, -4px);
     box-shadow: 4px 6px 0 rgba(0, 0, 0, 0.3);
 }
-.quest-card:nth-child(1) {
-    border-left-color: var(--lavender);
-}
-.quest-card:nth-child(2) {
-    border-left-color: var(--mint);
-}
-.quest-card:nth-child(3) {
-    border-left-color: var(--peach);
-}
-.quest-card:nth-child(4) {
-    border-left-color: var(--pink);
-}
-.quest-card:nth-child(5) {
-    border-left-color: var(--blue);
-}
-.quest-card:nth-child(6) {
-    border-left-color: var(--redstone);
-}
-.quest-card:nth-child(1):hover {
-    border-color: var(--lavender);
-}
-.quest-card:nth-child(2):hover {
-    border-color: var(--mint);
-}
-.quest-card:nth-child(3):hover {
-    border-color: var(--peach);
-}
-.quest-card:nth-child(4):hover {
-    border-color: var(--pink);
-}
-.quest-card:nth-child(5):hover {
-    border-color: var(--blue);
-}
-.quest-card:nth-child(6):hover {
-    border-color: var(--redstone);
-}
 .quest-number {
     font-family: "Press Start 2P", cursive;
     font-size: 0.5rem;
-    color: var(--stone);
-    letter-spacing: 2px;
+    color: var(--border-light);
     margin-bottom: 0.4rem;
 }
 .quest-title {
@@ -647,11 +453,11 @@ body::after {
 }
 .quest-desc {
     font-size: 1.05rem;
-    color: var(--stone-light);
+    color: var(--text-muted);
     line-height: 1.5;
 }
 
-/* Controls */
+/* ── CONTROLS ── */
 .controls {
     margin-bottom: 3rem;
 }
@@ -661,8 +467,8 @@ body::after {
     gap: 1.5rem;
 }
 .control-panel {
-    background: var(--dirt);
-    border: 4px solid var(--stone-dark);
+    background: var(--bg-card);
+    border: 4px solid var(--border);
     padding: 1.5rem;
     text-align: center;
     transition: border-color 0.2s;
@@ -682,7 +488,6 @@ body::after {
 .control-label {
     font-family: "Press Start 2P", cursive;
     font-size: 0.8rem;
-    text-transform: uppercase;
 }
 .key-display {
     display: flex;
@@ -694,10 +499,9 @@ body::after {
 .key {
     display: inline-block;
     padding: 0.4rem 0.8rem;
-    background: var(--stone);
+    background: var(--border-light);
     color: #000;
-    border: 2px solid;
-    border-color: var(--stone-dark) var(--dirt) var(--dirt) var(--stone-dark);
+    border: 2px solid var(--border);
     font-family: "Press Start 2P", cursive;
     font-size: 0.8rem;
     min-width: 50px;
@@ -711,13 +515,13 @@ body::after {
     min-width: 140px;
 }
 
-/* About */
+/* ── ABOUT PAGE ── */
 .about-section {
     margin-bottom: 3rem;
 }
 .story-box {
     background: rgba(0, 0, 0, 0.5);
-    border: 4px solid var(--stone-dark);
+    border: 4px solid var(--border);
     padding: 2rem;
     position: relative;
     overflow: hidden;
@@ -741,8 +545,8 @@ body::after {
     gap: 1.5rem;
 }
 .tech-card {
-    background: var(--dirt);
-    border: 4px solid var(--stone-dark);
+    background: var(--bg-card);
+    border: 4px solid var(--border);
     padding: 1.5rem;
     text-align: center;
     transition:
@@ -751,7 +555,7 @@ body::after {
 }
 .tech-card:hover {
     transform: translate(-2px, -2px);
-    border-color: var(--emerald);
+    border-color: var(--green);
 }
 .tech-icon {
     font-size: 3rem;
@@ -769,7 +573,7 @@ body::after {
     line-height: 1.4;
 }
 
-/* Leaderboard */
+/* ── LEADERBOARD ── */
 .leaderboard-container {
     margin-bottom: 3rem;
 }
@@ -791,12 +595,12 @@ body::after {
     font-size: 0.6rem;
     color: var(--gold);
     padding: 1rem 0.5rem;
-    border-bottom: 4px solid var(--stone-dark);
+    border-bottom: 4px solid var(--border);
     text-align: left;
 }
 .leaderboard-table td {
     padding: 0.8rem 0.5rem;
-    border-bottom: 2px solid var(--dirt-dark);
+    border-bottom: 2px solid var(--bg-darker);
     font-size: 1.1rem;
     color: #ddd;
 }
@@ -805,14 +609,14 @@ body::after {
 }
 .leaderboard-table .rank {
     font-family: "Press Start 2P", cursive;
-    color: var(--emerald);
+    color: var(--green);
     font-size: 0.9rem;
 }
 .leaderboard-table .rank-1 {
     color: var(--gold);
 }
 .leaderboard-table .rank-2 {
-    color: var(--iron);
+    color: #e8e0f0;
 }
 .leaderboard-table .rank-3 {
     color: #cd7f32;
@@ -825,8 +629,8 @@ body::after {
 .empty-state {
     text-align: center;
     padding: 3rem;
-    background: var(--dirt);
-    border: 4px solid var(--stone-dark);
+    background: var(--bg-card);
+    border: 4px solid var(--border);
 }
 .empty-state .empty-icon {
     font-size: 4rem;
@@ -838,7 +642,7 @@ body::after {
     margin-bottom: 0.5rem;
 }
 
-/* Achievements */
+/* ── ACHIEVEMENTS ── */
 .achievement-section {
     margin-bottom: 3rem;
 }
@@ -848,15 +652,14 @@ body::after {
     gap: 1rem;
 }
 .achievement-badge {
-    background: var(--dirt);
-    border: 3px solid var(--stone-dark);
+    background: var(--bg-card);
+    border: 3px solid var(--border);
     padding: 1rem 0.8rem;
     text-align: center;
     position: relative;
     transition:
         transform 0.2s,
-        border-color 0.2s,
-        box-shadow 0.2s;
+        border-color 0.2s;
 }
 .achievement-badge.unlocked {
     border-color: var(--gold);
@@ -864,7 +667,6 @@ body::after {
 }
 .achievement-badge.unlocked:hover {
     transform: translate(-2px, -2px);
-    box-shadow: 0 0 18px rgba(240, 200, 90, 0.45);
 }
 .achievement-badge.locked {
     opacity: 0.38;
@@ -877,7 +679,7 @@ body::after {
     right: 8px;
     font-family: "Press Start 2P", cursive;
     font-size: 0.5rem;
-    color: var(--emerald);
+    color: var(--green);
 }
 .achievement-icon {
     font-size: 2.2rem;
@@ -896,10 +698,10 @@ body::after {
     line-height: 1.3;
 }
 
-/* Footer */
+/* ── FOOTER ── */
 .pixel-footer {
-    border-top: 4px solid var(--stone-dark);
-    background: var(--dirt-dark);
+    border-top: 4px solid var(--border);
+    background: var(--bg-darker);
     padding: 2rem;
     text-align: center;
 }
@@ -926,14 +728,14 @@ body::after {
     margin-bottom: 0.4rem;
 }
 .footer-links a {
-    color: var(--stone-light);
+    color: var(--text-muted);
     text-decoration: none;
     font-size: 1rem;
-    transition: color 0.15s;
     cursor: pointer;
+    transition: color 0.15s;
 }
 .footer-links a:hover {
-    color: var(--emerald);
+    color: var(--green);
 }
 .footer-text {
     font-size: 1rem;
@@ -947,108 +749,39 @@ body::after {
 .footer-bottom {
     margin-top: 1.5rem;
     padding-top: 1rem;
-    border-top: 2px solid var(--stone-dark);
+    border-top: 2px solid var(--border);
     font-size: 0.9rem;
     color: #777;
 }
 
-/* Personal Best */
-.personal-best-banner {
-    background: linear-gradient(
-        90deg,
-        rgba(126, 200, 160, 0.12),
-        rgba(137, 212, 207, 0.12)
-    );
-    border: 3px solid var(--emerald);
-    padding: 0.7rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    margin: 1rem 0 1.5rem;
-    box-shadow: 0 0 12px rgba(126, 200, 160, 0.2);
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar {
+    width: 16px;
 }
-.personal-best-banner .pb-label {
-    font-family: "Press Start 2P", cursive;
-    font-size: 0.5rem;
-    color: var(--emerald);
+::-webkit-scrollbar-track {
+    background: var(--bg-card);
+    border-left: 4px solid var(--border);
 }
-.personal-best-banner .pb-value {
-    font-family: "Press Start 2P", cursive;
-    font-size: 0.95rem;
-    color: var(--gold);
-    text-shadow: 1px 1px 0 #000;
+::-webkit-scrollbar-thumb {
+    background: var(--border-light);
+    border: 2px solid var(--border);
 }
-.personal-best-banner.no-score {
-    border-color: var(--stone-dark);
-    background: rgba(0, 0, 0, 0.3);
-    box-shadow: none;
-}
-.personal-best-banner.no-score .pb-label {
-    color: var(--stone-light);
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold);
 }
 
-/* Pixel Decorations */
-.deco-1 {
-    background:
-        linear-gradient(90deg, var(--emerald) 4px, transparent 4px),
-        linear-gradient(0deg, var(--emerald) 4px, transparent 4px);
-    background-size: 16px 16px;
-    background-color: var(--dirt);
-    border: 2px solid var(--stone-dark);
-    animation: float 4s ease-in-out infinite;
-}
-.deco-2 {
-    background:
-        linear-gradient(90deg, var(--cyan) 4px, transparent 4px),
-        linear-gradient(45deg, var(--magenta) 2px, transparent 2px);
-    background-size:
-        16px 16px,
-        8px 8px;
-    background-color: var(--dirt);
-    border: 2px solid var(--stone-dark);
-    animation: float 3.5s ease-in-out infinite 0.5s;
-}
-.deco-3 {
-    background:
-        linear-gradient(90deg, var(--gold) 2px, transparent 2px),
-        linear-gradient(45deg, var(--redstone) 2px, transparent 2px);
-    background-size: 8px 8px;
-    background-color: var(--dirt);
-    border: 2px solid var(--stone-dark);
-    animation: pulse 1s ease-in-out infinite;
-}
-.deco-4 {
-    background:
-        linear-gradient(90deg, var(--yellow) 2px, transparent 2px),
-        linear-gradient(0deg, var(--yellow) 2px, transparent 2px);
-    background-size: 8px 8px;
-    background-color: var(--dirt);
-    border: 2px solid var(--stone-dark);
-    animation: float 5s ease-in-out infinite 1s;
-}
-.deco-5 {
-    background: linear-gradient(0deg, var(--yellow) 4px, transparent 4px);
-    background-size: 8px 12px;
-    background-color: var(--dirt);
-    border: 2px solid var(--stone-dark);
-    animation: pulse 0.6s ease-in-out infinite;
-}
-
-/* Animations */
-@keyframes starScroll {
-    to {
-        transform: translateY(-50%);
-    }
-}
-@keyframes pulse {
+/* ── ANIMATIONS ── */
+@keyframes pixelGlow {
     0%,
     100% {
-        transform: scale(1);
+        text-shadow:
+            3px 3px 0 var(--bg-darker),
+            6px 6px 0 rgba(232, 141, 141, 0.5);
     }
     50% {
-        transform: scale(1.05);
+        text-shadow:
+            4px 4px 0 var(--bg-darker),
+            8px 8px 0 var(--cyan);
     }
 }
 @keyframes float {
@@ -1063,7 +796,7 @@ body::after {
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(20px);
     }
     to {
         opacity: 1;
@@ -1080,32 +813,6 @@ body::after {
         opacity: 0;
     }
 }
-@keyframes glitch {
-    0%,
-    100% {
-        text-shadow:
-            2px 0 var(--cyan),
-            -2px 0 var(--redstone);
-    }
-    50% {
-        text-shadow:
-            2px 2px var(--cyan),
-            -2px -2px var(--redstone);
-    }
-}
-@keyframes pixelGlow {
-    0%,
-    100% {
-        text-shadow:
-            3px 3px 0 var(--dirt-dark),
-            6px 6px 0 var(--redstone);
-    }
-    50% {
-        text-shadow:
-            4px 4px 0 var(--dirt-dark),
-            8px 8px 0 var(--cyan);
-    }
-}
 @keyframes pauseBlink {
     0%,
     49% {
@@ -1114,39 +821,6 @@ body::after {
     50%,
     100% {
         opacity: 0.3;
-    }
-}
-@keyframes ufoFly {
-    0% {
-        left: -80px;
-        opacity: 0;
-    }
-    5% {
-        opacity: 1;
-    }
-    40% {
-        transform: translateY(-30px) rotate(-8deg);
-    }
-    70% {
-        transform: translateY(20px) rotate(6deg);
-    }
-    95% {
-        opacity: 1;
-    }
-    100% {
-        left: calc(100vw + 80px);
-        opacity: 0;
-    }
-}
-@keyframes rainbowFlash {
-    0% {
-        background: rgba(232, 141, 141, 0.3);
-    }
-    50% {
-        background: rgba(168, 212, 240, 0.3);
-    }
-    100% {
-        background: rgba(18, 16, 28, 0.9);
     }
 }
 @keyframes waveClearAnim {
@@ -1193,89 +867,16 @@ body::after {
 .fade-in-up:nth-child(6) {
     animation-delay: 0.6s;
 }
+
 .typewriter-active::after {
     content: "█";
     animation: insertCoin 0.8s step-end infinite;
-    color: var(--emerald);
+    color: var(--green);
 }
 
-/* Easter Egg */
-.easter-egg-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 99999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.9);
-    animation: rainbowFlash 0.3s ease-in-out;
-}
-.easter-egg-content {
-    text-align: center;
-    animation: fadeInUp 0.5s ease-out;
-}
-.easter-egg-content h2 {
-    font-family: "Press Start 2P", cursive;
-    font-size: 1.5rem;
-    color: var(--gold);
-    margin-bottom: 1rem;
-    animation: glitch 0.3s ease-in-out infinite;
-}
-.easter-egg-content p {
-    font-size: 1.3rem;
-    color: var(--cyan);
-    margin-bottom: 1.5rem;
-}
-
-/* Scroll Top */
-.scroll-top-btn {
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    z-index: 5000;
-    background: var(--dirt);
-    border: 3px solid var(--stone-dark);
-    color: var(--gold);
-    font-family: "Press Start 2P", cursive;
-    font-size: 0.6rem;
-    padding: 0.5rem 0.7rem;
-    cursor: pointer;
-    box-shadow: 3px 3px 0 var(--dirt-dark);
-    transition: all 0.15s;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(10px);
-}
-.scroll-top-btn.visible {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
-}
-.scroll-top-btn:hover {
-    background: var(--stone-dark);
-    color: var(--emerald);
-    border-color: var(--emerald);
-    transform: translateY(-2px);
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-    width: 16px;
-}
-::-webkit-scrollbar-track {
-    background: var(--dirt);
-    border-left: 4px solid var(--stone-dark);
-}
-::-webkit-scrollbar-thumb {
-    background: var(--stone);
-    border: 2px solid;
-    border-color: var(--stone-dark) var(--dirt) var(--dirt) var(--stone-dark);
-}
-::-webkit-scrollbar-thumb:hover {
-    background: var(--gold);
-}
-
-/* ─── GAME ─── */
+/* ══════════════════════════════════════════
+   GAME SECTION
+   ══════════════════════════════════════════ */
 .game-wrapper {
     display: flex;
     flex-direction: column;
@@ -1287,7 +888,6 @@ body::after {
 }
 #gameContainer {
     position: relative;
-    contain: layout style paint;
     border: 4px solid;
     border-color: #9e95a8 #6e6580 #6e6580 #9e95a8;
     box-shadow:
@@ -1295,25 +895,13 @@ body::after {
         0 0 0 8px #2d2438,
         8px 8px 0 rgba(0, 0, 0, 0.5);
 }
-#gameContainer::before {
-    content: "";
-    position: absolute;
-    inset: -12px;
-    background: repeating-linear-gradient(
-        45deg,
-        #2d2438 0 4px,
-        transparent 4px 8px
-    );
-    pointer-events: none;
-    z-index: -1;
-    border: 4px solid #1e1830;
-}
 canvas#game {
     display: block;
     image-rendering: pixelated;
     background: linear-gradient(180deg, #0f1a0f, #081008);
-    will-change: contents;
 }
+
+/* In-game UI */
 #ui {
     position: absolute;
     top: 10px;
@@ -1369,6 +957,7 @@ canvas#game {
     font-size: 14px;
 }
 
+/* Difficulty Select Screen */
 #difficultyScreen {
     position: absolute;
     inset: 0;
@@ -1444,6 +1033,7 @@ canvas#game {
     margin-top: 4px;
 }
 
+/* Pause Screen */
 #pauseOverlay {
     position: absolute;
     inset: 0;
@@ -1468,6 +1058,7 @@ canvas#game {
     color: #c4b8d0;
 }
 
+/* Game Over Screen */
 #gameOver {
     position: absolute;
     top: 50%;
@@ -1601,7 +1192,7 @@ canvas#game {
     animation: waveClearAnim 2s ease-out forwards;
 }
 
-/* Responsive */
+/* ── RESPONSIVE ── */
 @media (max-width: 768px) {
     .landing-title {
         font-size: 1.8rem;
@@ -1621,18 +1212,6 @@ canvas#game {
     .stat-value {
         font-size: 1.8rem;
     }
-    .leaderboard-table th,
-    .leaderboard-table td {
-        padding: 0.5rem 0.3rem;
-        font-size: 0.9rem;
-    }
-    .nav-links a {
-        padding: 0.6rem;
-        font-size: 0.9rem;
-    }
-    .nav-logo {
-        font-size: 0.5rem;
-    }
     canvas#game {
         width: 100%;
         height: auto;
@@ -1650,7 +1229,7 @@ canvas#game {
         left: 0;
         right: 0;
         background: rgba(26, 22, 40, 0.98);
-        border-bottom: 4px solid var(--stone-dark);
+        border-bottom: 4px solid var(--border);
         z-index: 9999;
     }
     .nav-links.open {
@@ -1658,12 +1237,7 @@ canvas#game {
     }
     .nav-links a {
         border-left: none;
-        border-right: none;
-        border-top: 1px solid var(--stone-dark);
         text-align: center;
-    }
-    .nav-links a:last-child {
-        border-right: none;
     }
 }
 @media (max-width: 480px) {
