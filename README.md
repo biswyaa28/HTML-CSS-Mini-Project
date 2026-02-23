@@ -1,12 +1,12 @@
 # 👾 LASER DEFENDER — Retro Edition
 
-> *Defend the galaxy from waves of pixel invaders. Command your ship through an 8-bit warzone. How long can you survive, pilot?*
+> Defend the galaxy from waves of pixel invaders. Command your ship through an 8-bit warzone.
 
-A retro-styled, browser-based space shooter built entirely with **vanilla HTML, CSS, and JavaScript** — no frameworks, no build tools, no dependencies. Just open `index.html` and play.
+A retro-styled, browser-based space shooter built entirely with **vanilla HTML, CSS, and JavaScript** — no frameworks, no build tools, no dependencies.
 
 ---
 
-## 🎮 Live Preview
+## 🎮 Quick Start
 
 Open `index.html` directly in any modern browser. No server required.
 
@@ -14,124 +14,78 @@ Open `index.html` directly in any modern browser. No server required.
 
 ## ✨ Features
 
-| # | Feature | Description |
-|---|---------|-------------|
-| 01 | 🎨 **Pixel Graphics** | Hand-crafted pixel art sprites drawn entirely on HTML5 Canvas with retro scanline overlay |
-| 02 | 👾 **Enemy Waves** | Endless waves of creeper-inspired aliens — normal and fast variants, each with their own health |
-| 03 | ⚡ **Power System** | Laser cooldown mechanic + limited lives. Take too many hits and it's game over |
-| 04 | 🏆 **Leaderboard** | Top 20 scores persisted in `localStorage` with name, accuracy, kills, difficulty & date |
-| 05 | 🏅 **Achievements** | 10 unlockable badges tracked across sessions (First Flight, On Fire, Hard Core, and more) |
-| 06 | 🎯 **3 Difficulties** | Easy (5 lives, slow enemies) · Normal (3 lives, balanced) · Hard (1 life, fast & furious) |
-| 07 | 📈 **Wave Scaling** | Every 8 kills advances a wave — enemies spawn faster and move quicker each round |
-| 08 | 🔊 **8-bit Sounds** | Procedural sound effects generated in real-time via the **Web Audio API** — zero audio files |
-| 09 | 🕹️ **SPA Navigation** | Single-page app with VHS glitch transitions between sections, no page reloads |
-| 10 | 💥 **Screen Shake** | Camera shake effect when the player takes damage for impactful hit feedback |
-| 11 | ☄️ **Meteor Showers** | Random meteor shower events during gameplay — survive for bonus points |
-| 12 | 🖥️ **Boot Sequence** | Fake BIOS boot screen with green-on-black DOS terminal text on every page load |
-| 13 | 🎯 **Retro Cursor** | Custom pixel-art crosshair cursor with click ripple effect and hover/active states |
-| 14 | 📊 **Live Stats** | Home page battle stats pull real data from localStorage — games played, best score, kills, accuracy |
-| 15 | 🐣 **Easter Eggs** | Konami code, terminal hack sequence, idle UFO flyby, and a secret footer message |
+| #   | Feature               | Description                                    |
+| --- | --------------------- | ---------------------------------------------- |
+| 01  | 🎨 **Pixel Graphics** | Hand-crafted pixel art sprites on HTML5 Canvas |
+| 02  | 👾 **Enemy Waves**    | Endless waves with normal and fast variants    |
+| 03  | ⚡ **Power System**   | Laser cooldown + limited lives                 |
+| 04  | 🏆 **Leaderboard**    | Top 20 scores persisted in localStorage        |
+| 05  | 🏅 **Achievements**   | 10 unlockable badges tracked across sessions   |
+| 06  | 🎯 **3 Difficulties** | Easy · Normal · Hard                           |
+| 07  | 📈 **Wave Scaling**   | Enemies spawn faster each round                |
+| 08  | 🔊 **8-bit Sounds**   | Procedural sounds via Web Audio API            |
+| 09  | 🕹️ **SPA Navigation** | Single-page app with VHS glitch transitions    |
+| 10  | 💥 **Screen Shake**   | Camera shake on damage                         |
+| 11  | ☄️ **Meteor Showers** | Random events for bonus points                 |
+| 12  | 🖥️ **Boot Sequence**  | Fake BIOS boot screen on load                  |
+| 13  | 🎯 **Retro Cursor**   | Custom pixel-art crosshair                     |
+| 14  | 📊 **Live Stats**     | Real-time stats from localStorage              |
+| 15  | 🐣 **Easter Eggs**    | Konami code, terminal hack, idle UFO           |
 
 ---
 
 ## 🕹️ Controls
 
-| Action | Keys |
-|--------|------|
-| Move Left | `←` or `A` |
-| Move Right | `→` or `D` |
-| Fire Laser | `Space` or `Mouse Click` |
-| Pause / Resume | `Esc` or `P` |
+| Action     | Keys               |
+| ---------- | ------------------ |
+| Move Left  | `←` or `A`         |
+| Move Right | `→` or `D`         |
+| Fire Laser | `Space` or `Click` |
+| Pause      | `Esc` or `P`       |
 
 ---
 
 ## 🗂️ Project Structure
 
 ```
-laser-defender/
-├── index.html      # Full SPA — all pages (Home, About, Scores, Game)
-├── style.css       # All styles — layout, animations, game UI, responsive
-├── app.js          # All logic — SPA nav, game engine, leaderboard, easter eggs
-└── assets/
-    └── favicon.svg # Pixel art favicon
+miniproject/
+├── index.html      # Full SPA (Home, About, Scores, Game)
+├── style.css       # All styles (2,700+ lines)
+├── app.js          # Game engine + SPA router + sounds
+├── merge-navfix.sh # Git merge helper script
+└── README.md       # This file
 ```
 
-**3 files. That's it.** No `node_modules`, no bundler, no config files.
-
----
-
-## 🚀 Getting Started
-
-```bash
-# Clone the repo
-git clone https://github.com/your-username/laser-defender.git
-
-# Open in browser — no install step needed
-open index.html
-```
-
-Or just double-click `index.html`. Works offline too.
-
----
-
-## 🔧 Tech Stack
-
-| Technology | Usage |
-|------------|-------|
-| **HTML5** | Semantic structure, Canvas API for game rendering |
-| **CSS3** | Custom properties, CSS Grid, keyframe animations, scanline effects, custom cursors |
-| **Vanilla JS** | Game loop (`requestAnimationFrame`), SPA routing, DOM manipulation |
-| **Web Audio API** | Procedural 8-bit sound effects — oscillators + gain nodes |
-| **localStorage** | Persistent leaderboard scores, achievements, and home page stats |
-| **Google Fonts** | VT323 · Press Start 2P |
-
----
-
-## 🎯 Gameplay
-
-1. Hit **🪙 INSERT COIN** from the home screen
-2. Pick your difficulty — **Easy**, **Normal**, or **Hard**
-3. Move your ship left/right and shoot down the incoming aliens
-4. Each wave gets progressively harder — enemies spawn faster and move quicker
-5. Watch out for random **meteor showers** mid-game — survive them for +50 bonus points
-6. Survive as long as possible, then save your score to the leaderboard
-
-**Scoring:**
-- Normal enemy destroyed → **+10 pts**
-- Fast enemy destroyed → **+20 pts**
-- Meteor destroyed → **+5 pts**
-- Meteor shower survived → **+50 pts bonus**
+**3 core files. That's it.** No `node_modules`, no bundler.
 
 ---
 
 ## 🏅 Achievements
 
-| Badge | Name | Condition |
-|-------|------|-----------|
-| 🚀 | First Flight | Play your first game |
-| 💯 | Century | Score 100+ points |
-| ⭐ | Rising Star | Score 500+ points |
-| 🔥 | On Fire | Score 1,000+ points |
-| 💎 | Diamond | Score 5,000+ points |
-| 👾 | Hunter | Destroy 50 enemies |
-| 🎯 | Marksman | Destroy 200 enemies |
-| 💀 | Hard Core | Score on HARD mode |
-| 🏆 | Veteran | Play 10+ games |
-| 🕵️ | Secret Agent | Find the Konami code |
+| Badge           | Condition            |
+| --------------- | -------------------- |
+| 🚀 First Flight | Play your first game |
+| 💯 Century      | Score 100+ points    |
+| ⭐ Rising Star  | Score 500+ points    |
+| 🔥 On Fire      | Score 1,000+ points  |
+| 💎 Diamond      | Score 5,000+ points  |
+| 👾 Hunter       | Destroy 50 enemies   |
+| 🎯 Marksman     | Destroy 200 enemies  |
+| 💀 Hard Core    | Score on HARD mode   |
+| 🏆 Veteran      | Play 10+ games       |
+| 🕵️ Secret Agent | Find the Konami code |
 
 ---
 
 ## 🐣 Easter Eggs
 
-There are **4 hidden secrets** in the game. Can you find them all?
-
 <details>
 <summary>Spoilers (click to reveal)</summary>
 
-- **Konami Code** — `↑ ↑ ↓ ↓ ← → ← → B A` anywhere on the page. Grants +1000 bonus points to your next game.
-- **Terminal Hack** — Click the three macOS-style dots on the hero terminal in order (🔴 → 🟡 → 🟢). Watch what happens.
-- **Footer Secret** — Click the copyright text at the bottom of the page.
-- **Idle UFO** — Leave the tab open and idle for ~18 seconds...
+- **Konami Code** — `↑ ↑ ↓ ↓ ← → ← → B A` anywhere. Grants +1000 bonus points.
+- **Terminal Hack** — Click the three macOS-style dots in order (🔴 → 🟡 → 🟢).
+- **Footer Secret** — Click the copyright text at the bottom.
+- **Idle UFO** — Leave the tab open and idle for ~18 seconds.
 
 </details>
 
@@ -139,20 +93,33 @@ There are **4 hidden secrets** in the game. Can you find them all?
 
 ## 👥 Team
 
-| Name | Role |
-|------|------|
+| Name          | Role           |
+| ------------- | -------------- |
 | **Biswajeet** | Lead Developer |
-| **Neel** | Lead Developer |
-| **Saish** | Lead Developer |
-| **Manthan** | Lead Developer |
+| **Neel**      | Lead Developer |
+| **Saish**     | Lead Developer |
+| **Manthan**   | Lead Developer |
 
-*B.Tech CSE — 2026*
+_B.Tech CSE — 2026_
+
+---
+
+## 💻 Tech Stack
+
+| Technology        | Usage                                            |
+| ----------------- | ------------------------------------------------ |
+| **HTML5**         | Semantic structure, Canvas API                   |
+| **CSS3**          | Custom properties, Grid, animations, CRT effects |
+| **Vanilla JS**    | Game loop, SPA routing, localStorage             |
+| **Web Audio API** | Procedural 8-bit sound effects                   |
+| **localStorage**  | Scores, achievements, stats persistence          |
+| **Google Fonts**  | VT323 · Press Start 2P                           |
 
 ---
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
+MIT License
 
 ---
 
@@ -160,6 +127,6 @@ This project is open source and available under the [MIT License](LICENSE).
 
 **LASER DEFENDER © 2026 — Retro Edition**
 
-*Made with ❤️, pixels, and way too much chai.*
+_Made with ❤️, pixels, and way too much chai._
 
 </div>
