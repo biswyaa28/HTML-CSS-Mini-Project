@@ -57,8 +57,8 @@ function beep(freq = 440, dur = 0.1, type = "square", vol = 0.12) {
     if (!audioCtx) audioCtx = new AudioCtx();
 
     // Create the two nodes in our signal chain
-    const o = audioCtx.createOscillator(),  // Generates the raw tone
-      g = audioCtx.createGain();            // Controls volume envelope
+    const o = audioCtx.createOscillator(), // Generates the raw tone
+      g = audioCtx.createGain(); // Controls volume envelope
 
     o.type = type; // Waveform shape — "square" for classic 8-bit, "sawtooth" for harsher buzz
     o.frequency.setValueAtTime(freq, audioCtx.currentTime); // Set pitch immediately
@@ -139,8 +139,8 @@ const sfx = {
   // Wave cleared — C-E-G major triad arpeggio (C5→E5→G5)
   // Musical chord creates a triumphant "level up" feel
   wave: () => {
-    beep(523, 0.08);  // C5
-    setTimeout(() => beep(659, 0.08), 90);  // E5
+    beep(523, 0.08); // C5
+    setTimeout(() => beep(659, 0.08), 90); // E5
     setTimeout(() => beep(784, 0.12), 180); // G5
   },
 
@@ -208,12 +208,12 @@ function navigateTo(section) {
     // Step 3c: Section-specific initialisation hooks.
     // Certain sections need fresh data rendered when they become visible.
     if (section === "leaderboard") {
-      renderLeaderboard();  // Rebuild score table from localStorage
+      renderLeaderboard(); // Rebuild score table from localStorage
       renderAchievements(); // Recheck achievement unlock conditions
     }
     if (section === "home") {
       renderPersonalBest(); // Update hero banner with latest high score
-      renderHomeStats();    // Refresh the "BATTLE STATS" grid
+      renderHomeStats(); // Refresh the "BATTLE STATS" grid
     }
     if (section === "game") {
       resetGame(); // Reset all game state and show difficulty picker
@@ -257,8 +257,8 @@ document.addEventListener("click", (e) => {
 // At ~125 frames (≈2 seconds at 60fps), the counter reaches its target.
 function animateCounters() {
   document.querySelectorAll("[data-target]").forEach((el) => {
-    const target = +el.dataset.target,   // Final number to count up to (from data-target attr)
-      suffix = el.dataset.suffix || "";  // Optional suffix like "%" (from data-suffix attr)
+    const target = +el.dataset.target, // Final number to count up to (from data-target attr)
+      suffix = el.dataset.suffix || ""; // Optional suffix like "%" (from data-suffix attr)
     let cur = 0;
     const inc = target / 125; // Increment per frame — reaches target in ~125 frames (~2.1s at 60fps)
 
@@ -276,7 +276,7 @@ function animateCounters() {
     new IntersectionObserver(
       (entries, obs) => {
         if (entries[0].isIntersecting) {
-          tick();          // Start the count-up animation
+          tick(); // Start the count-up animation
           obs.unobserve(el); // Stop observing — animation should only play once
         }
       },
@@ -327,7 +327,7 @@ const clearBoard = () => localStorage.removeItem(LB_KEY);
 function saveScore(name, score, stats = {}) {
   const board = getBoard();
   board.push({
-    name: name || "PILOT",         // Default name if the player skipped the input
+    name: name || "PILOT", // Default name if the player skipped the input
     score,
     accuracy: stats.accuracy || 0,
     enemiesKilled: stats.enemiesKilled || 0,
@@ -394,8 +394,8 @@ function renderLeaderboard() {
   // ── Render aggregate stats cards ──
   // Compute summary statistics across ALL saved games (not just top score)
   if (sg) {
-    const t = board.length,         // Total games played (board length = number of saves)
-      b = board[0].score;           // Best score (board is sorted descending, so index 0 = best)
+    const t = board.length, // Total games played (board length = number of saves)
+      b = board[0].score; // Best score (board is sorted descending, so index 0 = best)
     const a = Math.round(board.reduce((s, e) => s + (e.accuracy || 0), 0) / t); // Mean accuracy
     const k = board.reduce((s, e) => s + (e.enemiesKilled || 0), 0); // Sum of all kills
 
@@ -404,7 +404,7 @@ function renderLeaderboard() {
     sg.innerHTML = [
       [t, "GAMES PLAYED"],
       [b, "BEST SCORE"],
-      [a, "AVG ACCURACY", "%"],   // Has a suffix "%" appended after the number
+      [a, "AVG ACCURACY", "%"], // Has a suffix "%" appended after the number
       [k, "TOTAL KILLS"],
     ]
       .map(
@@ -445,8 +445,8 @@ function renderAchievements() {
     ["⭐", "RISING STAR", "Score 500+", best >= 500],
     ["🔥", "ON FIRE", "Score 1,000+", best >= 1000],
     ["💎", "DIAMOND", "Score 5,000+", best >= 5000],
-    ["👾", "HUNTER", "Destroy 50 enemies", kills >= 50],       // Cumulative across all games
-    ["🎯", "MARKSMAN", "Destroy 200 enemies", kills >= 200],   // Cumulative across all games
+    ["👾", "HUNTER", "Destroy 50 enemies", kills >= 50], // Cumulative across all games
+    ["🎯", "MARKSMAN", "Destroy 200 enemies", kills >= 200], // Cumulative across all games
     [
       "💀",
       "HARD CORE",
@@ -506,12 +506,13 @@ function renderHomeStats() {
 
   // Read all saved games and compute aggregate stats
   const board = getBoard();
-  const games = board.length;                                                    // Total games played
-  const best = board[0]?.score || 0;                                             // Highest single-game score
-  const kills = board.reduce((s, e) => s + (e.enemiesKilled || 0), 0);          // Sum of kills across all games
-  const acc = games > 0
-    ? Math.round(board.reduce((s, e) => s + (e.accuracy || 0), 0) / games)      // Mean accuracy percentage
-    : 0; // Avoid division by zero for new players
+  const games = board.length; // Total games played
+  const best = board[0]?.score || 0; // Highest single-game score
+  const kills = board.reduce((s, e) => s + (e.enemiesKilled || 0), 0); // Sum of kills across all games
+  const acc =
+    games > 0
+      ? Math.round(board.reduce((s, e) => s + (e.accuracy || 0), 0) / games) // Mean accuracy percentage
+      : 0; // Avoid division by zero for new players
 
   // Build stat cards — initial text is "0" so animateCounters() can count up from 0 → target
   // data-target holds the final value; data-suffix holds an optional "%" for accuracy
@@ -542,13 +543,13 @@ function renderHomeStats() {
 // The "typewriter-active" CSS class can add a blinking cursor pseudo-element
 // while typing is in progress, and is removed when the text is fully rendered.
 function typewriter(el, text, speed = 35) {
-  el.textContent = "";                    // Clear any existing content before starting
-  el.classList.add("typewriter-active");  // Enable blinking cursor CSS
-  let i = 0;                             // Character index pointer
+  el.textContent = ""; // Clear any existing content before starting
+  el.classList.add("typewriter-active"); // Enable blinking cursor CSS
+  let i = 0; // Character index pointer
   const t = setInterval(() => {
-    el.textContent += text[i++];         // Append next character
+    el.textContent += text[i++]; // Append next character
     if (i >= text.length) {
-      clearInterval(t);                  // Stop the interval when all characters are typed
+      clearInterval(t); // Stop the interval when all characters are typed
       el.classList.remove("typewriter-active"); // Remove blinking cursor
     }
   }, speed); // Default 35ms per character
@@ -568,7 +569,7 @@ function typewriter(el, text, speed = 35) {
 function toast(msg, ms = 4000) {
   document.getElementById("eggToast")?.remove(); // Remove any existing toast first
   const el = document.createElement("div");
-  el.id = "eggToast";    // Fixed ID ensures only one toast exists at a time
+  el.id = "eggToast"; // Fixed ID ensures only one toast exists at a time
   el.textContent = msg;
   // Inline styles create a fixed-position banner centered at top of viewport.
   // Uses the app's retro VT323 monospace font and theme colors (--lavender, --iron).
@@ -578,8 +579,8 @@ function toast(msg, ms = 4000) {
   // Auto-dismiss: after `ms`, fade out then remove from DOM
   setTimeout(() => {
     el.style.transition = "opacity .4s"; // Enable CSS transition for smooth fade
-    el.style.opacity = "0";              // Trigger the fade-out
-    setTimeout(() => el.remove(), 450);  // Remove from DOM after fade completes (400ms + 50ms buffer)
+    el.style.opacity = "0"; // Trigger the fade-out
+    setTimeout(() => el.remove(), 450); // Remove from DOM after fade completes (400ms + 50ms buffer)
   }, ms); // Default 4 seconds visible before fade begins
 }
 
@@ -621,8 +622,8 @@ let konamiIdx = 0; // Current position in the KONAMI sequence (0 = no progress)
 //
 // dotSeq accumulates clicked dot classes. dotTimer resets the sequence if the
 // player takes more than 3 seconds between clicks (prevents accidental triggers).
-let dotSeq = [],      // Array of clicked dot CSS class names (e.g. ["dot-red", "dot-yellow"])
-  dotTimer = null;    // Timeout handle — resets dotSeq after 3s of inactivity
+let dotSeq = [], // Array of clicked dot CSS class names (e.g. ["dot-red", "dot-yellow"])
+  dotTimer = null; // Timeout handle — resets dotSeq after 3s of inactivity
 const DOT_ORDER = ["dot-red", "dot-yellow", "dot-green"]; // Required click order
 
 document.addEventListener("click", (e) => {
@@ -634,8 +635,8 @@ document.addEventListener("click", (e) => {
     // Identify which dot was clicked by checking its CSS class
     const cls = DOT_ORDER.find((c) => dot.classList.contains(c));
     if (cls) {
-      clearTimeout(dotTimer);  // Reset the 3-second inactivity timeout
-      dotSeq.push(cls);        // Record this click
+      clearTimeout(dotTimer); // Reset the 3-second inactivity timeout
+      dotSeq.push(cls); // Record this click
       // Start a new 3-second timeout — if the player waits too long, reset progress
       dotTimer = setTimeout(() => {
         dotSeq = [];
@@ -644,8 +645,8 @@ document.addEventListener("click", (e) => {
       if (dotSeq.every((c, i) => c === DOT_ORDER[i]) && dotSeq.length <= 3) {
         // All 3 dots clicked in correct order — trigger the easter egg!
         if (dotSeq.length === 3) {
-          dotSeq = [];           // Reset for potential re-trigger
-          runHackSequence();     // Launch the fake hacking animation
+          dotSeq = []; // Reset for potential re-trigger
+          runHackSequence(); // Launch the fake hacking animation
         }
         // Otherwise, sequence is partially correct — keep waiting for more clicks
       } else dotSeq = []; // Wrong order — reset and start over
@@ -756,8 +757,8 @@ function runHackSequence() {
 // The ufoActive flag prevents multiple UFOs from spawning simultaneously.
 // After the 5-second flyby animation completes, the timer restarts so another
 // UFO can appear after another 18s of inactivity.
-let idleTimer = null,    // setTimeout handle for the 18-second idle detection
-  ufoActive = false;     // Guard flag: true while a UFO is currently on screen
+let idleTimer = null, // setTimeout handle for the 18-second idle detection
+  ufoActive = false; // Guard flag: true while a UFO is currently on screen
 
 function resetIdleTimer() {
   clearTimeout(idleTimer); // Cancel any pending idle timeout
@@ -777,9 +778,9 @@ function resetIdleTimer() {
 
     // Clean up after the 5s animation completes (200ms buffer for safety)
     setTimeout(() => {
-      ufo.remove();         // Remove the UFO element from DOM
-      ufoActive = false;    // Allow future UFO spawns
-      resetIdleTimer();     // Restart the idle timer for another potential UFO
+      ufo.remove(); // Remove the UFO element from DOM
+      ufoActive = false; // Allow future UFO spawns
+      resetIdleTimer(); // Restart the idle timer for another potential UFO
     }, 5200); // 5000ms animation + 200ms buffer
   }, 18000); // 18 seconds of inactivity triggers the UFO
 }
@@ -793,7 +794,7 @@ function resetIdleTimer() {
 // rather than directly setting display/opacity, keeping the logic clean.
 function initScrollTop() {
   const btn = document.createElement("button");
-  btn.className = "scroll-top-btn";    // CSS handles position: fixed, opacity transition, etc.
+  btn.className = "scroll-top-btn"; // CSS handles position: fixed, opacity transition, etc.
   btn.textContent = "▲ TOP";
   document.body.appendChild(btn);
   // Toggle visibility based on scroll position (> 400px = show, <= 400px = hide)
@@ -832,23 +833,23 @@ const canvas = document.getElementById("game"),
 // which would cause unnecessary DOM lookups (~60 times/second). The DOM object
 // acts as a namespace for all game-related UI element references.
 const DOM = {
-  score: document.getElementById("score"),             // Score counter in HUD
-  lives: document.getElementById("lives"),             // Lives counter in HUD
+  score: document.getElementById("score"), // Score counter in HUD
+  lives: document.getElementById("lives"), // Lives counter in HUD
   waveDisplay: document.getElementById("waveDisplay"), // Current wave number
   timeDisplay: document.getElementById("timeDisplay"), // Elapsed time "M:SS"
   modeDisplay: document.getElementById("modeDisplay"), // Difficulty label (EASY/NORMAL/HARD)
   difficultyScreen: document.getElementById("difficultyScreen"), // Pre-game difficulty picker overlay
-  pauseOverlay: document.getElementById("pauseOverlay"),         // "PAUSED" overlay
-  gameOverEl: document.getElementById("gameOver"),               // Game over stats screen
-  finalScore: document.getElementById("finalScore"),             // Final score on game over
-  finalKills: document.getElementById("finalKills"),             // Final kill count
-  finalAccuracy: document.getElementById("finalAccuracy"),       // Final accuracy %
-  finalTime: document.getElementById("finalTime"),               // Final survival time
-  finalDifficulty: document.getElementById("finalDifficulty"),   // Difficulty on game over
-  finalWave: document.getElementById("finalWave"),               // Final wave reached
-  savedMsg: document.getElementById("savedMsg"),                 // "Score saved!" confirmation
-  playerName: document.getElementById("playerName"),             // Name input on game over screen
-  gameContainer: document.getElementById("gameContainer"),       // Wrapper div (for screen shake CSS)
+  pauseOverlay: document.getElementById("pauseOverlay"), // "PAUSED" overlay
+  gameOverEl: document.getElementById("gameOver"), // Game over stats screen
+  finalScore: document.getElementById("finalScore"), // Final score on game over
+  finalKills: document.getElementById("finalKills"), // Final kill count
+  finalAccuracy: document.getElementById("finalAccuracy"), // Final accuracy %
+  finalTime: document.getElementById("finalTime"), // Final survival time
+  finalDifficulty: document.getElementById("finalDifficulty"), // Difficulty on game over
+  finalWave: document.getElementById("finalWave"), // Final wave reached
+  savedMsg: document.getElementById("savedMsg"), // "Score saved!" confirmation
+  playerName: document.getElementById("playerName"), // Name input on game over screen
+  gameContainer: document.getElementById("gameContainer"), // Wrapper div (for screen shake CSS)
 };
 
 // ─── Background Gradient (pre-cached) ────────────────────
@@ -878,19 +879,19 @@ bgGradient.addColorStop(1, "#081008"); // Bottom: near-black (deep space)
 // (danger), warm yellows for bullets and particles (energy/fire), cool lavender
 // for stars (ambient space), orange for meteors (hazard warning).
 const C = {
-  pBody: "#7ec8a0",    // Player body — mint green (hero color)
-  pDark: "#5fa880",    // Player shadow edge — darker green
-  pHi: "#a2dbb8",      // Player highlight edge — lighter green
-  bullet: "#f5e6a3",   // Bullet fill — warm yellow (laser energy)
-  bulletSh: "#e0cc80",  // Bullet shadow — slightly darker yellow
-  enemy: "#e88d8d",    // Normal enemy body — salmon red (danger)
-  eDark: "#cc6666",    // Enemy shadow edge — darker red
-  eHi: "#f0b6c5",      // Enemy highlight edge — pink (also used as "fast" enemy body color)
+  pBody: "#7ec8a0", // Player body — mint green (hero color)
+  pDark: "#5fa880", // Player shadow edge — darker green
+  pHi: "#a2dbb8", // Player highlight edge — lighter green
+  bullet: "#f5e6a3", // Bullet fill — warm yellow (laser energy)
+  bulletSh: "#e0cc80", // Bullet shadow — slightly darker yellow
+  enemy: "#e88d8d", // Normal enemy body — salmon red (danger)
+  eDark: "#cc6666", // Enemy shadow edge — darker red
+  eHi: "#f0b6c5", // Enemy highlight edge — pink (also used as "fast" enemy body color)
   particle: "#f7c5a8", // Explosion particle color — warm peach/orange
-  star: "#d4cce0",     // Background star color — cool lavender (subtle, non-distracting)
-  bgTop: "#0f1a0f",    // Canvas gradient top (not used directly — see bgGradient above)
-  bgBot: "#081008",    // Canvas gradient bottom (not used directly — see bgGradient above)
-  meteor: "#ff6633",   // Meteor shower color — bright orange-red (warning/hazard)
+  star: "#d4cce0", // Background star color — cool lavender (subtle, non-distracting)
+  bgTop: "#0f1a0f", // Canvas gradient top (not used directly — see bgGradient above)
+  bgBot: "#081008", // Canvas gradient bottom (not used directly — see bgGradient above)
+  meteor: "#ff6633", // Meteor shower color — bright orange-red (warning/hazard)
 };
 
 // ─── Game State Variables ────────────────────────────────
@@ -900,48 +901,48 @@ const C = {
 // encapsulation or multiple game objects.
 
 // Core entity arrays — each element is a plain object with x, y, w, h, speed, etc.
-let player,      // Single player object: {x, y, w, h, speed}
-  bullets,       // Array of bullet objects: {x, y, w, h, speed, dead?}
-  enemies,       // Array of enemy objects: {x, y, w, h, speed, health, type, dead?}
-  particles,     // Array of explosion particle objects: {x, y, vx, vy, life, color, size}
-  stars = [];    // Array of background star objects: {x, y, size, speed} — persists across games
+let player, // Single player object: {x, y, w, h, speed}
+  bullets, // Array of bullet objects: {x, y, w, h, speed, dead?}
+  enemies, // Array of enemy objects: {x, y, w, h, speed, health, type, dead?}
+  particles, // Array of explosion particle objects: {x, y, vx, vy, life, color, size}
+  stars = []; // Array of background star objects: {x, y, size, speed} — persists across games
 
 // Scoring and lives
-let score,       // Current score (integer, displayed in HUD)
-  lives,         // Remaining lives (0 = game over)
-  keys = {};     // Map of currently-pressed keyboard keys: {"ArrowLeft": true, " ": true, ...}
+let score, // Current score (integer, displayed in HUD)
+  lives, // Remaining lives (0 = game over)
+  keys = {}; // Map of currently-pressed keyboard keys: {"ArrowLeft": true, " ": true, ...}
 
 // Game lifecycle flags
 let gameRunning, // true while the game loop is actively processing frames
-  gamePaused,    // true while paused (game loop runs but update() early-returns)
-  gameStarted,   // true after difficulty is selected (false on title/difficulty screen)
-  frame;         // Frame counter (incremented each update() call) — used for timed events
+  gamePaused, // true while paused (game loop runs but update() early-returns)
+  gameStarted, // true after difficulty is selected (false on title/difficulty screen)
+  frame; // Frame counter (incremented each update() call) — used for timed events
 
 // Wave system — enemies get harder every KILLS_PER_WAVE kills
-let waveNumber,    // Current wave number (starts at 1, displayed in HUD)
-  killsThisWave,   // Kill count within the current wave (resets to 0 on wave advance)
-  shotsFired,      // Total shots fired this game (for accuracy calculation)
-  shotsHit,        // Total shots that hit an enemy (for accuracy calculation)
-  enemiesKilled,   // Total enemies destroyed this game
-  startTime,       // Date.now() timestamp when the game started (used for elapsed time)
-  elapsedTime;     // Milliseconds elapsed since game start (pauses when game is paused)
+let waveNumber, // Current wave number (starts at 1, displayed in HUD)
+  killsThisWave, // Kill count within the current wave (resets to 0 on wave advance)
+  shotsFired, // Total shots fired this game (for accuracy calculation)
+  shotsHit, // Total shots that hit an enemy (for accuracy calculation)
+  enemiesKilled, // Total enemies destroyed this game
+  startTime, // Date.now() timestamp when the game started (used for elapsed time)
+  elapsedTime; // Milliseconds elapsed since game start (pauses when game is paused)
 
 // Difficulty and balancing
-let difficulty,       // Current difficulty string: "easy", "normal", or "hard"
-  enemySpawnRate,     // Frames between enemy spawns (lower = more frequent, scales with wave)
-  enemySpeedMult,     // Multiplier applied to base enemy speed (scales with wave)
-  konamiBonus,        // Bonus points from easter eggs applied at game start
-  lastShot = 0,       // Timestamp of last shot fired (for rate-limiting, see shoot())
+let difficulty, // Current difficulty string: "easy", "normal", or "hard"
+  enemySpawnRate, // Frames between enemy spawns (lower = more frequent, scales with wave)
+  enemySpeedMult, // Multiplier applied to base enemy speed (scales with wave)
+  konamiBonus, // Bonus points from easter eggs applied at game start
+  lastShot = 0, // Timestamp of last shot fired (for rate-limiting, see shoot())
   idleRunning = true; // Whether the idle starfield animation is active (before game starts)
 
 // Number of kills needed to advance to the next wave
 const KILLS_PER_WAVE = 8;
 
 // Meteor shower state — a random mid-game event (see triggerMeteorShower)
-let meteorActive = false;    // Whether a meteor shower is currently happening
-let meteorTimer = 0;         // Timestamp when the current shower started
-let meteors = [];            // Array of active meteor objects: {x, y, w, h, speed, health, dead?}
-let lastMeteorCheck = 0;     // Frame number of last random check (throttles checks to ~1/sec)
+let meteorActive = false; // Whether a meteor shower is currently happening
+let meteorTimer = 0; // Timestamp when the current shower started
+let meteors = []; // Array of active meteor objects: {x, y, w, h, speed, health, dead?}
+let lastMeteorCheck = 0; // Frame number of last random check (throttles checks to ~1/sec)
 
 // ─── Star Field Initialisation ───────────────────────────
 // Pre-populate 60 stars with random positions, sizes, and scroll speeds.
@@ -957,9 +958,9 @@ let lastMeteorCheck = 0;     // Frame number of last random check (throttles che
 // (resetGame does NOT clear it), so the starfield is always present.
 for (let i = 0; i < 60; i++)
   stars.push({
-    x: Math.random() * 600,       // Random x within canvas width (600px)
-    y: Math.random() * 800,       // Random y within canvas height (800px)
-    size: Math.random() * 3 + 1,  // 1–4px square
+    x: Math.random() * 600, // Random x within canvas width (600px)
+    y: Math.random() * 800, // Random y within canvas height (800px)
+    size: Math.random() * 3 + 1, // 1–4px square
     speed: Math.random() * 2 + 0.5, // 0.5–2.5 px/frame scroll speed
   });
 
@@ -976,7 +977,10 @@ document.addEventListener("keydown", (e) => {
   // Without this, pressing Space to shoot would also scroll the page down,
   // since Space is the browser's default "scroll down" shortcut.
   // We only prevent it on the game section to avoid breaking normal page scrolling.
-  if (e.key === " " && document.getElementById("sec-game")?.classList.contains("active")) {
+  if (
+    e.key === " " &&
+    document.getElementById("sec-game")?.classList.contains("active")
+  ) {
     e.preventDefault();
   }
 
@@ -988,8 +992,8 @@ document.addEventListener("keydown", (e) => {
   if (e.key === KONAMI[konamiIdx]) {
     konamiIdx++;
     if (konamiIdx === KONAMI.length) {
-      triggerKonami();  // Full sequence entered — award bonus!
-      konamiIdx = 0;    // Reset for potential re-trigger
+      triggerKonami(); // Full sequence entered — award bonus!
+      konamiIdx = 0; // Reset for potential re-trigger
     }
   } else konamiIdx = 0; // Wrong key — restart the sequence
 
@@ -1048,7 +1052,8 @@ function triggerKonami() {
   }
 
   // Dynamic label text based on whether points were applied now or banked
-  const label = gameStarted && gameRunning ? "+1000 POINTS ADDED!" : "+1000 BONUS POINTS!";
+  const label =
+    gameStarted && gameRunning ? "+1000 POINTS ADDED!" : "+1000 BONUS POINTS!";
 
   // Create a full-screen overlay with the reveal announcement
   const ov = document.createElement("div");
@@ -1087,9 +1092,9 @@ function startGame(diff) {
   // Destructure difficulty settings from a lookup table.
   // Format: { difficulty: [lives, spawnRate, speedMult, playerSpeed] }
   [lives, enemySpawnRate, enemySpeedMult, player.speed] = {
-    easy: [5, 80, 0.7, 7],     // Forgiving: 5 lives, slow enemies, fast player
-    normal: [3, 60, 1, 6],     // Balanced: 3 lives, normal speed
-    hard: [1, 40, 1.5, 5],     // Punishing: 1 life, fast enemies, slow player
+    easy: [5, 80, 0.7, 7], // Forgiving: 5 lives, slow enemies, fast player
+    normal: [3, 60, 1, 6], // Balanced: 3 lives, normal speed
+    hard: [1, 40, 1.5, 5], // Punishing: 1 life, fast enemies, slow player
   }[diff];
 
   // Update HUD with initial values
@@ -1111,8 +1116,8 @@ function startGame(diff) {
   // the stored value so they're not double-counted.
   konamiBonus = +(localStorage.getItem("laserDefenderBonus") || 0);
   if (konamiBonus > 0) {
-    score = konamiBonus;                       // Start with bonus points
-    DOM.score.textContent = score;             // Show on HUD immediately
+    score = konamiBonus; // Start with bonus points
+    DOM.score.textContent = score; // Show on HUD immediately
     localStorage.removeItem("laserDefenderBonus"); // Clear so it's not applied again
     konamiBonus = 0;
   }
@@ -1123,8 +1128,8 @@ function startGame(diff) {
   meteors = [];
   lastMeteorCheck = 0;
 
-  gameLoop();            // Start the requestAnimationFrame loop (update + draw)
-  idleRunning = false;   // Stop the idle starfield animation (game loop handles stars now)
+  gameLoop(); // Start the requestAnimationFrame loop (update + draw)
+  idleRunning = false; // Stop the idle starfield animation (game loop handles stars now)
 }
 
 /**
@@ -1144,7 +1149,7 @@ function togglePause() {
   gamePaused = !gamePaused;
   DOM.pauseOverlay.style.display = gamePaused ? "flex" : "none"; // Show/hide "PAUSED" overlay
   gamePaused
-    ? ((elapsedTime = Date.now() - startTime), beep(400, 0.1))   // Pause: snapshot time, low beep
+    ? ((elapsedTime = Date.now() - startTime), beep(400, 0.1)) // Pause: snapshot time, low beep
     : ((startTime = Date.now() - elapsedTime), beep(600, 0.05)); // Unpause: adjust start, high beep
 }
 
@@ -1167,7 +1172,7 @@ function shoot() {
   // Spawn bullet at the center-top of the player sprite, moving upward (negative y)
   bullets.push({ x: player.x + 24, y: player.y, w: 8, h: 16, speed: 14 });
   shotsFired++; // Track for accuracy calculation at game over
-  sfx.shoot();  // Pew pew!
+  sfx.shoot(); // Pew pew!
 }
 
 /**
@@ -1187,13 +1192,13 @@ function shoot() {
  */
 function spawnEnemy() {
   enemies.push({
-    x: Math.random() * 552,                     // Random x, kept within canvas bounds
-    y: -50,                                      // Start above canvas (invisible, scrolls in)
-    w: 48,                                       // Sprite width (matches player width)
-    h: 48,                                       // Sprite height
+    x: Math.random() * 552, // Random x, kept within canvas bounds
+    y: -50, // Start above canvas (invisible, scrolls in)
+    w: 48, // Sprite width (matches player width)
+    h: 48, // Sprite height
     speed: (2 + Math.random() * 3) * enemySpeedMult, // 2–5 base speed * difficulty multiplier
-    health: 2,                                   // Takes 2 hits to destroy
-    type: Math.random() > 0.7 ? "fast" : "normal",  // 30% chance of fast (pink) variant
+    health: 2, // Takes 2 hits to destroy
+    type: Math.random() > 0.7 ? "fast" : "normal", // 30% chance of fast (pink) variant
   });
 }
 
@@ -1222,9 +1227,9 @@ function boom(x, y, color) {
       y,
       vx: (Math.random() - 0.5) * 8, // Random x velocity: -4 to +4 px/frame
       vy: (Math.random() - 0.5) * 8, // Random y velocity: -4 to +4 px/frame
-      life: 25,                       // 25 frames until particle expires
+      life: 25, // 25 frames until particle expires
       color,
-      size: Math.random() * 4 + 2,   // 2–6px particle size
+      size: Math.random() * 4 + 2, // 2–6px particle size
     });
 }
 
@@ -1266,7 +1271,7 @@ function collides(a, b) {
  */
 function flash(id) {
   const el = DOM[id] || document.getElementById(id); // Try cache first, fall back to ID lookup
-  el.classList.add("flash");                          // Trigger the CSS scale/color animation
+  el.classList.add("flash"); // Trigger the CSS scale/color animation
   setTimeout(() => el.classList.remove("flash"), 200); // Remove after 200ms (matches CSS transition)
 }
 
@@ -1276,7 +1281,7 @@ function flash(id) {
  * padStart(2, "0") ensures seconds are always two digits (e.g., "1:05" not "1:5").
  */
 function fmtTime(ms) {
-  const s = Math.floor(ms / 1000);   // Convert ms to whole seconds
+  const s = Math.floor(ms / 1000); // Convert ms to whole seconds
   return `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, "0")}`;
 }
 
@@ -1305,10 +1310,10 @@ function fmtTime(ms) {
  */
 function pixRect(x, y, w, h, main, dark, light) {
   ctx.fillStyle = main;
-  ctx.fillRect(x, y, w, h);        // Fill the entire rectangle with main color
+  ctx.fillRect(x, y, w, h); // Fill the entire rectangle with main color
   ctx.fillStyle = light;
-  ctx.fillRect(x, y, w, 3);        // Top edge highlight (3px tall, full width)
-  ctx.fillRect(x, y, 3, h);        // Left edge highlight (3px wide, full height)
+  ctx.fillRect(x, y, w, 3); // Top edge highlight (3px tall, full width)
+  ctx.fillRect(x, y, 3, h); // Left edge highlight (3px wide, full height)
   ctx.fillStyle = dark;
   ctx.fillRect(x, y + h - 3, w, 3); // Bottom edge shadow (3px tall, full width)
   ctx.fillRect(x + w - 3, y, 3, h); // Right edge shadow (3px wide, full height)
@@ -1332,7 +1337,7 @@ function pixRect(x, y, w, h, main, dark, light) {
  * Called when the player collides with an enemy or meteor (takes damage).
  */
 function onHit() {
-  DOM.gameContainer.classList.add("screen-shake");     // Start shake animation
+  DOM.gameContainer.classList.add("screen-shake"); // Start shake animation
   setTimeout(() => DOM.gameContainer.classList.remove("screen-shake"), 200); // Stop after 200ms
 }
 
@@ -1381,12 +1386,12 @@ function triggerMeteorShower() {
  */
 function spawnMeteor() {
   meteors.push({
-    x: Math.random() * 580,       // Random x within canvas (580 + 16 = 596, fits in 600px)
-    y: -20,                        // Spawn just above the visible canvas
-    w: 16,                         // Small — harder to hit but less imposing
+    x: Math.random() * 580, // Random x within canvas (580 + 16 = 596, fits in 600px)
+    y: -20, // Spawn just above the visible canvas
+    w: 16, // Small — harder to hit but less imposing
     h: 16,
     speed: 6 + Math.random() * 4, // 6–10 px/frame — notably faster than enemies
-    health: 1,                     // One-hit kill (compared to enemies' 2 health)
+    health: 1, // One-hit kill (compared to enemies' 2 health)
   });
 }
 
@@ -1416,7 +1421,7 @@ function updateMeteors() {
   // Phase 3: After 6 seconds and all meteors are off-screen or destroyed, end the event
   if (elapsed > 6000 && meteors.length === 0) {
     meteorActive = false;
-    score += 50;                    // Survival bonus
+    score += 50; // Survival bonus
     DOM.score.textContent = score;
     flash("score");
     toast("☄ Meteor shower survived! +50 bonus");
@@ -1433,12 +1438,12 @@ function updateMeteors() {
       const b = bullets[bi];
       if (b.dead) continue; // Skip already-consumed bullets
       if (collides(b, m)) {
-        b.dead = true;   // Bullet is consumed
-        shotsHit++;      // Count as a hit for accuracy tracking
+        b.dead = true; // Bullet is consumed
+        shotsHit++; // Count as a hit for accuracy tracking
         m.health--;
         if (m.health <= 0) {
           boom(m.x + 8, m.y + 8, C.meteor); // Explosion centered on meteor
-          score += 5;                         // Small score bonus per meteor destroyed
+          score += 5; // Small score bonus per meteor destroyed
           DOM.score.textContent = score;
           sfx.hit();
           m.dead = true;
@@ -1453,10 +1458,10 @@ function updateMeteors() {
       boom(player.x + 24, player.y + 16, "#ff6633"); // Explosion at player center
       lives--;
       DOM.lives.textContent = lives;
-      flash("lives");      // Visual pulse on lives HUD
-      sfx.death();         // Damage sound effect
-      onHit();             // Screen shake
-      m.dead = true;       // Meteor is destroyed on contact
+      flash("lives"); // Visual pulse on lives HUD
+      sfx.death(); // Damage sound effect
+      onHit(); // Screen shake
+      m.dead = true; // Meteor is destroyed on contact
       if (lives <= 0) endGame(); // Check for game over
     }
 
@@ -1486,9 +1491,9 @@ function drawMeteors() {
   for (let i = 0; i < meteors.length; i++) {
     const m = meteors[i];
     ctx.fillStyle = C.meteor;
-    ctx.fillRect(m.x, m.y, m.w, m.h);                   // Outer body
+    ctx.fillRect(m.x, m.y, m.w, m.h); // Outer body
     ctx.fillStyle = "#ff4400";
-    ctx.fillRect(m.x + 2, m.y + 2, m.w - 4, m.h - 4);  // Inner core (2px inset)
+    ctx.fillRect(m.x + 2, m.y + 2, m.w - 4, m.h - 4); // Inner core (2px inset)
     // Trailing glow — a semi-transparent rectangle above the meteor body
     // simulates a heat trail / atmospheric entry effect
     ctx.fillStyle = "rgba(255, 102, 51, 0.3)";
@@ -1520,15 +1525,15 @@ function drawPlayer() {
   ctx.fillStyle = "#5fa880";
   ctx.fillRect(x + 18, y + 4, 12, 8);
   // Wings — left and right protrusions, darker green with their own 3D shading
-  pixRect(x, y + 16, 8, 16, C.pDark, "#3f8870", "#7ec8a0");       // Left wing
+  pixRect(x, y + 16, 8, 16, C.pDark, "#3f8870", "#7ec8a0"); // Left wing
   pixRect(x + w - 8, y + 16, 8, 16, C.pDark, "#3f8870", "#7ec8a0"); // Right wing
   // Engine glow (pulsing) — alpha oscillates via sine wave for a thruster flicker effect
   // sin(frame * 0.3) cycles every ~21 frames (~0.35s at 60fps), giving a rapid flicker
   const a = 0.6 + Math.sin(frame * 0.3) * 0.4; // Alpha range: 0.2 to 1.0
-  ctx.fillStyle = `rgba(247,197,168,${a})`;      // Outer glow: warm peach
-  ctx.fillRect(x + 18, y + h, 12, 4);           // Wider outer exhaust
-  ctx.fillStyle = `rgba(245,230,163,${a})`;      // Inner glow: bright yellow (hotter center)
-  ctx.fillRect(x + 20, y + h + 4, 8, 2);        // Narrower inner exhaust flame
+  ctx.fillStyle = `rgba(247,197,168,${a})`; // Outer glow: warm peach
+  ctx.fillRect(x + 18, y + h, 12, 4); // Wider outer exhaust
+  ctx.fillStyle = `rgba(245,230,163,${a})`; // Inner glow: bright yellow (hotter center)
+  ctx.fillRect(x + 20, y + h + 4, 8, 2); // Narrower inner exhaust flame
 }
 
 /**
@@ -1555,18 +1560,18 @@ function drawEnemy(e) {
     y + 2,
     w - 4,
     h - 4,
-    f ? "#f0b6c5" : C.enemy,    // Main fill: pink (fast) or red (normal)
-    f ? "#d890a0" : C.eDark,    // Shadow: darker pink or darker red
-    f ? "#f8d4de" : C.eHi,      // Highlight: lighter pink or lighter red
+    f ? "#f0b6c5" : C.enemy, // Main fill: pink (fast) or red (normal)
+    f ? "#d890a0" : C.eDark, // Shadow: darker pink or darker red
+    f ? "#f8d4de" : C.eHi, // Highlight: lighter pink or lighter red
   );
   // Eyes — two yellow squares positioned symmetrically
   ctx.fillStyle = "#f5e6a3";
-  ctx.fillRect(x + 10, y + 12, 8, 8);       // Left eye
-  ctx.fillRect(x + w - 18, y + 12, 8, 8);   // Right eye
+  ctx.fillRect(x + 10, y + 12, 8, 8); // Left eye
+  ctx.fillRect(x + w - 18, y + 12, 8, 8); // Right eye
   // Pupils — small dark squares centered within each eye
   ctx.fillStyle = "#1e1830";
-  ctx.fillRect(x + 14, y + 16, 4, 4);       // Left pupil
-  ctx.fillRect(x + w - 14, y + 16, 4, 4);   // Right pupil
+  ctx.fillRect(x + 14, y + 16, 4, 4); // Left pupil
+  ctx.fillRect(x + w - 14, y + 16, 4, 4); // Right pupil
   // Mouth — wide dark rectangle for a menacing appearance
   ctx.fillRect(x + 14, y + 30, 20, 4);
 }
@@ -1629,7 +1634,8 @@ function update() {
   let bWrite = 0;
   for (let i = 0; i < bullets.length; i++) {
     bullets[i].y -= bullets[i].speed; // Move upward (negative y direction)
-    if (bullets[i].y > -20) {         // Keep if still on-screen (20px grace above canvas)
+    if (bullets[i].y > -20) {
+      // Keep if still on-screen (20px grace above canvas)
       bullets[bWrite++] = bullets[i];
     }
   }
@@ -1646,8 +1652,8 @@ function update() {
   for (let i = 0; i < stars.length; i++) {
     stars[i].y += stars[i].speed;
     if (stars[i].y > 800) {
-      stars[i].y = 0;                    // Wrap to top
-      stars[i].x = Math.random() * 600;  // New random horizontal position
+      stars[i].y = 0; // Wrap to top
+      stars[i].x = Math.random() * 600; // New random horizontal position
     }
   }
 
@@ -1662,14 +1668,14 @@ function update() {
       const b = bullets[bi];
       if (b.dead) continue; // Skip bullets already consumed by a previous collision
       if (collides(b, e)) {
-        b.dead = true;  // Mark bullet as consumed (cleaned up in step 7)
-        shotsHit++;     // Track for accuracy stat
-        e.health--;     // Reduce enemy health
-        sfx.hit();      // "Damage dealt" sound
+        b.dead = true; // Mark bullet as consumed (cleaned up in step 7)
+        shotsHit++; // Track for accuracy stat
+        e.health--; // Reduce enemy health
+        sfx.hit(); // "Damage dealt" sound
         if (e.health <= 0) {
           // Enemy destroyed!
           boom(e.x + 24, e.y + 24, C.particle); // Explosion at enemy center
-          score += e.type === "fast" ? 20 : 10;  // Fast enemies worth double
+          score += e.type === "fast" ? 20 : 10; // Fast enemies worth double
           enemiesKilled++;
           killsThisWave++;
           DOM.score.textContent = score;
@@ -1682,7 +1688,7 @@ function update() {
           // Every KILLS_PER_WAVE (8) kills, advance to the next wave.
           // Waves increase difficulty by reducing spawn interval and increasing speed.
           if (killsThisWave >= KILLS_PER_WAVE) {
-            killsThisWave = 0;        // Reset kill counter for the new wave
+            killsThisWave = 0; // Reset kill counter for the new wave
             waveNumber++;
             DOM.waveDisplay.textContent = waveNumber;
             flash("waveDisplay");
@@ -1718,10 +1724,10 @@ function update() {
       boom(player.x + 24, player.y + 16, "#f5e6a3"); // Yellow explosion at player center
       lives--;
       DOM.lives.textContent = lives;
-      flash("lives");         // Visual pulse on lives HUD (warning: lives decreasing)
-      sfx.death();            // Low damage sound
-      onHit();                // Trigger screen shake
-      e.dead = true;          // Enemy is destroyed on contact (kamikaze)
+      flash("lives"); // Visual pulse on lives HUD (warning: lives decreasing)
+      sfx.death(); // Low damage sound
+      onHit(); // Trigger screen shake
+      e.dead = true; // Enemy is destroyed on contact (kamikaze)
       if (lives <= 0) endGame(); // No lives left = game over
     }
   }
@@ -1750,10 +1756,10 @@ function update() {
   let pWrite = 0;
   for (let i = 0; i < particles.length; i++) {
     const p = particles[i];
-    p.x += p.vx;    // Apply horizontal velocity
-    p.y += p.vy;    // Apply vertical velocity
-    p.vy += 0.2;    // Apply gravity (particles arc downward over time)
-    p.life--;        // Count down to expiry (used as alpha: life/25)
+    p.x += p.vx; // Apply horizontal velocity
+    p.y += p.vy; // Apply vertical velocity
+    p.vy += 0.2; // Apply gravity (particles arc downward over time)
+    p.life--; // Count down to expiry (used as alpha: life/25)
     if (p.life > 0) particles[pWrite++] = p; // Keep alive particles
   }
   particles.length = pWrite;
@@ -1814,10 +1820,10 @@ function draw() {
   // for a subtle 3D extruded look (same technique as pixRect but simplified)
   for (let i = 0; i < bullets.length; i++) {
     const b = bullets[i];
-    ctx.fillStyle = C.bullet;                                // Outer fill: warm yellow
+    ctx.fillStyle = C.bullet; // Outer fill: warm yellow
     ctx.fillRect(b.x, b.y, b.w, b.h);
-    ctx.fillStyle = C.bulletSh;                              // Inner shadow: darker yellow
-    ctx.fillRect(b.x + 2, b.y + 2, b.w - 4, b.h - 4);     // 2px inset on all sides
+    ctx.fillStyle = C.bulletSh; // Inner shadow: darker yellow
+    ctx.fillRect(b.x + 2, b.y + 2, b.w - 4, b.h - 4); // 2px inset on all sides
   }
 
   // Step 5: Draw all enemies (each has its own multi-part sprite drawing)
@@ -1863,7 +1869,7 @@ function draw() {
  */
 function gameLoop() {
   update(); // Process one tick of game logic
-  draw();   // Render the current state to canvas
+  draw(); // Render the current state to canvas
   if (gameStarted) requestAnimationFrame(gameLoop); // Schedule next frame (or stop if game ended)
 }
 
@@ -1930,7 +1936,7 @@ function endGame() {
   DOM.finalDifficulty.textContent = difficulty.toUpperCase();
   DOM.finalWave.textContent = waveNumber;
   DOM.gameOverEl.style.display = "block"; // Show the game over overlay
-  DOM.savedMsg.textContent = "";          // Clear any previous "Score saved!" message
+  DOM.savedMsg.textContent = ""; // Clear any previous "Score saved!" message
 }
 
 /**
@@ -1957,7 +1963,7 @@ function saveAndRestart() {
     difficulty: difficulty.toUpperCase(),
   });
   DOM.savedMsg.textContent = "✓ Score saved!"; // Visual confirmation
-  beep(800, 0.1);                              // Two-note "success" confirmation sound
+  beep(800, 0.1); // Two-note "success" confirmation sound
   setTimeout(() => beep(1000, 0.1), 80);
   setTimeout(resetGame, 600); // Brief pause so the player sees the confirmation, then reset
 }
@@ -2035,7 +2041,7 @@ function resetGame() {
   DOM.gameOverEl.style.display = "none";
   DOM.pauseOverlay.style.display = "none";
   DOM.difficultyScreen.style.display = "flex"; // Flexbox centers the difficulty buttons
-  DOM.savedMsg.textContent = "";               // Clear any "Score saved!" message
+  DOM.savedMsg.textContent = ""; // Clear any "Score saved!" message
 
   // Start the idle starfield animation on the canvas
   idleRunning = true;
@@ -2073,12 +2079,12 @@ function runBootSequence() {
   const lines = [
     "BIOS v2.187 — LASER DEFENDER SYSTEMS",
     "Copyright (c) 2187 Emerald Corp.",
-    "",                                         // Empty line = visual spacer
-    "Memory check... 640K OK",                  // Classic "640K ought to be enough"
+    "", // Empty line = visual spacer
+    "Memory check... 640K OK", // Classic "640K ought to be enough"
     "Detecting peripherals... JOYSTICK OK",
-    "LOADING SECTOR 7G... OK",                  // Simpsons reference (Homer's sector)
+    "LOADING SECTOR 7G... OK", // Simpsons reference (Homer's sector)
     "Initializing CRT display driver...",
-    "",                                         // Visual spacer before final message
+    "", // Visual spacer before final message
     "> BOOT COMPLETE. LAUNCHING laser_defender.exe",
   ];
 
@@ -2152,14 +2158,29 @@ document.addEventListener("DOMContentLoaded", () => {
     sfx.click(); // Audio feedback
   });
 
+  // ── GitHub dropdown toggle ──
+  const githubToggle = document.getElementById("githubToggle");
+  const githubDropdown = document.getElementById("githubDropdown");
+  if (githubToggle && githubDropdown) {
+    githubToggle.addEventListener("click", (e) => {
+      e.stopPropagation(); // prevent body click-away handler from firing immediately
+      githubDropdown.classList.toggle("open");
+      sfx.click();
+    });
+    // Click anywhere outside the dropdown closes it
+    document.addEventListener("click", () => {
+      githubDropdown.classList.remove("open");
+    });
+  }
+
   // ── 3. Data-driven renders ──
   // Populate the home page with data from localStorage. These must run at init
   // because the home section is the default visible section — the player sees
   // these stats immediately.
-  renderHomeStats();     // Home page "BATTLE STATS" grid
-  initScrollTop();       // Create the scroll-to-top button
-  renderPersonalBest();  // Hero banner with highest score
-  renderAchievements();  // Achievement badges grid
+  renderHomeStats(); // Home page "BATTLE STATS" grid
+  initScrollTop(); // Create the scroll-to-top button
+  renderPersonalBest(); // Hero banner with highest score
+  renderAchievements(); // Achievement badges grid
 
   // ── 4. Idle timer setup ──
   // Register resetIdleTimer() on ALL common user interaction events.
@@ -2176,8 +2197,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Uses native confirm() dialog as a safety check before destructive action.
   document.getElementById("clearBtn")?.addEventListener("click", () => {
     if (confirm("Clear all scores?")) {
-      clearBoard();          // Remove scores from localStorage
-      renderLeaderboard();   // Re-render the (now empty) leaderboard
+      clearBoard(); // Remove scores from localStorage
+      renderLeaderboard(); // Re-render the (now empty) leaderboard
       beep(200, 0.3, "sawtooth"); // Low buzz confirms deletion
     }
   });
@@ -2189,7 +2210,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // The actual text is stored in the data-text attribute, keeping JS and HTML separate.
   const hero = document.getElementById("heroTypewriter");
   if (hero) {
-    hero.textContent = "";    // Clear any pre-rendered text (prevents flash of content)
+    hero.textContent = ""; // Clear any pre-rendered text (prevents flash of content)
     setTimeout(() => typewriter(hero, hero.dataset.text || "", 25), 800);
   }
 

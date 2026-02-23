@@ -56,27 +56,27 @@
    peach, pink, blue) are used for accent variety — quest card borders,
    decorations, and UI value readouts. */
 :root {
-    --dirt: #2d2438;            /* Base dark background */
-    --dirt-dark: #1e1830;       /* Deepest shadow / page bg tint */
-    --dirt-light: #3f3550;      /* Slightly lifted panels */
-    --stone: #9e95a8;           /* Mid-tone borders, scrollbar thumb */
-    --stone-dark: #6e6580;      /* Border shadows, dividers */
-    --stone-light: #c4b8d0;     /* Muted body text, labels */
-    --iron: #d4cce0;            /* Primary light text color */
-    --gold: #f0c85a;            /* Primary accent — scores, titles, highlights */
-    --emerald: #7ec8a0;         /* Success accent — buttons, health, positive */
-    --emerald-dark: #5fa880;    /* Emerald border shadow */
-    --emerald-light: #a2dbb8;   /* Emerald highlight */
-    --redstone: #e88d8d;        /* Danger accent — lives, warnings, damage */
-    --cyan: #89d4cf;            /* Secondary accent — links, info, time */
-    --magenta: #d4a0d8;         /* Tertiary accent — wave counter */
-    --yellow: #f5e6a3;          /* Warm highlight, warning text */
-    --yellow-dark: #e0cc80;     /* Yellow border shadow */
-    --lavender: #c4b7eb;        /* Soft purple accent — landing title, cards */
-    --mint: #98d8c8;            /* Fresh green — terminal dots, prompts */
-    --peach: #f7c5a8;           /* Warm accent — subtitles, tags */
-    --pink: #f0b6c5;            /* Soft accent — card borders */
-    --blue: #a8d4f0;            /* Cool accent — card borders, star tints */
+    --dirt: #2d2438; /* Base dark background */
+    --dirt-dark: #1e1830; /* Deepest shadow / page bg tint */
+    --dirt-light: #3f3550; /* Slightly lifted panels */
+    --stone: #9e95a8; /* Mid-tone borders, scrollbar thumb */
+    --stone-dark: #6e6580; /* Border shadows, dividers */
+    --stone-light: #c4b8d0; /* Muted body text, labels */
+    --iron: #d4cce0; /* Primary light text color */
+    --gold: #f0c85a; /* Primary accent — scores, titles, highlights */
+    --emerald: #7ec8a0; /* Success accent — buttons, health, positive */
+    --emerald-dark: #5fa880; /* Emerald border shadow */
+    --emerald-light: #a2dbb8; /* Emerald highlight */
+    --redstone: #e88d8d; /* Danger accent — lives, warnings, damage */
+    --cyan: #89d4cf; /* Secondary accent — links, info, time */
+    --magenta: #d4a0d8; /* Tertiary accent — wave counter */
+    --yellow: #f5e6a3; /* Warm highlight, warning text */
+    --yellow-dark: #e0cc80; /* Yellow border shadow */
+    --lavender: #c4b7eb; /* Soft purple accent — landing title, cards */
+    --mint: #98d8c8; /* Fresh green — terminal dots, prompts */
+    --peach: #f7c5a8; /* Warm accent — subtitles, tags */
+    --pink: #f0b6c5; /* Soft accent — card borders */
+    --blue: #a8d4f0; /* Cool accent — card borders, star tints */
 }
 
 /* ─── Base Body ───
@@ -97,32 +97,33 @@
    padding-top: 52px reserves space for the fixed nav bar so content
    doesn't hide behind it on load. */
 body {
-    font-family: "VT323", monospace;       /* Google Font — retro terminal look */
-    background-color: #12101c;             /* Deep space purple-black base */
+    font-family: "VT323", monospace; /* Google Font — retro terminal look */
+    background-color: #12101c; /* Deep space purple-black base */
     background-image:
         /* First checkerboard layer — squares at default position */
         linear-gradient(
             45deg,
-            rgba(100, 80, 140, 0.04) 25%,  /* Colored square: top-left triangle */
-            transparent 25%,                /* Gap begins */
-            transparent 75%,                /* Gap ends */
-            rgba(100, 80, 140, 0.04) 75%   /* Colored square: bottom-right triangle */
+            rgba(100, 80, 140, 0.04) 25%,
+            /* Colored square: top-left triangle */ transparent 25%,
+            /* Gap begins */ transparent 75%,
+            /* Gap ends */ rgba(100, 80, 140, 0.04) 75%
+                /* Colored square: bottom-right triangle */
         ),
         /* Second checkerboard layer — offset by half a tile to fill the gaps */
         linear-gradient(
-            45deg,
-            rgba(100, 80, 140, 0.04) 25%,
-            transparent 25%,
-            transparent 75%,
-            rgba(100, 80, 140, 0.04) 75%
-        );
-    background-size: 16px 16px;            /* Each tile is 16x16 — pixel-art scale */
+                45deg,
+                rgba(100, 80, 140, 0.04) 25%,
+                transparent 25%,
+                transparent 75%,
+                rgba(100, 80, 140, 0.04) 75%
+            );
+    background-size: 16px 16px; /* Each tile is 16x16 — pixel-art scale */
     background-position:
-        0 0,                               /* Layer 1: default origin */
-        8px 8px;                           /* Layer 2: offset by half tile size */
-    color: #e8e0f0;                        /* Default text: light lavender-white */
-    min-height: 100vh;                     /* Fill at least the full viewport */
-    padding-top: 52px;                     /* Space for the fixed nav bar height */
+        0 0,
+        /* Layer 1: default origin */ 8px 8px; /* Layer 2: offset by half tile size */
+    color: #e8e0f0; /* Default text: light lavender-white */
+    min-height: 100vh; /* Fill at least the full viewport */
+    padding-top: 52px; /* Space for the fixed nav bar height */
 }
 
 /* Scanline overlay — CRT monitor horizontal lines
@@ -141,14 +142,15 @@ body {
 body::before {
     content: "";
     position: fixed;
-    inset: 0;                  /* Shorthand for top/right/bottom/left: 0 */
+    inset: 0; /* Shorthand for top/right/bottom/left: 0 */
     background: repeating-linear-gradient(
-        0deg,                  /* Vertical direction = horizontal lines */
-        rgba(0, 0, 0, 0.06) 0 2px,   /* Dark scanline band: 2px tall */
-        transparent 2px 4px           /* Transparent gap: 2px tall */
+        0deg,
+        /* Vertical direction = horizontal lines */ rgba(0, 0, 0, 0.06) 0 2px,
+        /* Dark scanline band: 2px tall */ transparent 2px 4px
+            /* Transparent gap: 2px tall */
     );
-    pointer-events: none;      /* Non-interactive overlay */
-    z-index: 9998;             /* Above all content except boot screen */
+    pointer-events: none; /* Non-interactive overlay */
+    z-index: 9998; /* Above all content except boot screen */
 }
 
 /* Parallax star field — scrolls vertically on infinite loop
@@ -180,7 +182,7 @@ body::after {
     top: 0;
     left: 0;
     width: 100%;
-    height: 200%;              /* 2x viewport height for seamless scroll loop */
+    height: 200%; /* 2x viewport height for seamless scroll loop */
     background-image:
         /* Star 1 — lavender, top-left region */
         radial-gradient(
@@ -190,74 +192,74 @@ body::after {
         ),
         /* Star 2 — mint, upper-left */
         radial-gradient(
-            1px 1px at 20% 35%,
-            rgba(152, 216, 200, 0.6) 50%,
-            transparent 100%
-        ),
+                1px 1px at 20% 35%,
+                rgba(152, 216, 200, 0.6) 50%,
+                transparent 100%
+            ),
         /* Star 3 — pink, 2px (brighter/closer), center-left */
         radial-gradient(
-            2px 2px at 30% 55%,
-            rgba(240, 182, 197, 0.7) 50%,
-            transparent 100%
-        ),
+                2px 2px at 30% 55%,
+                rgba(240, 182, 197, 0.7) 50%,
+                transparent 100%
+            ),
         /* Star 4 — blue, lower-left */
         radial-gradient(
-            1px 1px at 40% 75%,
-            rgba(168, 212, 240, 0.5) 50%,
-            transparent 100%
-        ),
+                1px 1px at 40% 75%,
+                rgba(168, 212, 240, 0.5) 50%,
+                transparent 100%
+            ),
         /* Star 5 — yellow, top-center */
         radial-gradient(
-            1px 1px at 50% 10%,
-            rgba(245, 230, 163, 0.6) 50%,
-            transparent 100%
-        ),
+                1px 1px at 50% 10%,
+                rgba(245, 230, 163, 0.6) 50%,
+                transparent 100%
+            ),
         /* Star 6 — lavender, 2px, center */
         radial-gradient(
-            2px 2px at 60% 45%,
-            rgba(196, 183, 235, 0.5) 50%,
-            transparent 100%
-        ),
+                2px 2px at 60% 45%,
+                rgba(196, 183, 235, 0.5) 50%,
+                transparent 100%
+            ),
         /* Star 7 — peach, center-right */
         radial-gradient(
-            1px 1px at 70% 65%,
-            rgba(247, 197, 168, 0.6) 50%,
-            transparent 100%
-        ),
+                1px 1px at 70% 65%,
+                rgba(247, 197, 168, 0.6) 50%,
+                transparent 100%
+            ),
         /* Star 8 — mint, dim, lower-right */
         radial-gradient(
-            1px 1px at 80% 85%,
-            rgba(152, 216, 200, 0.4) 50%,
-            transparent 100%
-        ),
+                1px 1px at 80% 85%,
+                rgba(152, 216, 200, 0.4) 50%,
+                transparent 100%
+            ),
         /* Star 9 — pink, upper-right */
         radial-gradient(
-            1px 1px at 90% 25%,
-            rgba(240, 182, 197, 0.5) 50%,
-            transparent 100%
-        ),
+                1px 1px at 90% 25%,
+                rgba(240, 182, 197, 0.5) 50%,
+                transparent 100%
+            ),
         /* Star 10 — blue, mid-left */
         radial-gradient(
-            1px 1px at 15% 50%,
-            rgba(168, 212, 240, 0.5) 50%,
-            transparent 100%
-        ),
+                1px 1px at 15% 50%,
+                rgba(168, 212, 240, 0.5) 50%,
+                transparent 100%
+            ),
         /* Star 11 — lavender, 2px, lower-left */
         radial-gradient(
-            2px 2px at 25% 80%,
-            rgba(196, 183, 235, 0.6) 50%,
-            transparent 100%
-        ),
+                2px 2px at 25% 80%,
+                rgba(196, 183, 235, 0.6) 50%,
+                transparent 100%
+            ),
         /* Star 12 — yellow, center */
         radial-gradient(
-            1px 1px at 45% 40%,
-            rgba(245, 230, 163, 0.5) 50%,
-            transparent 100%
-        );
-    pointer-events: none;      /* Stars are purely decorative */
-    z-index: -1;               /* Behind all page content */
-    animation: starScroll 60s linear infinite;  /* Slow upward drift */
-    will-change: transform;    /* GPU-accelerate for smooth animation */
+                1px 1px at 45% 40%,
+                rgba(245, 230, 163, 0.5) 50%,
+                transparent 100%
+            );
+    pointer-events: none; /* Stars are purely decorative */
+    z-index: -1; /* Behind all page content */
+    animation: starScroll 60s linear infinite; /* Slow upward drift */
+    will-change: transform; /* GPU-accelerate for smooth animation */
 }
 
 /* ─── Custom Retro Cursor System ───
@@ -281,24 +283,50 @@ body::after {
    instead of 24px), creating a "squeezed" visual that feels like a click. */
 
 /* State 1: Default cursor — emerald green crosshair with gold center */
-*, *::before, *::after {
-    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><rect x="11" y="0" width="2" height="8" fill="%237ec8a0"/><rect x="11" y="16" width="2" height="8" fill="%237ec8a0"/><rect x="0" y="11" width="8" height="2" fill="%237ec8a0"/><rect x="16" y="11" width="8" height="2" fill="%237ec8a0"/><rect x="10" y="10" width="4" height="4" fill="%23f0c85a"/></svg>') 12 12, crosshair !important;
+*,
+*::before,
+*::after {
+    cursor:
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><rect x="11" y="0" width="2" height="8" fill="%237ec8a0"/><rect x="11" y="16" width="2" height="8" fill="%237ec8a0"/><rect x="0" y="11" width="8" height="2" fill="%237ec8a0"/><rect x="16" y="11" width="8" height="2" fill="%237ec8a0"/><rect x="10" y="10" width="4" height="4" fill="%23f0c85a"/></svg>')
+            12 12,
+        crosshair !important;
 }
 /* State 2: Interactive cursor — gold crosshair with redstone center
    Selector covers all interactive elements: native HTML controls,
    custom buttons, nav items, cards, and game UI components. */
-a, button, [role="button"], input, select, textarea,
-.action-btn, .go-btn, .diff-btn, .terminal-dot,
-.nav-hamburger, .nav-links a, .nav-logo, .footer-links a,
-.scroll-top-btn, .quest-card, .stat-card, .tech-card,
-.control-panel, .achievement-badge {
-    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><rect x="11" y="0" width="2" height="8" fill="%23f0c85a"/><rect x="11" y="16" width="2" height="8" fill="%23f0c85a"/><rect x="0" y="11" width="8" height="2" fill="%23f0c85a"/><rect x="16" y="11" width="8" height="2" fill="%23f0c85a"/><rect x="10" y="10" width="4" height="4" fill="%23e88d8d"/></svg>') 12 12, pointer !important;
+a,
+button,
+[role="button"],
+input,
+select,
+textarea,
+.action-btn,
+.go-btn,
+.diff-btn,
+.terminal-dot,
+.nav-hamburger,
+.nav-links a,
+.nav-logo,
+.footer-links a,
+.scroll-top-btn,
+.quest-card,
+.stat-card,
+.tech-card,
+.control-panel,
+.achievement-badge {
+    cursor:
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><rect x="11" y="0" width="2" height="8" fill="%23f0c85a"/><rect x="11" y="16" width="2" height="8" fill="%23f0c85a"/><rect x="0" y="11" width="8" height="2" fill="%23f0c85a"/><rect x="16" y="11" width="8" height="2" fill="%23f0c85a"/><rect x="10" y="10" width="4" height="4" fill="%23e88d8d"/></svg>')
+            12 12,
+        pointer !important;
 }
 /* State 3: Active/pressed — contracted crosshair for "pressed" feedback.
    Arms start at 4px instead of 0px and are shorter (6px vs 8px),
    so the crosshair appears to squeeze inward on click. */
 *:active {
-    cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><rect x="11" y="4" width="2" height="6" fill="%23f0c85a"/><rect x="11" y="14" width="2" height="6" fill="%23f0c85a"/><rect x="4" y="11" width="6" height="2" fill="%23f0c85a"/><rect x="14" y="11" width="6" height="2" fill="%23f0c85a"/><rect x="10" y="10" width="4" height="4" fill="%23e88d8d"/></svg>') 12 12, crosshair !important;
+    cursor:
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><rect x="11" y="4" width="2" height="6" fill="%23f0c85a"/><rect x="11" y="14" width="2" height="6" fill="%23f0c85a"/><rect x="4" y="11" width="6" height="2" fill="%23f0c85a"/><rect x="14" y="11" width="6" height="2" fill="%23f0c85a"/><rect x="10" y="10" width="4" height="4" fill="%23e88d8d"/></svg>')
+            12 12,
+        crosshair !important;
 }
 
 /* Click ripple — pixel "+" burst that appears at the mouse click position.
@@ -316,34 +344,45 @@ a, button, [role="button"], input, select, textarea,
     position: fixed;
     width: 24px;
     height: 24px;
-    pointer-events: none;      /* Decorative only — no interaction */
+    pointer-events: none; /* Decorative only — no interaction */
     z-index: 99999;
     animation: clickBurst 0.35s ease-out forwards;
 }
 /* Both pseudo-elements share emerald color for the "+" shape */
-.click-ripple::before, .click-ripple::after {
+.click-ripple::before,
+.click-ripple::after {
     content: "";
     position: absolute;
     background: var(--emerald);
 }
 /* Vertical bar of the "+" */
 .click-ripple::before {
-    top: 0; left: 50%;
-    width: 2px; height: 100%;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
     transform: translateX(-50%);
 }
 /* Horizontal bar of the "+" */
 .click-ripple::after {
-    left: 0; top: 50%;
-    width: 100%; height: 2px;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 2px;
     transform: translateY(-50%);
 }
 /* Expand outward and fade to zero over 350ms.
    translate(-50%, -50%) keeps the burst centered on the click point
    (the element is positioned at cursor coords by JS). */
 @keyframes clickBurst {
-    0%   { transform: translate(-50%, -50%) scale(0.3); opacity: 1; }
-    100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
+    0% {
+        transform: translate(-50%, -50%) scale(0.3);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.8);
+        opacity: 0;
+    }
 }
 
 /* ─── Utility Classes ───
@@ -430,22 +469,22 @@ a, button, [role="button"], input, select, textarea,
    ═══════════════════════════════════════════════ */
 #bootScreen {
     position: fixed;
-    inset: 0;                  /* Full viewport coverage */
-    z-index: 100000;           /* Above absolutely everything */
-    background: #000;          /* Pure black — classic BIOS look */
-    color: #33ff33;            /* Phosphor green terminal text */
+    inset: 0; /* Full viewport coverage */
+    z-index: 100000; /* Above absolutely everything */
+    background: #000; /* Pure black — classic BIOS look */
+    color: #33ff33; /* Phosphor green terminal text */
     font-family: "VT323", "Courier New", monospace;
     font-size: 1.2rem;
     padding: 2rem;
-    overflow: hidden;          /* No scroll on the boot screen */
+    overflow: hidden; /* No scroll on the boot screen */
     display: flex;
-    align-items: flex-start;   /* Text starts from top-left, like real BIOS */
-    transition: opacity 0.6s ease;  /* Smooth fade when .fade-out is added */
+    align-items: flex-start; /* Text starts from top-left, like real BIOS */
+    transition: opacity 0.6s ease; /* Smooth fade when .fade-out is added */
 }
 /* Fade-out state: visually hidden but still in DOM for the transition */
 #bootScreen.fade-out {
     opacity: 0;
-    pointer-events: none;      /* Prevent interaction during fade */
+    pointer-events: none; /* Prevent interaction during fade */
 }
 /* Final hidden state: removed from layout entirely after fade completes */
 #bootScreen.hidden {
@@ -461,7 +500,9 @@ a, button, [role="button"], input, select, textarea,
 }
 /* Simple opacity fade from 0 to 1 */
 @keyframes bootLineIn {
-    to { opacity: 1; }
+    to {
+        opacity: 1;
+    }
 }
 
 /* ═══════════════════════════════════════════════
@@ -486,13 +527,14 @@ a, button, [role="button"], input, select, textarea,
     content: "";
     position: fixed;
     inset: 0;
-    z-index: 99996;            /* Above content, below scanlines/cursor */
+    z-index: 99996; /* Above content, below scanlines/cursor */
     pointer-events: none;
     animation: trackingLines 0.3s linear;
     background: repeating-linear-gradient(
         0deg,
-        transparent 0 4px,                   /* 4px transparent gap */
-        rgba(255, 255, 255, 0.03) 4px 8px    /* 4px faint white bar */
+        transparent 0 4px,
+        /* 4px transparent gap */ rgba(255, 255, 255, 0.03) 4px 8px
+            /* 4px faint white bar */
     );
 }
 
@@ -503,12 +545,37 @@ a, button, [role="button"], input, select, textarea,
    The offset values alternate in sign and magnitude for a jittery,
    unstable feel. Returns to text-shadow:none at 100% for clean exit. */
 @keyframes vhsGlitch {
-    0% { filter: none; }
-    20% { filter: none; text-shadow: -3px 0 #ff0040, 3px 0 #00ffff; }
-    40% { filter: none; text-shadow: 2px 0 #ff0040, -2px 0 #00ffff; }
-    60% { filter: none; text-shadow: -1px 0 #ff0040, 1px 0 #00ffff; }
-    80% { filter: none; text-shadow: 3px 0 #ff0040, -3px 0 #00ffff; }
-    100% { filter: none; text-shadow: none; }
+    0% {
+        filter: none;
+    }
+    20% {
+        filter: none;
+        text-shadow:
+            -3px 0 #ff0040,
+            3px 0 #00ffff;
+    }
+    40% {
+        filter: none;
+        text-shadow:
+            2px 0 #ff0040,
+            -2px 0 #00ffff;
+    }
+    60% {
+        filter: none;
+        text-shadow:
+            -1px 0 #ff0040,
+            1px 0 #00ffff;
+    }
+    80% {
+        filter: none;
+        text-shadow:
+            3px 0 #ff0040,
+            -3px 0 #00ffff;
+    }
+    100% {
+        filter: none;
+        text-shadow: none;
+    }
 }
 
 /* TRACKING LINES SWEEP — Moves the repeating stripe pattern from
@@ -516,8 +583,12 @@ a, button, [role="button"], input, select, textarea,
    creating the illusion of horizontal noise bars sweeping downward
    across the screen, like adjusting the tracking knob on a VCR. */
 @keyframes trackingLines {
-    0% { background-position: 0 -100vh; }
-    100% { background-position: 0 100vh; }
+    0% {
+        background-position: 0 -100vh;
+    }
+    100% {
+        background-position: 0 100vh;
+    }
 }
 
 /* ═══════════════════════════════════════════════
@@ -535,13 +606,27 @@ a, button, [role="button"], input, select, textarea,
     animation: screenShake 0.2s ease-in-out;
 }
 @keyframes screenShake {
-    0%   { transform: translate(0, 0); }       /* Start: neutral */
-    15%  { transform: translate(3px, -2px); }   /* Jolt upper-right */
-    30%  { transform: translate(-3px, 2px); }   /* Snap lower-left */
-    45%  { transform: translate(2px, 3px); }    /* Push lower-right */
-    60%  { transform: translate(-2px, -3px); }  /* Kick upper-left */
-    75%  { transform: translate(3px, 1px); }    /* Drift right */
-    100% { transform: translate(0, 0); }        /* Settle back to origin */
+    0% {
+        transform: translate(0, 0);
+    } /* Start: neutral */
+    15% {
+        transform: translate(3px, -2px);
+    } /* Jolt upper-right */
+    30% {
+        transform: translate(-3px, 2px);
+    } /* Snap lower-left */
+    45% {
+        transform: translate(2px, 3px);
+    } /* Push lower-right */
+    60% {
+        transform: translate(-2px, -3px);
+    } /* Kick upper-left */
+    75% {
+        transform: translate(3px, 1px);
+    } /* Drift right */
+    100% {
+        transform: translate(0, 0);
+    } /* Settle back to origin */
 }
 
 /* ═══════════════════════════════════════════════
@@ -558,14 +643,14 @@ a, button, [role="button"], input, select, textarea,
    - On hover, a soft lavender glow (box-shadow) appears as feedback
    ═══════════════════════════════════════════════ */
 .retro-nav {
-    position: fixed;           /* Stays at top during scroll */
+    position: fixed; /* Stays at top during scroll */
     top: 0;
     left: 0;
     right: 0;
-    z-index: 9999;             /* Above page content, below scanlines */
-    background: rgba(26, 22, 40, 0.95);  /* 95% opaque — slight transparency */
-    border-bottom: 4px solid var(--stone-dark);  /* Pixel-art bottom edge */
-    backdrop-filter: blur(6px);   /* Frosted glass blur on content behind */
+    z-index: 9999; /* Above page content, below scanlines */
+    background: rgba(26, 22, 40, 0.95); /* 95% opaque — slight transparency */
+    border-bottom: 4px solid var(--stone-dark); /* Pixel-art bottom edge */
+    backdrop-filter: blur(6px); /* Frosted glass blur on content behind */
     transition: box-shadow 0.3s ease;
 }
 /* Soft glow on hover for subtle interactivity feedback */
@@ -575,10 +660,10 @@ a, button, [role="button"], input, select, textarea,
 /* Centered inner wrapper constrains content width on large screens */
 .nav-inner {
     max-width: 1100px;
-    margin: 0 auto;            /* Center horizontally */
+    margin: 0 auto; /* Center horizontally */
     display: flex;
     align-items: center;
-    justify-content: space-between;  /* Logo left, links right */
+    justify-content: space-between; /* Logo left, links right */
     padding: 0 1rem;
 }
 
@@ -591,8 +676,8 @@ a, button, [role="button"], input, select, textarea,
     color: var(--emerald);
     text-decoration: none;
     padding: 0.8rem 0;
-    text-shadow: 2px 2px 0 var(--dirt-dark);  /* Pixel offset shadow */
-    white-space: nowrap;       /* Prevent logo text from wrapping */
+    text-shadow: 2px 2px 0 var(--dirt-dark); /* Pixel offset shadow */
+    white-space: nowrap; /* Prevent logo text from wrapping */
     transition:
         color 0.4s ease,
         text-shadow 0.4s ease,
@@ -605,7 +690,7 @@ a, button, [role="button"], input, select, textarea,
     transform: scale(1.05);
     text-shadow:
         2px 2px 0 var(--dirt-dark),
-        0 0 12px rgba(137, 212, 207, 0.5);  /* Soft cyan glow */
+        0 0 12px rgba(137, 212, 207, 0.5); /* Soft cyan glow */
 }
 
 /* Nav links — horizontal row separated by left-border "dividers."
@@ -624,12 +709,12 @@ a, button, [role="button"], input, select, textarea,
     text-decoration: none;
     padding: 0.8rem 1rem;
     display: block;
-    border-left: 2px solid var(--stone-dark);  /* Vertical divider between links */
+    border-left: 2px solid var(--stone-dark); /* Vertical divider between links */
     transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
     text-transform: uppercase;
     letter-spacing: 1px;
-    position: relative;        /* Needed for the ::before underline */
-    overflow: hidden;          /* Clips the underline during animation */
+    position: relative; /* Needed for the ::before underline */
+    overflow: hidden; /* Clips the underline during animation */
 }
 /* ANIMATED UNDERLINE TECHNIQUE:
    A ::before pseudo-element is placed at the bottom of the link with
@@ -641,10 +726,10 @@ a, button, [role="button"], input, select, textarea,
     content: "";
     position: absolute;
     bottom: 0;
-    left: 50%;                 /* Start centered (invisible at width:0) */
-    width: 0;                  /* Hidden by default */
+    left: 50%; /* Start centered (invisible at width:0) */
+    width: 0; /* Hidden by default */
     height: 2px;
-    background: var(--gold);   /* Gold underline accent */
+    background: var(--gold); /* Gold underline accent */
     transition:
         width 0.3s ease,
         left 0.3s ease;
@@ -661,7 +746,7 @@ a, button, [role="button"], input, select, textarea,
    Shown via media query at 640px breakpoint. The icon character
    (likely an "=" or unicode hamburger) is set in HTML. */
 .nav-hamburger {
-    display: none;             /* Hidden on desktop */
+    display: none; /* Hidden on desktop */
     background: none;
     border: 2px solid var(--stone-dark);
     color: var(--gold);
@@ -676,13 +761,111 @@ a, button, [role="button"], input, select, textarea,
     border-color: var(--emerald);
 }
 
+/* ── GitHub Dropdown ── */
+.nav-github-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-left: 2px solid var(--stone-dark);
+}
+.nav-github-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: "VT323", monospace;
+    font-size: 1.1rem;
+    color: var(--stone-light);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.8rem 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition:
+        color 0.2s,
+        background 0.2s;
+    white-space: nowrap;
+}
+.nav-github-btn:hover,
+.nav-github-dropdown.open .nav-github-btn {
+    color: var(--gold);
+    background: rgba(240, 200, 90, 0.08);
+}
+.github-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 160px;
+    background: rgba(26, 22, 40, 0.98);
+    border: 2px solid var(--stone-dark);
+    border-top: none;
+    z-index: 10000;
+    flex-direction: column;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+}
+.nav-github-dropdown.open .github-menu {
+    display: flex;
+}
+.github-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "VT323", monospace;
+    font-size: 1.1rem;
+    color: var(--stone-light);
+    text-decoration: none;
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid rgba(110, 101, 128, 0.35);
+    transition:
+        color 0.15s,
+        background 0.15s;
+    white-space: nowrap;
+}
+.github-link:last-child {
+    border-bottom: none;
+}
+.github-link:hover {
+    color: var(--gold);
+    background: rgba(240, 200, 90, 0.1);
+}
+.github-link svg {
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+/* Mobile: flatten dropdown into the hamburger menu */
+@media (max-width: 640px) {
+    .nav-github-dropdown {
+        border-left: none;
+        border-top: 1px solid var(--stone-dark);
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .nav-github-btn {
+        justify-content: center;
+        width: 100%;
+    }
+    .github-menu {
+        position: static;
+        border: none;
+        border-top: 1px solid rgba(110, 101, 128, 0.35);
+        background: rgba(0, 0, 0, 0.2);
+        box-shadow: none;
+    }
+    .github-link {
+        justify-content: center;
+    }
+}
+
 /* ─── Layout Container ───
    Centers page content with a max-width cap for readability on wide
    monitors. The 1rem horizontal padding provides breathing room on
    mobile so content doesn't touch screen edges. */
 .page-container {
     max-width: 1000px;
-    margin: 0 auto;           /* Center horizontally */
+    margin: 0 auto; /* Center horizontally */
     padding: 2rem 1rem;
 }
 
@@ -698,21 +881,21 @@ a, button, [role="button"], input, select, textarea,
    provides a subtle "worn paper" or pixel-grid texture behind titles
    without overpowering the text. z-index: -1 keeps it behind content. */
 .pixel-header {
-    position: relative;        /* Establishes stacking context for ::before */
+    position: relative; /* Establishes stacking context for ::before */
     text-align: center;
     padding: 2rem 1rem;
 }
 .pixel-header::before {
     content: "";
     position: absolute;
-    inset: -8px;               /* Extends 8px outside the parent box */
+    inset: -8px; /* Extends 8px outside the parent box */
     background: repeating-linear-gradient(
         45deg,
-        var(--dirt-dark) 0 4px,    /* Dark stripe */
-        transparent 4px 8px        /* Transparent gap */
+        var(--dirt-dark) 0 4px,
+        /* Dark stripe */ transparent 4px 8px /* Transparent gap */
     );
-    z-index: -1;               /* Behind the header text */
-    opacity: 0.5;              /* Subtle, not overpowering */
+    z-index: -1; /* Behind the header text */
+    opacity: 0.5; /* Subtle, not overpowering */
 }
 .pixel-title {
     font-family: "Press Start 2P", cursive;
@@ -753,7 +936,7 @@ a, button, [role="button"], input, select, textarea,
     display: flex;
     justify-content: center;
     gap: 2rem;
-    flex-wrap: wrap;           /* Wraps on narrow screens */
+    flex-wrap: wrap; /* Wraps on narrow screens */
     margin: 2rem 0;
 }
 /* image-rendering: pixelated preserves crisp edges on scaled-up
@@ -767,15 +950,15 @@ a, button, [role="button"], input, select, textarea,
    The double box-shadow creates: (1) a deep drop shadow for depth,
    (2) a 1px subtle lavender outline for definition against the dark bg. */
 .terminal-window {
-    background: rgba(20, 16, 30, 0.85);   /* Semi-transparent dark */
+    background: rgba(20, 16, 30, 0.85); /* Semi-transparent dark */
     border: 3px solid var(--stone-dark);
-    border-radius: 12px;       /* Rounded corners like a real window */
-    overflow: hidden;          /* Clips child content to rounded corners */
+    border-radius: 12px; /* Rounded corners like a real window */
+    overflow: hidden; /* Clips child content to rounded corners */
     max-width: 700px;
-    margin: 0 auto 2rem;      /* Centered */
+    margin: 0 auto 2rem; /* Centered */
     box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.5),           /* Deep drop shadow */
-        0 0 0 1px rgba(196, 183, 235, 0.08);      /* Subtle outline ring */
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        /* Deep drop shadow */ 0 0 0 1px rgba(196, 183, 235, 0.08); /* Subtle outline ring */
 }
 /* Terminal title bar — macOS-style with red/yellow/green "traffic light"
    dots. The gradient background gives it a slight sheen left to right. */
@@ -793,7 +976,7 @@ a, button, [role="button"], input, select, textarea,
 .terminal-dot {
     width: 12px;
     height: 12px;
-    border-radius: 50%;        /* Perfect circle */
+    border-radius: 50%; /* Perfect circle */
     display: inline-block;
     cursor: pointer;
     transition:
@@ -802,16 +985,16 @@ a, button, [role="button"], input, select, textarea,
 }
 .terminal-dot:hover {
     transform: scale(1.4);
-    box-shadow: 0 0 6px currentColor;  /* Glow in the dot's own color */
+    box-shadow: 0 0 6px currentColor; /* Glow in the dot's own color */
 }
 .terminal-dot.dot-red {
-    background: var(--redstone);   /* Close button */
+    background: var(--redstone); /* Close button */
 }
 .terminal-dot.dot-yellow {
-    background: var(--yellow);     /* Minimize button */
+    background: var(--yellow); /* Minimize button */
 }
 .terminal-dot.dot-green {
-    background: var(--mint);       /* Maximize button */
+    background: var(--mint); /* Maximize button */
 }
 .terminal-title {
     font-size: 0.95rem;
@@ -831,8 +1014,8 @@ a, button, [role="button"], input, select, textarea,
     text-align: left;
     margin: 1.2rem 0;
     padding: 0.8rem 1rem;
-    background: rgba(0, 0, 0, 0.35);              /* Darkened inset */
-    border: 1px solid rgba(196, 183, 235, 0.1);   /* Faint outline */
+    background: rgba(0, 0, 0, 0.35); /* Darkened inset */
+    border: 1px solid rgba(196, 183, 235, 0.1); /* Faint outline */
     border-radius: 6px;
 }
 /* The ">" prompt symbol — uses pixel font, flex-shrink: 0 prevents it
@@ -842,7 +1025,7 @@ a, button, [role="button"], input, select, textarea,
     font-family: "Press Start 2P", cursive;
     font-size: 0.7rem;
     flex-shrink: 0;
-    margin-top: 2px;           /* Visually align with taller VT323 text */
+    margin-top: 2px; /* Visually align with taller VT323 text */
 }
 /* Typewriter text area — JS types characters into this element one by
    one with a blinking cursor (see .typewriter-active::after below). */
@@ -862,8 +1045,8 @@ a, button, [role="button"], input, select, textarea,
     font-size: 2.5rem;
     color: var(--lavender);
     text-shadow:
-        3px 3px 0 var(--dirt-dark),            /* Hard dark shadow */
-        6px 6px 0 rgba(232, 141, 141, 0.5);   /* Soft red ambient glow */
+        3px 3px 0 var(--dirt-dark),
+        /* Hard dark shadow */ 6px 6px 0 rgba(232, 141, 141, 0.5); /* Soft red ambient glow */
     line-height: 1.6;
     margin-bottom: 0.5rem;
 }
@@ -873,7 +1056,7 @@ a, button, [role="button"], input, select, textarea,
     font-family: "Press Start 2P", cursive;
     font-size: 0.65rem;
     color: var(--peach);
-    letter-spacing: 6px;       /* Wide tracking for retro subtitle style */
+    letter-spacing: 6px; /* Wide tracking for retro subtitle style */
     margin-bottom: 0.5rem;
 }
 /* CTA (Call-to-Action) button row — centers play and secondary buttons */
@@ -881,7 +1064,7 @@ a, button, [role="button"], input, select, textarea,
     display: flex;
     gap: 1rem;
     justify-content: center;
-    flex-wrap: wrap;           /* Stack buttons on narrow screens */
+    flex-wrap: wrap; /* Stack buttons on narrow screens */
     margin-top: 1.5rem;
 }
 
@@ -912,19 +1095,19 @@ a, button, [role="button"], input, select, textarea,
     font-size: 1rem;
     padding: 0.8rem 1.5rem;
     background: var(--emerald);
-    color: #1e1830;            /* Dark text on bright button */
+    color: #1e1830; /* Dark text on bright button */
     border: 4px solid;
     /* 3D bevel: top-left highlight / bottom-right shadow
        Order: top | right | bottom | left */
     border-color: var(--emerald-dark) var(--dirt) var(--dirt)
         var(--emerald-dark);
-    box-shadow: 0 4px 0 var(--dirt-dark);  /* Hard shadow = button depth */
+    box-shadow: 0 4px 0 var(--dirt-dark); /* Hard shadow = button depth */
     cursor: pointer;
     margin-top: 1.5rem;
-    transition: all 0.1s;      /* Snappy press/release feel */
+    transition: all 0.1s; /* Snappy press/release feel */
     text-transform: uppercase;
     text-decoration: none;
-    display: inline-block;     /* Allows transform on <a> tags */
+    display: inline-block; /* Allows transform on <a> tags */
 }
 /* Hover: lift up slightly, color shifts to cyan */
 .action-btn:hover {
@@ -987,10 +1170,10 @@ a, button, [role="button"], input, select, textarea,
     font-family: "Press Start 2P", cursive;
     font-size: 1.2rem;
     color: var(--gold);
-    text-shadow: 2px 2px 0 var(--dirt-dark);  /* Pixel offset shadow */
+    text-shadow: 2px 2px 0 var(--dirt-dark); /* Pixel offset shadow */
     margin-bottom: 0.5rem;
     text-transform: uppercase;
-    letter-spacing: 2px;       /* Spaced out for a retro display feel */
+    letter-spacing: 2px; /* Spaced out for a retro display feel */
 }
 /* Decorative divider line — gradient from transparent on both edges
    to solid stone in the center, creating a smooth fade-in/fade-out bar. */
@@ -1005,7 +1188,7 @@ a, button, [role="button"], input, select, textarea,
     display: inline-block;
     font-size: 0.95rem;
     color: var(--peach);
-    background: rgba(247, 197, 168, 0.1);     /* Tinted background */
+    background: rgba(247, 197, 168, 0.1); /* Tinted background */
     border: 1px solid rgba(247, 197, 168, 0.25);
     padding: 0.2rem 0.8rem;
     border-radius: 4px;
@@ -1047,8 +1230,8 @@ a, button, [role="button"], input, select, textarea,
         border-color 0.2s;
 }
 .stat-card:hover {
-    transform: translate(-2px, -2px);  /* Lift up-left */
-    border-color: var(--gold);         /* Highlight border */
+    transform: translate(-2px, -2px); /* Lift up-left */
+    border-color: var(--gold); /* Highlight border */
 }
 .stat-value {
     font-family: "Press Start 2P", cursive;
@@ -1083,7 +1266,7 @@ a, button, [role="button"], input, select, textarea,
 .quest-card {
     background: rgba(30, 24, 48, 0.8);
     border: 3px solid var(--stone-dark);
-    border-left: 5px solid var(--lavender);  /* Default accent color */
+    border-left: 5px solid var(--lavender); /* Default accent color */
     border-radius: 8px;
     padding: 1.4rem;
     transition:
@@ -1240,14 +1423,14 @@ a, button, [role="button"], input, select, textarea,
     background: rgba(0, 0, 0, 0.5);
     border: 4px solid var(--stone-dark);
     padding: 2rem;
-    position: relative;        /* For the ::after star */
+    position: relative; /* For the ::after star */
     overflow: hidden;
 }
 /* Floating star decoration — a gold unicode star that bobs up and down
    using the "float" keyframe animation. Positioned at the top-right
    corner of the story box as a decorative accent. */
 .story-box::after {
-    content: "\2605";          /* Unicode filled star character */
+    content: "\2605"; /* Unicode filled star character */
     position: absolute;
     top: -5px;
     right: 15px;
@@ -1322,12 +1505,12 @@ a, button, [role="button"], input, select, textarea,
     font-size: 0.6rem;
     color: var(--gold);
     padding: 1rem 0.5rem;
-    border-bottom: 4px solid var(--stone-dark);  /* Thick divider */
+    border-bottom: 4px solid var(--stone-dark); /* Thick divider */
     text-align: left;
 }
 .leaderboard-table td {
     padding: 0.8rem 0.5rem;
-    border-bottom: 2px solid var(--dirt-dark);   /* Thinner row divider */
+    border-bottom: 2px solid var(--dirt-dark); /* Thinner row divider */
     font-size: 1.1rem;
     color: #ddd;
 }
@@ -1340,17 +1523,17 @@ a, button, [role="button"], input, select, textarea,
    All other ranks use the default emerald color. */
 .leaderboard-table .rank {
     font-family: "Press Start 2P", cursive;
-    color: var(--emerald);     /* Default rank color (4th place onward) */
+    color: var(--emerald); /* Default rank color (4th place onward) */
     font-size: 0.9rem;
 }
 .leaderboard-table .rank-1 {
-    color: var(--gold);        /* 1st place: gold medal */
+    color: var(--gold); /* 1st place: gold medal */
 }
 .leaderboard-table .rank-2 {
-    color: var(--iron);        /* 2nd place: silver medal */
+    color: var(--iron); /* 2nd place: silver medal */
 }
 .leaderboard-table .rank-3 {
-    color: #cd7f32;            /* 3rd place: bronze medal (#cd7f32) */
+    color: #cd7f32; /* 3rd place: bronze medal (#cd7f32) */
 }
 .leaderboard-table .player-score {
     font-family: "Press Start 2P", cursive;
@@ -1398,7 +1581,7 @@ a, button, [role="button"], input, select, textarea,
     border: 3px solid var(--stone-dark);
     padding: 1rem 0.8rem;
     text-align: center;
-    position: relative;        /* For the ::after checkmark */
+    position: relative; /* For the ::after checkmark */
     transition:
         transform 0.2s,
         border-color 0.2s,
@@ -1419,13 +1602,13 @@ a, button, [role="button"], input, select, textarea,
    look "disabled" / unearned. The combination of both effects creates
    a clearly distinct locked appearance without needing separate assets. */
 .achievement-badge.locked {
-    opacity: 0.38;             /* Dimmed out */
-    filter: grayscale(80%);    /* Nearly monochrome */
+    opacity: 0.38; /* Dimmed out */
+    filter: grayscale(80%); /* Nearly monochrome */
 }
 /* Checkmark indicator on unlocked badges — small emerald "check"
    in the top-right corner confirms the achievement is earned. */
 .achievement-badge.unlocked::after {
-    content: "\2713";          /* Unicode checkmark */
+    content: "\2713"; /* Unicode checkmark */
     position: absolute;
     top: 5px;
     right: 8px;
@@ -1456,8 +1639,8 @@ a, button, [role="button"], input, select, textarea,
    to single-column on mobile via the auto-fit pattern.
    ═══════════════════════════════════════════════ */
 .pixel-footer {
-    border-top: 4px solid var(--stone-dark);  /* Pixel-art top divider */
-    background: var(--dirt-dark);  /* Darkest background to anchor the page */
+    border-top: 4px solid var(--stone-dark); /* Pixel-art top divider */
+    background: var(--dirt-dark); /* Darkest background to anchor the page */
     padding: 2rem;
     text-align: center;
 }
@@ -1519,8 +1702,8 @@ a, button, [role="button"], input, select, textarea,
 .personal-best-banner {
     background: linear-gradient(
         90deg,
-        rgba(126, 200, 160, 0.12),    /* Emerald tint left */
-        rgba(137, 212, 207, 0.12)     /* Cyan tint right */
+        rgba(126, 200, 160, 0.12),
+        /* Emerald tint left */ rgba(137, 212, 207, 0.12) /* Cyan tint right */
     );
     border: 3px solid var(--emerald);
     padding: 0.7rem 1.5rem;
@@ -1530,7 +1713,7 @@ a, button, [role="button"], input, select, textarea,
     gap: 1.5rem;
     flex-wrap: wrap;
     margin: 1rem 0 1.5rem;
-    box-shadow: 0 0 12px rgba(126, 200, 160, 0.2);  /* Soft emerald glow */
+    box-shadow: 0 0 12px rgba(126, 200, 160, 0.2); /* Soft emerald glow */
 }
 .personal-best-banner .pb-label {
     font-family: "Press Start 2P", cursive;
@@ -1589,7 +1772,7 @@ a, button, [role="button"], input, select, textarea,
         8px 8px;
     background-color: var(--dirt);
     border: 2px solid var(--stone-dark);
-    animation: float 3.5s ease-in-out infinite 0.5s;  /* 0.5s delay for stagger */
+    animation: float 3.5s ease-in-out infinite 0.5s; /* 0.5s delay for stagger */
 }
 /* Deco 3: Gold horizontal + redstone diagonal — fast pulse (warning-like) */
 .deco-3 {
@@ -1716,13 +1899,13 @@ a, button, [role="button"], input, select, textarea,
     0%,
     100% {
         text-shadow:
-            2px 0 var(--cyan),       /* Cyan channel offset right */
-            -2px 0 var(--redstone);  /* Red channel offset left */
+            2px 0 var(--cyan),
+            /* Cyan channel offset right */ -2px 0 var(--redstone); /* Red channel offset left */
     }
     50% {
         text-shadow:
-            2px 2px var(--cyan),       /* Shift both axes */
-            -2px -2px var(--redstone);
+            2px 2px var(--cyan),
+            /* Shift both axes */ -2px -2px var(--redstone);
     }
 }
 
@@ -1773,16 +1956,16 @@ a, button, [role="button"], input, select, textarea,
         opacity: 1;
     }
     40% {
-        transform: translateY(-30px) rotate(-8deg);  /* Bank upward */
+        transform: translateY(-30px) rotate(-8deg); /* Bank upward */
     }
     70% {
-        transform: translateY(20px) rotate(6deg);    /* Dip downward */
+        transform: translateY(20px) rotate(6deg); /* Dip downward */
     }
     95% {
         opacity: 1;
     }
     100% {
-        left: calc(100vw + 80px);  /* Exit off right edge */
+        left: calc(100vw + 80px); /* Exit off right edge */
         opacity: 0;
     }
 }
@@ -1792,13 +1975,13 @@ a, button, [role="button"], input, select, textarea,
    to near-black, creating a brief "fireworks" color burst effect. */
 @keyframes rainbowFlash {
     0% {
-        background: rgba(232, 141, 141, 0.3);   /* Red flash */
+        background: rgba(232, 141, 141, 0.3); /* Red flash */
     }
     50% {
-        background: rgba(168, 212, 240, 0.3);   /* Blue flash */
+        background: rgba(168, 212, 240, 0.3); /* Blue flash */
     }
     100% {
-        background: rgba(18, 16, 28, 0.9);      /* Settle to dark */
+        background: rgba(18, 16, 28, 0.9); /* Settle to dark */
     }
 }
 
@@ -1842,7 +2025,7 @@ a, button, [role="button"], input, select, textarea,
    keeps it at opacity: 1 after the animation ends. */
 .fade-in-up {
     animation: fadeInUp 0.6s ease-out forwards;
-    opacity: 0;                /* Start invisible, animation reveals */
+    opacity: 0; /* Start invisible, animation reveals */
 }
 /* STAGGERED ENTRANCE DELAYS:
    Each :nth-child gets a progressively longer delay (100ms increments).
@@ -1873,7 +2056,7 @@ a, button, [role="button"], input, select, textarea,
    insertCoin keyframe makes it blink on/off with "step-end" timing
    (hard toggle, not smooth fade) to mimic a real terminal cursor. */
 .typewriter-active::after {
-    content: "\2588";          /* Full block character */
+    content: "\2588"; /* Full block character */
     animation: insertCoin 0.8s step-end infinite;
     color: var(--emerald);
 }
@@ -1888,12 +2071,12 @@ a, button, [role="button"], input, select, textarea,
 .easter-egg-overlay {
     position: fixed;
     inset: 0;
-    z-index: 99999;            /* Above everything except boot screen */
+    z-index: 99999; /* Above everything except boot screen */
     display: flex;
     align-items: center;
     justify-content: center;
     background: rgba(0, 0, 0, 0.9);
-    animation: rainbowFlash 0.3s ease-in-out;  /* Entry color flash */
+    animation: rainbowFlash 0.3s ease-in-out; /* Entry color flash */
 }
 .easter-egg-content {
     text-align: center;
@@ -1933,9 +2116,9 @@ a, button, [role="button"], input, select, textarea,
     cursor: pointer;
     box-shadow: 3px 3px 0 var(--dirt-dark);
     transition: all 0.15s;
-    opacity: 0;                /* Hidden by default */
-    pointer-events: none;      /* Non-clickable when hidden */
-    transform: translateY(10px);  /* Slightly below final position */
+    opacity: 0; /* Hidden by default */
+    pointer-events: none; /* Non-clickable when hidden */
+    transform: translateY(10px); /* Slightly below final position */
 }
 /* Visible state: slides up into place and becomes clickable */
 .scroll-top-btn.visible {
@@ -1963,11 +2146,11 @@ a, button, [role="button"], input, select, textarea,
    - Hover: thumb turns gold to match the primary accent color
    ═══════════════════════════════════════════════ */
 ::-webkit-scrollbar {
-    width: 16px;               /* Wide enough to feel like a retro UI element */
+    width: 16px; /* Wide enough to feel like a retro UI element */
 }
 ::-webkit-scrollbar-track {
     background: var(--dirt);
-    border-left: 4px solid var(--stone-dark);  /* Recessed channel edge */
+    border-left: 4px solid var(--stone-dark); /* Recessed channel edge */
 }
 /* Thumb uses the same 3D bevel as buttons for visual consistency */
 ::-webkit-scrollbar-thumb {
@@ -1976,7 +2159,7 @@ a, button, [role="button"], input, select, textarea,
     border-color: var(--stone-dark) var(--dirt) var(--dirt) var(--stone-dark);
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--gold);   /* Highlight on interaction */
+    background: var(--gold); /* Highlight on interaction */
 }
 
 /* ═══════════════════════════════════════════════
@@ -2002,9 +2185,9 @@ a, button, [role="button"], input, select, textarea,
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 52px);  /* Full viewport minus nav height */
+    min-height: calc(100vh - 52px); /* Full viewport minus nav height */
     padding: 2rem 1rem;
-    overflow: hidden;          /* Prevent canvas overflow on small screens */
+    overflow: hidden; /* Prevent canvas overflow on small screens */
 }
 
 /* Game container — holds the canvas and all game overlays.
@@ -2017,28 +2200,28 @@ a, button, [role="button"], input, select, textarea,
    2. 0 0 0 8px #2d2438 — 4px dirt-colored ring (outer frame)
    3. 8px 8px 0 rgba(0,0,0,0.5) — drop shadow for depth */
 #gameContainer {
-    position: relative;        /* Establishes positioning context for overlays */
-    contain: layout style paint;  /* Rendering isolation for performance */
+    position: relative; /* Establishes positioning context for overlays */
+    contain: layout style paint; /* Rendering isolation for performance */
     border: 4px solid;
-    border-color: #9e95a8 #6e6580 #6e6580 #9e95a8;  /* 3D bevel frame */
+    border-color: #9e95a8 #6e6580 #6e6580 #9e95a8; /* 3D bevel frame */
     box-shadow:
-        0 0 0 4px #1e1830,        /* Inner dark ring */
-        0 0 0 8px #2d2438,        /* Outer dirt ring */
-        8px 8px 0 rgba(0, 0, 0, 0.5);  /* Drop shadow */
+        0 0 0 4px #1e1830,
+        /* Inner dark ring */ 0 0 0 8px #2d2438,
+        /* Outer dirt ring */ 8px 8px 0 rgba(0, 0, 0, 0.5); /* Drop shadow */
 }
 /* Diagonal stripe frame — extends 12px outside the container as a
    decorative border, like a picture frame with hatched matting. */
 #gameContainer::before {
     content: "";
     position: absolute;
-    inset: -12px;              /* 12px outside the container on all sides */
+    inset: -12px; /* 12px outside the container on all sides */
     background: repeating-linear-gradient(
         45deg,
         #2d2438 0 4px,
         transparent 4px 8px
     );
-    pointer-events: none;      /* Non-interactive decoration */
-    z-index: -1;               /* Behind the game canvas */
+    pointer-events: none; /* Non-interactive decoration */
+    z-index: -1; /* Behind the game canvas */
     border: 4px solid #1e1830;
 }
 
@@ -2049,10 +2232,10 @@ a, button, [role="button"], input, select, textarea,
    will-change: contents hints to the browser that canvas pixels change
    every frame, encouraging GPU compositing for smooth rendering. */
 canvas#game {
-    display: block;            /* Removes inline element baseline gap */
-    image-rendering: pixelated;  /* Crisp pixel art, no bilinear blur */
-    background: linear-gradient(180deg, #0f1a0f, #081008);  /* Space green */
-    will-change: contents;     /* GPU optimization for frequent redraws */
+    display: block; /* Removes inline element baseline gap */
+    image-rendering: pixelated; /* Crisp pixel art, no bilinear blur */
+    background: linear-gradient(180deg, #0f1a0f, #081008); /* Space green */
+    will-change: contents; /* GPU optimization for frequent redraws */
 }
 
 /* HUD (Heads-Up Display) — positioned absolutely inside #gameContainer.
@@ -2062,13 +2245,13 @@ canvas#game {
     position: absolute;
     top: 10px;
     left: 10px;
-    z-index: 10;               /* Above canvas, below game overlays */
+    z-index: 10; /* Above canvas, below game overlays */
 }
 /* Individual HUD panel box — semi-transparent with 3D bevel border */
 .ui-panel {
-    background: rgba(26, 22, 40, 0.9);   /* 90% opaque for readability */
+    background: rgba(26, 22, 40, 0.9); /* 90% opaque for readability */
     border: 3px solid;
-    border-color: #9e95a8 #6e6580 #6e6580 #9e95a8;  /* 3D bevel */
+    border-color: #9e95a8 #6e6580 #6e6580 #9e95a8; /* 3D bevel */
     padding: 10px 15px;
     margin-bottom: 8px;
     box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
@@ -2076,21 +2259,21 @@ canvas#game {
 .ui-label {
     font-family: "Press Start 2P", monospace;
     font-size: 10px;
-    color: #c4b8d0;            /* Muted label text */
+    color: #c4b8d0; /* Muted label text */
     margin-bottom: 4px;
 }
 /* Value readout — color-coded: green (default), red (lives), gold (score) */
 .ui-value {
     font-family: "Press Start 2P", monospace;
     font-size: 14px;
-    color: #7ec8a0;            /* Default: emerald green */
+    color: #7ec8a0; /* Default: emerald green */
     transition: all 0.2s;
 }
 .ui-value.lives {
-    color: #e88d8d;            /* Red for lives — danger indicator */
+    color: #e88d8d; /* Red for lives — danger indicator */
 }
 .ui-value.score {
-    color: #f0c85a;            /* Gold for score — reward indicator */
+    color: #f0c85a; /* Gold for score — reward indicator */
 }
 /* Flash effect — JS temporarily adds .flash when the value changes
    (score increase, life lost). Scales up 1.3x with a glow to draw
@@ -2128,12 +2311,12 @@ canvas#game {
 #difficultyScreen {
     position: absolute;
     inset: 0;
-    background: rgba(18, 16, 28, 0.94);  /* Near-opaque dark overlay */
+    background: rgba(18, 16, 28, 0.94); /* Near-opaque dark overlay */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 200;              /* Highest game overlay layer */
+    z-index: 200; /* Highest game overlay layer */
 }
 #difficultyScreen h2 {
     font-family: "Press Start 2P", monospace;
@@ -2160,7 +2343,7 @@ canvas#game {
     margin-bottom: 12px;
     background: #1e1830;
     border: 4px solid;
-    border-color: #9e95a8 #6e6580 #6e6580 #9e95a8;  /* Default bevel */
+    border-color: #9e95a8 #6e6580 #6e6580 #9e95a8; /* Default bevel */
     color: #e8e0f0;
     font-family: "Press Start 2P", monospace;
     font-size: 12px;
@@ -2185,7 +2368,7 @@ canvas#game {
     color: #98d8c8;
 }
 .diff-btn.easy:hover {
-    background: #1a2a28;       /* Dark teal tint */
+    background: #1a2a28; /* Dark teal tint */
 }
 /* Normal: gold color theme */
 .diff-btn.normal {
@@ -2193,7 +2376,7 @@ canvas#game {
     color: #f0c85a;
 }
 .diff-btn.normal:hover {
-    background: #2a2518;       /* Dark gold tint */
+    background: #2a2518; /* Dark gold tint */
 }
 /* Hard: red/danger color theme */
 .diff-btn.hard {
@@ -2201,7 +2384,7 @@ canvas#game {
     color: #e88d8d;
 }
 .diff-btn.hard:hover {
-    background: #2a1818;       /* Dark red tint */
+    background: #2a1818; /* Dark red tint */
 }
 .diff-desc {
     font-family: "VT323", monospace;
@@ -2217,8 +2400,8 @@ canvas#game {
 #pauseOverlay {
     position: absolute;
     inset: 0;
-    background: rgba(18, 16, 28, 0.85);  /* Semi-transparent dark scrim */
-    display: none;             /* Hidden by default, JS toggles to flex */
+    background: rgba(18, 16, 28, 0.85); /* Semi-transparent dark scrim */
+    display: none; /* Hidden by default, JS toggles to flex */
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -2250,15 +2433,15 @@ canvas#game {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);  /* Center trick */
+    transform: translate(-50%, -50%); /* Center trick */
     background: #1e1830;
     border: 4px solid;
     border-color: #9e95a8 #6e6580 #6e6580 #9e95a8;
     padding: 30px 25px;
     text-align: center;
-    z-index: 100;              /* Above HUD, below pause overlay */
-    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.5);  /* Heavy drop shadow */
-    display: none;             /* Hidden until game over */
+    z-index: 100; /* Above HUD, below pause overlay */
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.5); /* Heavy drop shadow */
+    display: none; /* Hidden until game over */
     min-width: 320px;
 }
 #gameOver h2 {
@@ -2278,7 +2461,7 @@ canvas#game {
 }
 .stat-row {
     display: flex;
-    justify-content: space-between;  /* Label on left, value on right */
+    justify-content: space-between; /* Label on left, value on right */
     padding: 5px 0;
     border-bottom: 1px solid #3f3550;
     font-size: 16px;
@@ -2325,14 +2508,14 @@ canvas#game {
    .secondary variant uses muted purple for non-primary actions. */
 .go-btn {
     padding: 12px 20px;
-    background: #7ec8a0;       /* Emerald green = primary action */
+    background: #7ec8a0; /* Emerald green = primary action */
     border: 4px solid;
-    border-color: #5fa880 #3f8870 #3f8870 #5fa880;  /* 3D bevel */
+    border-color: #5fa880 #3f8870 #3f8870 #5fa880; /* 3D bevel */
     color: #1e1830;
     font-family: "Press Start 2P", monospace;
     font-size: 11px;
     cursor: pointer;
-    box-shadow: 0 4px 0 #3f8870;  /* Button depth shadow */
+    box-shadow: 0 4px 0 #3f8870; /* Button depth shadow */
     transition: all 0.1s;
     margin: 4px;
 }
@@ -2380,7 +2563,7 @@ canvas#game {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);  /* Center trick */
+    transform: translate(-50%, -50%); /* Center trick */
     background: rgba(0, 0, 0, 0.85);
     border: 3px solid var(--gold);
     padding: 12px 20px;
@@ -2388,8 +2571,8 @@ canvas#game {
     font-size: 14px;
     color: var(--gold);
     text-align: center;
-    z-index: 300;              /* Highest game overlay layer */
-    pointer-events: none;      /* Does not block gameplay input */
+    z-index: 300; /* Highest game overlay layer */
+    pointer-events: none; /* Does not block gameplay input */
     animation: waveClearAnim 2s ease-out forwards;
 }
 
@@ -2420,13 +2603,13 @@ canvas#game {
 @media (max-width: 768px) {
     /* Reduce heading sizes for smaller screens */
     .landing-title {
-        font-size: 1.8rem;    /* Down from 2.5rem */
+        font-size: 1.8rem; /* Down from 2.5rem */
     }
     .pixel-title {
-        font-size: 1rem;      /* Down from 1.5rem */
+        font-size: 1rem; /* Down from 1.5rem */
     }
     .section-title {
-        font-size: 0.9rem;    /* Down from 1.2rem */
+        font-size: 0.9rem; /* Down from 1.2rem */
     }
     /* Force all grids to single column — the auto-fit minmax pattern
        would eventually do this, but explicitly setting 1fr ensures
@@ -2438,7 +2621,7 @@ canvas#game {
         grid-template-columns: 1fr;
     }
     .stat-value {
-        font-size: 1.8rem;    /* Down from 2.5rem */
+        font-size: 1.8rem; /* Down from 2.5rem */
     }
     /* Tighter table cells for narrow screens */
     .leaderboard-table th,
@@ -2475,13 +2658,13 @@ canvas#game {
     }
     /* Hide horizontal nav links — they become a vertical dropdown */
     .nav-links {
-        display: none;         /* Hidden by default on mobile */
+        display: none; /* Hidden by default on mobile */
         flex-direction: column;
         position: absolute;
-        top: 100%;             /* Dropdown appears below the nav bar */
+        top: 100%; /* Dropdown appears below the nav bar */
         left: 0;
         right: 0;
-        background: rgba(26, 22, 40, 0.98);  /* Nearly opaque backdrop */
+        background: rgba(26, 22, 40, 0.98); /* Nearly opaque backdrop */
         border-bottom: 4px solid var(--stone-dark);
         z-index: 9999;
     }
@@ -2506,9 +2689,9 @@ canvas#game {
    Final size reduction for the smallest screens. */
 @media (max-width: 480px) {
     .landing-title {
-        font-size: 1.3rem;    /* Down from 1.8rem (tablet) / 2.5rem (desktop) */
+        font-size: 1.3rem; /* Down from 1.8rem (tablet) / 2.5rem (desktop) */
     }
     .terminal-body {
-        padding: 1.5rem 1rem;  /* Tighter padding to save space */
+        padding: 1.5rem 1rem; /* Tighter padding to save space */
     }
 }

@@ -1,0 +1,7 @@
+# Tell git to always use the "union" merge strategy for our main files.
+# This means git will COMBINE both sides instead of inserting
+# <<<<<<< conflict markers — so the site never breaks from a merge.
+
+index.html  merge=union
+style.css   merge=union
+app.js      merge=union
