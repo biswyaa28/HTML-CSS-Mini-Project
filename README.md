@@ -8,7 +8,9 @@ A retro-styled, browser-based space shooter built entirely with **vanilla HTML, 
 
 ## 🎮 Quick Start
 
-Open `index.html` directly in any modern browser. No server required.
+**Live Demo:** [html-css-mini-project-one.vercel.app](https://html-css-mini-project-one.vercel.app/)
+
+Or open `index.html` directly in any modern browser. No server required.
 
 ---
 
